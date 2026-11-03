@@ -413,6 +413,22 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
 @media print { .quiz-options,.quiz-actions,.quiz-progress,.discovery-back { display:none; } .quiz-text-version { display:block; } }
 
 .quiz-keyfigure{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin-top:18px;padding:17px 20px;border:1px solid var(--border);background:var(--surface-muted);border-radius:8px}.quiz-keyfigure[hidden]{display:none}.quiz-keyfigure span:first-child{flex-basis:100%;font-size:.76rem;color:var(--ink-soft);font-weight:760}.quiz-keyfigure strong{font:700 clamp(2rem,4vw,3.1rem)/1.1 var(--font-display);color:var(--brand)}.quiz-keyfigure span:last-child{flex:1 1 220px;font-size:.94rem}@media(forced-colors:active){.quiz-keyfigure{border:1px solid CanvasText}}
+
+/* Repères chiffrés : lecture sobre, non dépendante des couleurs. */
+.quiz-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:13px;margin:20px 0 18px}
+.quiz-stat-grid>div{display:flex;flex-direction:column;gap:9px;min-width:0;border-top:2px solid var(--brand);padding:12px 4px 10px 0}
+.quiz-stat-grid strong{font:700 clamp(1.5rem,2.5vw,2.3rem)/1.15 var(--font-display);color:var(--brand)}
+.quiz-stat-grid span{font-size:.9rem;line-height:1.5;color:var(--ink)}
+.quiz-source-note{font-size:.85rem;color:var(--ink-soft);max-width:72ch}
+.quiz-family-stats{margin:18px 0}
+.quiz-family-stats>div{display:grid;grid-template-columns:minmax(0,1fr) 145px;gap:10px;padding:10px 0;align-items:center;border-bottom:1px solid var(--border)}
+.quiz-family-stats dt{font-size:.92rem}
+.quiz-family-stats dd{margin:0;display:flex;align-items:center;justify-content:flex-end;gap:10px}
+.quiz-family-stats dd strong{min-width:54px;text-align:right}
+.family-bar{display:block;width:75px;height:8px;background:var(--surface-muted);border-radius:4px;overflow:hidden}
+.family-bar::before{content:"";display:block;height:100%;width:var(--share);background:var(--brand)}
+@media(max-width:580px){.quiz-family-stats>div{grid-template-columns:1fr;gap:4px}.quiz-family-stats dd{justify-content:flex-start}.quiz-family-stats dd strong{text-align:left}}
+@media(forced-colors:active){.quiz-stat-grid>div{border:1px solid CanvasText}.family-bar::before{background:CanvasText}}
 </style>
 </head>
 <body>
@@ -486,20 +502,32 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
     <p class="discovery-kicker">Chiffres clés et idées reçues</p>
     <h2 id="quizSummaryTitle" tabindex="-1">Ce que l’on retient avant d’agir</h2>
     <p>Le handicap ne se résume ni à une apparence ni à un diagnostic. Les conditions de travail peuvent créer des obstacles ou, au contraire, rendre la participation possible. L’objectif n’est pas d’étiqueter les personnes&nbsp;: c’est d’adapter les pratiques.</p>
+    <div class="quiz-stat-grid" aria-label="Cinq chiffres issus du dossier de Jérôme Caneva">
+      <div><strong>80&nbsp;%</strong><span>des situations de handicap sont invisibles au premier regard.</span></div>
+      <div><strong>85&nbsp;%</strong><span>des handicaps sont acquis au cours de la vie active.</span></div>
+      <div><strong>80&nbsp;%</strong><span>des travailleurs handicapés en emploi n’ont besoin d’aucun aménagement spécifique de poste.</span></div>
+      <div><strong>Moins de 5&nbsp;%</strong><span>des personnes concernées par un handicap moteur utilisent un fauteuil roulant.</span></div>
+      <div><strong>1 sur 2</strong><span>personnes sera concernée par une situation de handicap au cours de sa vie.</span></div>
+    </div>
+    <p class="quiz-source-note">Source des données : dossier de référence de Jérôme Caneva, chiffres validés pour le projet IFAP. Ces indicateurs ne reposent pas tous sur le même périmètre : ils ne doivent pas être additionnés.</p>
     <ol class="quiz-takeaways">
       <li><strong>Ne pas présumer</strong><span>Une situation de handicap peut ne pas être apparente.</span></li>
       <li><strong>Observer le contexte</strong><span>Les tâches et l’environnement influencent les obstacles.</span></li>
       <li><strong>Respecter la diversité</strong><span>Les situations et les besoins varient selon les personnes.</span></li>
       <li><strong>Demander, sans diagnostiquer</strong><span>La personne est la mieux placée pour exprimer ses besoins.</span></li>
     </ol>
-    <details class="quiz-families"><summary>Pour aller plus loin : six grandes familles de situations</summary><ul>
-      <li><strong>Motrices&nbsp;:</strong> déplacements, mouvements, préhension ou posture.</li>
-      <li><strong>Sensorielles&nbsp;:</strong> vision, audition et accès à l’information.</li>
-      <li><strong>Cognitives&nbsp;:</strong> attention, lecture, mémoire ou organisation.</li>
-      <li><strong>Psychiques&nbsp;:</strong> fonctionnement et vécu pouvant varier selon les contextes.</li>
-      <li><strong>Intellectuelles ou mentales&nbsp;:</strong> compréhension et adaptation à certaines tâches.</li>
-      <li><strong>Maladies invalidantes&nbsp;:</strong> fatigue, symptômes fluctuants ou contraintes de soins.</li>
-    </ul><p>Ces familles sont des repères pédagogiques, pas des étiquettes à attribuer à des collègues. Les besoins ne se déduisent pas d’une catégorie.</p></details>
+    <details class="quiz-families"><summary>Six grandes familles de handicap : répartition et exemples</summary>
+    <p>Dans le tableau de Jérôme, quatre familles sont associées à une part en entreprise. Les handicaps sensoriels et cognitifs sont indiqués comme transversaux, sans pourcentage distinct. Il ne s’agit donc pas d’un graphique de répartition exhaustive.</p>
+    <dl class="quiz-family-stats">
+      <div><dt>Maladies invalidantes</dt><dd><strong>45&nbsp;%</strong><span class="family-bar" style="--share:45%" aria-hidden="true"></span></dd></div>
+      <div><dt>Handicap psychique</dt><dd><strong>20&nbsp;%</strong><span class="family-bar" style="--share:20%" aria-hidden="true"></span></dd></div>
+      <div><dt>Handicap moteur</dt><dd><strong>16&nbsp;%</strong><span class="family-bar" style="--share:16%" aria-hidden="true"></span></dd></div>
+      <div><dt>Handicap mental ou intellectuel</dt><dd><strong>15&nbsp;%</strong><span class="family-bar" style="--share:15%" aria-hidden="true"></span></dd></div>
+    </dl>
+    <p><strong>Handicap sensoriel :</strong> difficultés possibles liées à la vision, à l’audition ou à l’accès à l’information (catégorie transversale).</p>
+    <p><strong>Handicap cognitif :</strong> difficultés possibles d’attention, de mémoire, de lecture ou d’organisation (catégorie transversale).</p>
+    <p>Ces catégories aident à comprendre la diversité des situations ; elles ne doivent pas servir à diagnostiquer un collègue ni à présumer ses capacités.</p>
+    </details>
     <div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Explorer les trois situations →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les sept questions</button></div>
   </section>
   <details class="quiz-text-version" id="quizTextVersion"><summary>Lire les sept questions et leurs explications en version texte</summary><div id="quizTextBody"></div></details>
@@ -584,7 +612,7 @@ function display(shouldFocus=true){$('choices').hidden=true;$('result').hidden=t
 function navigate(i){state.scene=i;state.phase=i===3?'finish':'welcome';state.line=0;state.step=0;state.choice=null;if(i<3)sceneArt(i);display()}
 function renderFinish(){$('contextTitle').textContent='Bilan du parcours · ce qui compte';$('sceneKicker').textContent='Vos repères de terrain';$('stepCount').textContent='Fin de l’expérience';$('roleText').textContent='Votre rôle : transférer ces réflexes dans votre quotidien professionnel.';$('countText').textContent='Bilan personnel, sans enregistrement nominatif';setText('Six réflexes à garder en tête','Une formation inclusive doit être accessible elle aussi. Vous pouvez télécharger ce mémo ou le lire directement ci-dessous.','Votre message clé','Demander, respecter, adapter : l’environnement de travail peut évoluer sans que la personne ait à se justifier.');$('finish').hidden=false;$('visual').dataset.effect='adapt';$('statsLine').textContent=state.completed.filter(Boolean).length+' des 3 situations explorées jusqu’à leur synthèse. Vous pouvez revoir les situations à volonté.';actions('Télécharger le mémo texte',downloadMemo,'Revenir à la situation 1',()=>navigate(0),'Imprimer ou enregistrer cette page',()=>{window.print()});}
 function downloadMemo(){const content=['IFAP — Six réflexes pour un environnement de travail inclusif','', '1. Demander ce qui convient, sans présumer.', '2. Respecter l’autonomie et les choix.', '3. Ne pas rechercher un diagnostic.', '4. Préserver la confidentialité.', '5. Anticiper les documents et l’organisation accessibles.', '6. Orienter sans garantir de droits ni décider à la place.', '', 'Document de sensibilisation général. Cas et personnages fictifs.'];const blob=new Blob([content.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='IFAP_memo_six_reflexes_accessibilite.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
-function initTranscript(){const root=$('transcriptBody');const pre=document.createElement('section');const preTitle=document.createElement('h2');preTitle.textContent='Diagnostic de découverte — les cinq questions';pre.append(preTitle);const preText=document.createElement('p');preText.textContent='Accessible sans chronomètre : questions, réponses et explications.';pre.append(preText);const preList=document.createElement('ol');quizData.forEach(q=>{const li=document.createElement('li');const st=document.createElement('strong');st.textContent=q.question;li.append(st);const p=document.createElement('p');p.textContent='Réponse : '+q.options[q.correct]+'. '+q.explanation;li.append(p);preList.append(li)});pre.append(preList);root.append(pre);for(let s=0;s<data.length;s++){const sc=data[s];const section=document.createElement('section');const h2=document.createElement('h2');h2.textContent='Situation '+(s+1)+' — '+sc.title;section.append(h2);const p=document.createElement('p');p.textContent=sc.role;section.append(p);for(const [speaker,text] of sc.intro){const item=document.createElement('p');const strong=document.createElement('strong');strong.textContent=speaker+' : ';item.append(strong,document.createTextNode(text));section.append(item)}sc.steps.forEach((step,k)=>{const h3=document.createElement('h3');h3.textContent='Décision '+(k+1)+' — '+step.question;section.append(h3);const list=document.createElement('ol');for(const opt of step.options){const li=document.createElement('li');const st=document.createElement('strong');st.textContent=opt.label+' ';li.append(st);const resp=document.createElement('p');resp.textContent='Réaction : « '+opt.reaction+' »';const feed=document.createElement('p');feed.textContent='Retour : '+opt.title+'. '+opt.feedback;li.append(resp,feed);list.append(li)}section.append(list)});const end=document.createElement('p');const strong=document.createElement('strong');strong.textContent='À retenir : ';end.append(strong,document.createTextNode(sc.take));section.append(end);root.append(section)}}
+function initTranscript(){const root=$('transcriptBody');const pre=document.createElement('section');const preTitle=document.createElement('h2');preTitle.textContent='Diagnostic de découverte — les sept questions';pre.append(preTitle);const preText=document.createElement('p');preText.textContent='Accessible sans chronomètre : questions, réponses et explications.';pre.append(preText);const preList=document.createElement('ol');quizData.forEach(q=>{const li=document.createElement('li');const st=document.createElement('strong');st.textContent=q.question;li.append(st);const p=document.createElement('p');p.textContent='Réponse : '+q.options[q.correct]+'. '+q.explanation;li.append(p);preList.append(li)});pre.append(preList);root.append(pre);for(let s=0;s<data.length;s++){const sc=data[s];const section=document.createElement('section');const h2=document.createElement('h2');h2.textContent='Situation '+(s+1)+' — '+sc.title;section.append(h2);const p=document.createElement('p');p.textContent=sc.role;section.append(p);for(const [speaker,text] of sc.intro){const item=document.createElement('p');const strong=document.createElement('strong');strong.textContent=speaker+' : ';item.append(strong,document.createTextNode(text));section.append(item)}sc.steps.forEach((step,k)=>{const h3=document.createElement('h3');h3.textContent='Décision '+(k+1)+' — '+step.question;section.append(h3);const list=document.createElement('ol');for(const opt of step.options){const li=document.createElement('li');const st=document.createElement('strong');st.textContent=opt.label+' ';li.append(st);const resp=document.createElement('p');resp.textContent='Réaction : « '+opt.reaction+' »';const feed=document.createElement('p');feed.textContent='Retour : '+opt.title+'. '+opt.feedback;li.append(resp,feed);list.append(li)}section.append(list)});const end=document.createElement('p');const strong=document.createElement('strong');strong.textContent='À retenir : ';end.append(strong,document.createTextNode(sc.take));section.append(end);root.append(section)}}
 for(let i=0;i<4;i++)$('nav'+i).addEventListener('click',()=>navigate(i));
 for(const [btn,klass] of [['textMode','text-mode'],['contrastMode','hc'],['motionMode','no-motion']])$(btn).addEventListener('click',()=>{const active=!document.body.classList.contains(klass);document.body.classList.toggle(klass,active);$(btn).setAttribute('aria-pressed',String(active));if(btn==='textMode'&&active){$('fullTranscript').open=true;}});
 
