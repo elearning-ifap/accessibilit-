@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="description" content="Prototype IFAP : trois simulations inclusives sur les réflexes professionnels face au handicap, avec alternative textuelle accessible.">
-<title>Les gestes qui incluent · laboratoire IFAP v0.6</title>
+<title>Les gestes qui incluent · laboratoire IFAP v0.7</title>
 <style>
 /* ======================================================================
    IFAP • v0.4 — système visuel éditorial et accessible
@@ -412,12 +412,13 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
 @media(forced-colors: active) { .quiz-option, .quiz-summary, .quiz-feedback { border:1px solid CanvasText; } .quiz-option[data-answer="chosen"] { outline:3px solid Highlight; } }
 @media print { .quiz-options,.quiz-actions,.quiz-progress,.discovery-back { display:none; } .quiz-text-version { display:block; } }
 
+.quiz-keyfigure{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin-top:18px;padding:17px 20px;border:1px solid var(--border);background:var(--surface-muted);border-radius:8px}.quiz-keyfigure[hidden]{display:none}.quiz-keyfigure span:first-child{flex-basis:100%;font-size:.76rem;color:var(--ink-soft);font-weight:760}.quiz-keyfigure strong{font:700 clamp(2rem,4vw,3.1rem)/1.1 var(--font-display);color:var(--brand)}.quiz-keyfigure span:last-child{flex:1 1 220px;font-size:.94rem}@media(forced-colors:active){.quiz-keyfigure{border:1px solid CanvasText}}
 </style>
 </head>
 <body>
 <a class="skip" id="skipMain" href="#welcomeTitle">Aller à la présentation du parcours</a>
 <a class="skip" id="skipTranscript" href="#fullTranscript" hidden>Consulter l’intégralité des situations en texte</a>
-<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype de conception · v0.6</span></div></header>
+<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype de conception · v0.7</span></div></header>
 <main>
 <section class="welcome-page" id="welcomePage" aria-labelledby="welcomeTitle">
   <div class="welcome-meta">Sensibilisation au handicap en emploi · Parcours de découverte</div>
@@ -429,10 +430,10 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
     </div>
     <aside class="welcome-metric" aria-label="Durée et format du parcours">
       <p class="welcome-metric-label">Votre temps de découverte</p>
-      <strong class="welcome-duration">17 à 20 min</strong>
+      <strong class="welcome-duration">20 à 24 min</strong>
       <p>Une estimation pour ce <strong>prototype interactif</strong>, à parcourir librement, sans chronomètre.</p>
       <div class="welcome-metric-rule" aria-hidden="true"></div>
-      <p><strong>5 questions pour découvrir</strong><br>3 situations concrètes · 6 décisions<br>1 mémo final à conserver</p>
+      <p><strong>7 questions pour découvrir</strong><br>3 situations concrètes · 6 décisions<br>1 mémo final à conserver</p>
     </aside>
   </div>
   <section class="welcome-purpose" aria-labelledby="welcomeWhy">
@@ -455,34 +456,34 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
       <button type="button" class="welcome-text" id="readExperience">Consulter en version texte</button>
     </div>
   </div>
-  <p class="welcome-disclaimer">Version de validation IFAP, avec quiz de découverte. Ce démonstrateur couvre environ 17 à 20 minutes&nbsp;; il ne remplace pas le futur module complet envisagé pour 35 à 45 minutes. Les situations et personnages sont fictifs.</p>
+  <p class="welcome-disclaimer">Version de validation IFAP, avec quiz de découverte. Ce démonstrateur couvre environ 20 à 24 minutes&nbsp;; il ne remplace pas le futur module complet envisagé pour 35 à 45 minutes. Les situations et personnages sont fictifs.</p>
 </section>
 
 <!-- Diagnostic de découverte : adaptation originale du format Kahoot du dossier de Jérôme,
-     sans pourcentages non vérifiés ni compétition chronométrée. -->
+     avec les pourcentages de référence validés par Jérôme, sans chronomètre ni compétition. -->
 <section class="discovery-page" id="discoveryPage" aria-labelledby="discoveryTitle" hidden>
   <button type="button" id="discoveryBack" class="discovery-back">← Revoir l’introduction</button>
   <div class="discovery-intro">
     <div>
       <p class="discovery-kicker">Étape 1 · Découvrir et questionner ses représentations</p>
       <h1 id="discoveryTitle" tabindex="-1">Vrai, faux… <em>ou plus nuancé&nbsp;?</em></h1>
-      <p>Avant d’entrer dans les situations, testez cinq idées reçues sur le handicap au travail. Il ne s’agit pas de vous noter, mais de découvrir ce qui change notre regard.</p>
+      <p>Avant d’entrer dans les situations, testez sept idées reçues sur le handicap au travail. Il ne s’agit pas de vous noter, mais de découvrir ce qui change notre regard.</p>
     </div>
-    <aside class="discovery-metric"><strong>5 questions · environ 4 à 5 minutes</strong><p>Aucun chronomètre. Aucune compétition. Chaque réponse est expliquée, et vous pouvez continuer à votre rythme.</p></aside>
+    <aside class="discovery-metric"><strong>7 questions · environ 6 à 7 minutes</strong><p>Aucun chronomètre. Aucune compétition. Chaque réponse est expliquée, et vous pouvez continuer à votre rythme.</p></aside>
   </div>
   <section id="quizSection" class="quiz-section" aria-labelledby="quizQuestion">
-    <div class="quiz-progress"><strong id="quizProgressText">Question 1 sur 5</strong><progress id="quizProgress" max="5" value="0">0 sur 5</progress></div>
+    <div class="quiz-progress"><strong id="quizProgressText">Question 1 sur 7</strong><progress id="quizProgress" max="7" value="0">0 sur 7</progress></div>
     <p class="quiz-kicker" id="quizTopic">Représentations</p>
     <h2 class="quiz-question" id="quizQuestion" tabindex="-1">Question de découverte</h2>
     <div class="quiz-options" id="quizOptions" role="group" aria-labelledby="quizQuestion"></div>
     <div class="quiz-feedback" id="quizFeedback" role="region" aria-labelledby="quizFeedbackTitle" tabindex="-1" hidden>
-      <h3 id="quizFeedbackTitle"></h3><p id="quizFeedbackText"></p>
+      <h3 id="quizFeedbackTitle"></h3><p id="quizFeedbackText"></p><div class="quiz-keyfigure" id="quizKeyfigure" hidden><span>Le chiffre à retenir</span><strong id="quizKeyfigureValue"></strong><span id="quizKeyfigureLabel"></span></div>
     </div>
     <div class="quiz-actions"><button type="button" id="quizNext" class="quiz-primary" hidden>Question suivante →</button><button type="button" id="quizSkip" class="quiz-secondary">Passer aux mises en situation</button></div>
-    <p class="quiz-note">Ce questionnaire reprend les thèmes proposés par Jérôme Caneva, sans reproduire ses chiffres non vérifiés ni ses questions juridiques en l’état.</p>
+    <p class="quiz-note">Chiffres issus du dossier de référence de Jérôme Caneva et validés par lui pour ce projet IFAP. Aucune question ne nécessite de se prononcer sur une reconnaissance administrative.</p>
   </section>
   <section class="quiz-summary" id="quizSummary" aria-labelledby="quizSummaryTitle" hidden>
-    <p class="discovery-kicker">Cinq repères essentiels</p>
+    <p class="discovery-kicker">Chiffres clés et idées reçues</p>
     <h2 id="quizSummaryTitle" tabindex="-1">Ce que l’on retient avant d’agir</h2>
     <p>Le handicap ne se résume ni à une apparence ni à un diagnostic. Les conditions de travail peuvent créer des obstacles ou, au contraire, rendre la participation possible. L’objectif n’est pas d’étiqueter les personnes&nbsp;: c’est d’adapter les pratiques.</p>
     <ol class="quiz-takeaways">
@@ -499,9 +500,9 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
       <li><strong>Intellectuelles ou mentales&nbsp;:</strong> compréhension et adaptation à certaines tâches.</li>
       <li><strong>Maladies invalidantes&nbsp;:</strong> fatigue, symptômes fluctuants ou contraintes de soins.</li>
     </ul><p>Ces familles sont des repères pédagogiques, pas des étiquettes à attribuer à des collègues. Les besoins ne se déduisent pas d’une catégorie.</p></details>
-    <div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Explorer les trois situations →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les cinq questions</button></div>
+    <div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Explorer les trois situations →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les sept questions</button></div>
   </section>
-  <details class="quiz-text-version" id="quizTextVersion"><summary>Lire les cinq questions et leurs explications en version texte</summary><div id="quizTextBody"></div></details>
+  <details class="quiz-text-version" id="quizTextVersion"><summary>Lire les sept questions et leurs explications en version texte</summary><div id="quizTextBody"></div></details>
 </section>
 
 <div id="experience" hidden aria-label="Parcours interactif de sensibilisation">
@@ -523,7 +524,7 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
   </details>
 </div>
 <div class="progress" aria-label="Progression du parcours">
-  <div class="progress-left"><strong id="progressText">Découverte du parcours</strong><span id="progressSub">Environ 17 à 20 minutes</span></div>
+  <div class="progress-left"><strong id="progressText">Découverte du parcours</strong><span id="progressSub">Environ 20 à 24 minutes</span></div>
   <div class="track" id="progressTrack" role="progressbar" aria-label="Situations achevées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="progressFill"></div></div>
 </div>
 <nav class="chapters" aria-label="Choisir une situation">
@@ -591,42 +592,105 @@ for(const [btn,klass] of [['textMode','text-mode'],['contrastMode','hc'],['motio
    Les scènes et leurs décisions restent inchangées. */
 
 /* Découverte inspirée du diagnostic Quiz / Kahoot de Jérôme Caneva :
-   pas de données chiffrées douteuses, ni de quiz juridique local non validé. */
+   pourcentages validés par Jérôme, sans quiz juridique local non validé. */
 const quizData = [
   {
-    topic:'Ce qui se voit… et ce qui ne se voit pas',
-    question:'Une situation de handicap est-elle toujours visible au premier regard ?',
-    options:['Oui, car elle modifie forcément la façon de se déplacer.','Non, certaines situations ne sont pas apparentes.','Oui, si l’on connaît bien ses collègues.','Non, mais il faut demander un diagnostic pour en être sûr.'],
-    correct:1,
-    explanation:'Une maladie invalidante, une difficulté auditive ou un trouble cognitif peuvent être non apparents. L’apparence ne permet ni de conclure à un handicap ni de connaître les besoins d’une personne.'
+    "topic": "Handicaps non apparents",
+    "question": "Quel pourcentage des situations de handicap est invisible au premier regard ?",
+    "options": [
+      "15 %",
+      "40 %",
+      "60 %",
+      "80 %"
+    ],
+    "correct": 3,
+    "figure": "80 %",
+    "figureLabel": "des situations de handicap sont invisibles au premier regard",
+    "explanation": "Selon le dossier de Jérôme Caneva, 80 % des situations de handicap sont invisibles. L’apparence ne permet pas de connaître les capacités ou les besoins d’une personne."
   },
   {
-    topic:'Le rôle de l’environnement',
-    question:'Une même difficulté de santé entraîne-t-elle forcément les mêmes obstacles dans deux métiers ?',
-    options:['Oui : le diagnostic suffit à déterminer l’impact.','Oui : toutes les tâches posent les mêmes problèmes.','Non : cela dépend notamment des tâches et des conditions de travail.','Non : seul l’âge de la personne change les difficultés.'],
-    correct:2,
-    explanation:'Jérôme utilise l’exemple d’une allergie sévère à la farine dans des environnements professionnels différents. Ce qui compte ici, c’est l’exposition, l’activité et les obstacles concrets. On ne peut pas en déduire automatiquement un statut administratif.'
+    "topic": "Handicaps acquis",
+    "question": "Quelle proportion des handicaps est acquise au cours de la vie active ?",
+    "options": [
+      "15 %",
+      "35 %",
+      "60 %",
+      "85 %"
+    ],
+    "correct": 3,
+    "figure": "85 %",
+    "figureLabel": "des handicaps sont acquis au cours de la vie active",
+    "explanation": "Jérôme indique que 85 % des handicaps sont acquis au cours de la vie active. Une maladie, un accident ou une usure professionnelle peuvent modifier les conditions de travail."
   },
   {
-    topic:'La diversité des situations',
-    question:'Parmi ces exemples, lesquels peuvent parfois être non apparents ?',
-    options:['Un trouble auditif.','Une maladie chronique.','Certaines difficultés cognitives.','Tous ces exemples.'],
-    correct:3,
-    explanation:'Toutes ces situations peuvent être peu ou pas visibles selon les personnes et les contextes. Il existe plusieurs grandes familles de handicap, mais elles ne permettent pas de présumer des capacités ou des préférences de chacun.'
+    "topic": "Aménagements de poste",
+    "question": "Parmi les travailleurs handicapés en emploi, quelle proportion nécessite un aménagement spécifique de poste ?",
+    "options": [
+      "100 %",
+      "80 %",
+      "50 %",
+      "20 %"
+    ],
+    "correct": 3,
+    "figure": "80 %",
+    "figureLabel": "des travailleurs handicapés n’ont besoin d’aucun aménagement spécifique de poste",
+    "explanation": "Selon Jérôme, 20 % nécessitent un aménagement spécifique de poste, et 80 % n’en ont pas besoin. Cela ne dispense pas de rendre les pratiques collectives accessibles et de dialoguer sur les besoins."
   },
   {
-    topic:'Des repères, pas des étiquettes',
-    question:'À quoi servent les grandes familles de handicap dans une sensibilisation ?',
-    options:['À deviner le diagnostic de ses collègues.','À décider de leur capacité à réaliser une mission.','À comprendre la diversité des situations sans enfermer les personnes dans une catégorie.','À imposer un aménagement identique à tout le monde.'],
-    correct:2,
-    explanation:'Les familles de handicap permettent de dépasser certaines représentations. Dans une équipe, le bon réflexe consiste à regarder le travail réel et à dialoguer sur les besoins, plutôt qu’à classer les personnes.'
+    "topic": "Handicap moteur",
+    "question": "Quelle proportion des personnes en situation de handicap moteur utilise un fauteuil roulant ?",
+    "options": [
+      "Moins de 5 %",
+      "20 %",
+      "50 %",
+      "80 %"
+    ],
+    "correct": 0,
+    "figure": "Moins de 5 %",
+    "figureLabel": "des personnes concernées par un handicap moteur utilisent un fauteuil roulant",
+    "explanation": "Le dossier de référence indique que moins de 5 % des personnes concernées par un handicap moteur utilisent un fauteuil roulant. Les situations motrices sont très diverses."
   },
   {
-    topic:'La bonne posture',
-    question:'Un collègue évoque une fatigue qui complique certaines réunions. Que pouvez-vous utilement faire ?',
-    options:['Lui demander quelle maladie il a pour comprendre.','Lui proposer de ne plus assister aux réunions.','En informer immédiatement toute l’équipe.','Lui demander quelles modalités de réunion lui conviendraient, sans exiger de détails personnels.'],
-    correct:3,
-    explanation:'La personne est la mieux placée pour exprimer ses besoins. On peut agir sur les supports, le rythme et l’organisation sans rechercher ni partager des informations de santé.'
+    "topic": "Handicap et environnement",
+    "question": "Une même difficulté de santé entraîne-t-elle forcément les mêmes obstacles dans deux métiers ?",
+    "options": [
+      "Oui : le diagnostic suffit à déterminer l’impact.",
+      "Oui : toutes les tâches posent les mêmes problèmes.",
+      "Non : cela dépend des tâches et des conditions de travail.",
+      "Non : seul l’âge change les difficultés."
+    ],
+    "correct": 2,
+    "figure": null,
+    "figureLabel": null,
+    "explanation": "Jérôme propose l’exemple d’une allergie à la farine : ses conséquences professionnelles diffèrent selon les activités et l’exposition. Cela ne permet pas de conclure automatiquement à un statut administratif."
+  },
+  {
+    "topic": "Un enjeu partagé",
+    "question": "Selon le dossier de Jérôme, quelle part des personnes sera concernée par une situation de handicap au cours de sa vie ?",
+    "options": [
+      "Une personne sur dix",
+      "Une personne sur quatre",
+      "Une personne sur deux",
+      "Toutes sans exception"
+    ],
+    "correct": 2,
+    "figure": "1 sur 2",
+    "figureLabel": "personnes sera concernée par une situation de handicap au cours de sa vie",
+    "explanation": "Le dossier de référence retient qu’une personne sur deux sera concernée au cours de sa vie par une situation de handicap, temporaire ou durable. L’accessibilité peut donc bénéficier à tous."
+  },
+  {
+    "topic": "Attitude entre collègues",
+    "question": "Un collègue évoque une fatigue qui complique certaines réunions. Que faites-vous ?",
+    "options": [
+      "Lui demander sa maladie pour comprendre.",
+      "Lui proposer de ne plus participer.",
+      "En informer immédiatement l’équipe.",
+      "Lui demander quelles modalités de réunion lui conviendraient, sans exiger de détails personnels."
+    ],
+    "correct": 3,
+    "figure": null,
+    "figureLabel": null,
+    "explanation": "La personne est la mieux placée pour exprimer ses besoins. On peut adapter les supports et l’organisation sans exiger ou divulguer des informations de santé."
   }
 ];
 let quizIndex=0, quizAnswered=false, quizCompleted=false;
@@ -639,6 +703,7 @@ function renderQuizQuestion(){
   $('quizTopic').textContent=q.topic;
   $('quizQuestion').textContent=q.question;
   $('quizProgressText').textContent='Question '+(quizIndex+1)+' sur '+quizData.length;
+  $('quizProgress').max=quizData.length;
   $('quizProgress').value=quizIndex;
   $('quizOptions').replaceChildren();
   $('quizFeedback').hidden=true;
@@ -663,6 +728,8 @@ function answerQuiz(chosen){
   $('quizFeedback').dataset.tone=good?'good':'adjust';
   $('quizFeedbackTitle').textContent=good?'Bonne intuition !':'À découvrir';
   $('quizFeedbackText').textContent=(good?'Votre réponse est pertinente. ':'Une autre réponse est plus juste : « '+q.options[q.correct]+' ». ')+q.explanation;
+  $('quizKeyfigure').hidden=!q.figure;
+  if(q.figure){$('quizKeyfigureValue').textContent=q.figure;$('quizKeyfigureLabel').textContent=q.figureLabel;}
   $('quizFeedback').hidden=false;
   $('quizNext').hidden=false;
   $('quizProgress').value=quizIndex+1;
