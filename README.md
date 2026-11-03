@@ -1,14 +1,28 @@
 # Prototype IFAP — sensibilisation au handicap en emploi
 
-Démonstrateur interactif de validation pédagogique, version 0.4.
+Démonstrateur interactif de validation pédagogique, **version 0.5**.
 
-- Ouvrir le prototype : `index.html` (page d'accueil du dépôt).
-- Trois situations professionnelles et décisions interactives.
-- Version de travail non validée juridiquement et pédagogiquement ; ne constitue pas une formation publiée.
-- Interface proposant des options d'accessibilité ; les essais utilisateurs, tests lecteurs d'écran et recette Moodle restent à conduire.
+## Page d’introduction
 
-## Diffusion par GitHub Pages
+Avant les simulations, l’apprenant découvre les enjeux de l’inclusion dans le travail quotidien, quatre objectifs d’apprentissage et la durée prévue pour **ce prototype : 12 à 15 minutes**.
 
-Dans **Settings → Pages**, choisir **Deploy from a branch**, puis **main** et **/(root)**. La page sera disponible à l'adresse `https://elearning-ifap.github.io/accessibilit-/` une fois Pages activé et le déploiement terminé.
+Le futur module complet reste envisagé sur **35 à 45 minutes** ; il n’est pas encore réalisé.
 
-**Attention :** ce dépôt est public. La balise `noindex` dans `index.html` ne contrôle pas l'accès. Ne pas y déposer de données sensibles ni de documents internes.
+## Expérience
+
+- Trois situations professionnelles : réunion, confidence, mission.
+- Six décisions interactives avec conséquences et feedbacks.
+- Accès à une transcription intégrale, sans animation.
+- Navigation libre et possibilité de revoir la présentation.
+- Aucun chronomètre et aucune donnée de santé collectée.
+
+**Statut : prototype pédagogique de validation**, non assimilable à une formation finalisée. Vérifications éditoriales, juridiques, tests humains d’accessibilité et recette Moodle restent nécessaires.
+
+## GitHub Pages
+
+Depuis **Settings → Pages**, choisir **Deploy from a branch**, branche **main**, dossier **/(root)**.
+
+Une fois Pages activé, la page se trouve à l’adresse :
+https://elearning-ifap.github.io/accessibilit-/
+
+**Ce dépôt est public.** L’instruction `noindex` n’est pas un contrôle d’accès.
