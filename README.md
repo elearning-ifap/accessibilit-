@@ -1,12 +1,20 @@
 # Prototype IFAP — sensibilisation au handicap en emploi
 
-Démonstrateur interactif de validation pédagogique, **version 0.5**.
+Démonstrateur interactif de validation pédagogique, **version 0.7**.
 
 ## Page d’introduction
 
 Avant les simulations, l’apprenant découvre les enjeux de l’inclusion dans le travail quotidien, quatre objectifs d’apprentissage et la durée prévue pour **ce prototype : 12 à 15 minutes**.
 
 Le futur module complet reste envisagé sur **35 à 45 minutes** ; il n’est pas encore réalisé.
+
+## Quiz de découverte et repères chiffrés
+
+Le diagnostic initial comporte **sept questions**, dont plusieurs exploitent les pourcentages transmis et validés par Jérôme Caneva : 80 % de situations invisibles, 85 % de handicaps acquis, 80 % sans aménagement spécifique de poste, moins de 5 % d'utilisateurs de fauteuil parmi les personnes concernées par un handicap moteur, et une personne sur deux concernée au cours de sa vie.
+
+La synthèse présente également la répartition indiquée dans le dossier pour quatre familles (45 %, 20 %, 16 %, 15 %) ; les familles sensorielles et cognitives y sont présentées comme transversales. Ne pas additionner ces catégories comme s'il s'agissait d'un graphique exhaustif.
+
+Les chiffres sont attribués au dossier de Jérôme, sans prétendre à une vérification externe supplémentaire. Le quiz ne porte pas sur les conditions juridiques de reconnaissance.
 
 ## Expérience
 
