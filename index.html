@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="description" content="Prototype IFAP : trois simulations inclusives sur les réflexes professionnels face au handicap, avec alternative textuelle accessible.">
-<title>Les gestes qui incluent · laboratoire IFAP v0.8</title>
+<title>Les gestes qui incluent · laboratoire IFAP v0.9</title>
 <style>
 /* ======================================================================
    IFAP • v0.4 — système visuel éditorial et accessible
@@ -435,12 +435,52 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
 .quiz-reference a,.stat-source,.family-reference a{color:var(--brand);text-underline-offset:.18em;text-decoration:underline}
 .quiz-stat-grid .stat-source{font-size:.78rem;line-height:1.4;margin-top:auto}
 .family-reference{font-size:.82rem;color:var(--ink-soft)}
+
+/* Étape 2 — six familles, design éditorial et accès clavier */
+.family-progress{display:flex;align-items:center;gap:20px;margin:24px 0 19px;flex-wrap:wrap}
+.family-progress strong{font-size:.91rem}.family-progress progress{width:min(300px,100%);height:10px;accent-color:var(--brand)}
+.family-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.family-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:7px;min-height:164px;padding:19px 21px;border:1px solid var(--border);border-top:3px solid transparent;border-radius:7px;background:var(--surface);color:var(--ink);transition:background-color .15s,border-color .15s}
+.family-card:hover,.family-card[data-active="true"]{background:var(--brand-wash);border-color:var(--brand);border-top-color:var(--brand)}
+.family-card-top{display:flex;justify-content:space-between;align-items:baseline;width:100%;gap:14px;font-size:.76rem;font-weight:770;color:var(--brand)}
+.family-card-title{font:400 clamp(1.2rem,1.6vw,1.5rem)/1.2 var(--font-display);margin:11px 0 3px}
+.family-card-sub{color:var(--ink-soft);font-size:.84rem;line-height:1.4}
+.family-card-state{color:var(--brand);font-size:.78rem;font-weight:740;margin-top:auto;padding-top:10px}
+.family-detail{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--brand);margin-top:18px;padding:clamp(22px,3vw,38px)}
+.family-meta{display:flex;justify-content:space-between;gap:18px;font-size:.79rem;font-weight:760;color:var(--brand);margin-bottom:9px}
+.family-meta p{margin:0}.family-detail h2{font:400 clamp(1.9rem,3vw,2.7rem)/1.15 var(--font-display);margin-bottom:24px}
+.family-detail-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.8fr);gap:clamp(25px,4vw,50px)}
+.family-detail h3{font-size:.92rem;font-weight:780;color:var(--brand);margin:20px 0 8px}
+.family-detail h3:first-child{margin-top:0}.family-detail li+li{margin-top:7px}.family-detail ul{padding-left:20px}
+.family-reflex{background:var(--brand-wash);border-radius:5px;padding:23px;align-self:start}
+.family-reflex h3{margin-top:0}.family-reflex p{margin:0}
+.family-source{border-top:1px solid var(--border);padding-top:15px;margin-top:25px;color:var(--ink-soft);font-size:.82rem}
+.family-synthesis{background:var(--brand-wash);margin-top:22px;padding:clamp(22px,4vw,40px)}
+.family-synthesis h2{font:400 clamp(1.7rem,2.6vw,2.4rem)/1.18 var(--font-display);max-width:850px}
+.family-answers{display:grid;gap:10px;margin:22px 0}
+.family-answer{padding:16px 20px;min-height:60px;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--ink)}
+.family-answer:hover:not(:disabled){border-color:var(--brand);background:var(--surface-muted)}
+.family-answer:disabled{opacity:1;cursor:default}
+.family-answer[data-chosen="true"]{border:2px solid var(--brand);background:var(--surface-muted)}
+.family-feedback{margin:16px 0;padding:20px;background:var(--surface);border-left:3px solid var(--brand)}
+.family-footer{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.family-footer p{margin:0;color:var(--ink-soft);max-width:650px}.family-footer button{flex-shrink:0}
+.family-text{border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:24px;padding:14px 0}
+.family-text summary{color:var(--brand);font-weight:760;cursor:pointer}
+.family-text section{padding:16px 0;border-bottom:1px solid var(--border)}.family-text h3{margin:0 0 8px;font-size:1.12rem}
+.quiz-next-note{padding:14px 19px;background:var(--brand-wash);border-left:3px solid var(--brand)}
+@media(max-width:920px){.family-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.family-detail-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.family-grid{grid-template-columns:1fr}.family-card{min-height:122px;padding:17px}.family-footer{flex-direction:column}.family-footer button{width:100%}.family-detail .quiz-actions button{width:100%}}
+@media(prefers-reduced-motion:reduce){.family-card{transition:none}}
+body.hc .family-card,body.hc .family-detail{border-color:var(--ink)}
+@media(forced-colors:active){.family-card,.family-answer,.family-detail{border:1px solid CanvasText}.family-card[data-active="true"]{outline:3px solid Highlight}}
+
 </style>
 </head>
 <body>
 <a class="skip" id="skipMain" href="#welcomeTitle">Aller à la présentation du parcours</a>
 <a class="skip" id="skipTranscript" href="#fullTranscript" hidden>Consulter l’intégralité des situations en texte</a>
-<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype de conception · v0.8</span></div></header>
+<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype de conception · v0.9</span></div></header>
 <main>
 <section class="welcome-page" id="welcomePage" aria-labelledby="welcomeTitle">
   <div class="welcome-meta">Sensibilisation au handicap en emploi · Parcours de découverte</div>
@@ -452,15 +492,15 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
     </div>
     <aside class="welcome-metric" aria-label="Durée et format du parcours">
       <p class="welcome-metric-label">Votre temps de découverte</p>
-      <strong class="welcome-duration">20 à 24 min</strong>
+      <strong class="welcome-duration">24 à 30 min</strong>
       <p>Une estimation pour ce <strong>prototype interactif</strong>, à parcourir librement, sans chronomètre.</p>
       <div class="welcome-metric-rule" aria-hidden="true"></div>
-      <p><strong>7 questions pour découvrir</strong><br>3 situations concrètes · 6 décisions<br>1 mémo final à conserver</p>
+      <p><strong>7 questions pour découvrir</strong><br>6 familles de handicap à explorer<br>3 situations · 6 décisions · 1 mémo final</p>
     </aside>
   </div>
   <section class="welcome-purpose" aria-labelledby="welcomeWhy">
     <h2 id="welcomeWhy">Pourquoi ce parcours&nbsp;?</h2>
-    <p>Parce qu’une intention bienveillante ne suffit pas toujours. Pour contribuer à un environnement de travail inclusif, il faut savoir reconnaître les obstacles, respecter le choix des personnes et agir sur les conditions de participation. Ce parcours vous invite à <strong>expérimenter des réactions professionnelles</strong> en commençant par questionner quelques idées reçues, plutôt qu’à mémoriser des catégories de handicap.</p>
+    <p>Parce qu’une intention bienveillante ne suffit pas toujours. Pour contribuer à un environnement de travail inclusif, il faut savoir reconnaître les obstacles, respecter le choix des personnes et agir sur les conditions de participation. Ce parcours vous invite à <strong>questionner vos représentations</strong>, découvrir la diversité des handicaps et expérimenter des réactions professionnelles respectueuses.</p>
   </section>
   <section class="welcome-objectives" aria-labelledby="welcomeObjectives">
     <h2 id="welcomeObjectives">À l’issue de cette découverte, vous pourrez…</h2>
@@ -478,7 +518,7 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
       <button type="button" class="welcome-text" id="readExperience">Consulter en version texte</button>
     </div>
   </div>
-  <p class="welcome-disclaimer">Version de validation IFAP, avec quiz de découverte. Ce démonstrateur couvre environ 20 à 24 minutes&nbsp;; il ne remplace pas le futur module complet envisagé pour 35 à 45 minutes. Les situations et personnages sont fictifs.</p>
+  <p class="welcome-disclaimer">Version de validation IFAP, avec quiz et exploration des six familles de handicap. Ce démonstrateur couvre environ 24 à 30 minutes&nbsp;; il ne remplace pas le futur module complet envisagé pour 35 à 45 minutes. Les situations et personnages sont fictifs.</p>
 </section>
 
 <!-- Diagnostic de découverte : quiz accessible, sans chronomètre ni classement. -->
@@ -500,7 +540,7 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
     <div class="quiz-feedback" id="quizFeedback" role="region" aria-labelledby="quizFeedbackTitle" tabindex="-1" hidden>
       <h3 id="quizFeedbackTitle"></h3><p id="quizFeedbackText"></p><p id="quizReference" class="quiz-reference" hidden>Source : <a id="quizReferenceLink" target="_blank" rel="noopener noreferrer"></a></p><div class="quiz-keyfigure" id="quizKeyfigure" hidden><span>Le chiffre à retenir</span><strong id="quizKeyfigureValue"></strong><span id="quizKeyfigureLabel"></span></div>
     </div>
-    <div class="quiz-actions"><button type="button" id="quizNext" class="quiz-primary" hidden>Question suivante →</button><button type="button" id="quizSkip" class="quiz-secondary">Passer aux mises en situation</button></div>
+    <div class="quiz-actions"><button type="button" id="quizNext" class="quiz-primary" hidden>Question suivante →</button><button type="button" id="quizSkip" class="quiz-secondary">Passer à la découverte des six familles</button></div>
     <p class="quiz-note">Chaque chiffre est accompagné de sa source. Les repères sont tirés de publications françaises datées, et ne sont pas des statistiques mesurées en Nouvelle-Calédonie.</p>
   </section>
   <section class="quiz-summary" id="quizSummary" aria-labelledby="quizSummaryTitle" hidden>
@@ -521,26 +561,53 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
       <li><strong>Respecter la diversité</strong><span>Les situations et les besoins varient selon les personnes.</span></li>
       <li><strong>Demander, sans diagnostiquer</strong><span>La personne est la mieux placée pour exprimer ses besoins.</span></li>
     </ol>
-    <details class="quiz-families"><summary>Six grandes familles de handicap : répartition et exemples</summary>
-    <p>Une source de sensibilisation publiée en France présente quatre familles avec une part chiffrée. Les handicaps sensoriels et cognitifs sont indiqués comme transversaux, sans pourcentage distinct. Il ne s’agit donc pas d’un graphique de répartition exhaustive.</p>
-    <dl class="quiz-family-stats">
-      <div><dt>Maladies invalidantes</dt><dd><strong>45&nbsp;%</strong><span class="family-bar" style="--share:45%" aria-hidden="true"></span></dd></div>
-      <div><dt>Handicap psychique</dt><dd><strong>20&nbsp;%</strong><span class="family-bar" style="--share:20%" aria-hidden="true"></span></dd></div>
-      <div><dt>Handicap moteur</dt><dd><strong>16&nbsp;%</strong><span class="family-bar" style="--share:16%" aria-hidden="true"></span></dd></div>
-      <div><dt>Handicap mental ou intellectuel</dt><dd><strong>15&nbsp;%</strong><span class="family-bar" style="--share:15%" aria-hidden="true"></span></dd></div>
-    </dl>
-    <p><strong>Handicap sensoriel :</strong> difficultés possibles liées à la vision, à l’audition ou à l’accès à l’information (catégorie transversale).</p>
-    <p><strong>Handicap cognitif :</strong> difficultés possibles d’attention, de mémoire, de lecture ou d’organisation (catégorie transversale).</p>
-    <p>Ces catégories aident à comprendre la diversité des situations ; elles ne doivent pas servir à diagnostiquer un collègue ni à présumer ses capacités.</p>
-    <p class="family-reference">Source : <a href="https://www.fo-snta.fr/docs/Guide_Handicap.pdf" target="_blank" rel="noopener noreferrer">Guide « Que savez-vous du handicap ? », 2017</a>. Ces proportions illustratives sont issues d’un support de sensibilisation français ; il ne s’agit pas d’une enquête statistique calédonienne.</p>
-    </details>
-    <div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Explorer les trois situations →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les sept questions</button></div>
+    <p class="quiz-next-note">Vous avez découvert les chiffres et déconstruit plusieurs idées reçues. L’étape suivante vous permet d’explorer six familles de handicap à travers des situations professionnelles concrètes.</p>
+    <div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Découvrir les six familles de handicap →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les sept questions</button></div>
   </section>
   <details class="quiz-text-version" id="quizTextVersion"><summary>Lire les sept questions et leurs explications en version texte</summary><div id="quizTextBody"></div></details>
 </section>
 
+
+<!-- Séquence de découverte des six familles de handicap -->
+<section class="family-page discovery-page" id="familyPage" aria-labelledby="familyTitle" hidden>
+  <button type="button" id="familyBack" class="discovery-back">← Revoir le quiz</button>
+  <div class="discovery-intro">
+    <div>
+      <p class="discovery-kicker">Étape 2 · Découvrir la diversité des situations</p>
+      <h1 id="familyTitle" tabindex="-1">Six familles de handicap, <em>des réalités singulières.</em></h1>
+      <p>Découvrez chacune des six familles, leurs incidences possibles au travail et un réflexe utile. Ce sont des repères pour comprendre, jamais des étiquettes à attribuer à des collègues.</p>
+    </div>
+    <aside class="discovery-metric"><strong>4 à 6 minutes</strong><p>Six cartes à explorer et une question de synthèse. Sans chronomètre ni classement.</p></aside>
+  </div>
+  <div class="family-progress"><strong id="familyProgressLabel" role="status" aria-live="polite">0 famille explorée sur 6</strong><progress id="familyProgress" value="0" max="6">0 sur 6</progress></div>
+  <div id="familyCards" class="family-grid" role="group" aria-label="Les six familles de handicap"></div>
+  <section class="family-detail" id="familyDetail" aria-labelledby="familyDetailTitle" hidden>
+    <div class="family-meta"><p id="familyDetailIndex"></p><strong id="familyDetailShare"></strong></div>
+    <h2 id="familyDetailTitle" tabindex="-1"></h2>
+    <div class="family-detail-grid">
+      <div><h3>Comprendre</h3><p id="familyDetailDescription"></p><h3>Au travail, cela peut se traduire par…</h3><ul id="familyDetailExamples"></ul></div>
+      <aside class="family-reflex"><h3>Un réflexe utile</h3><p id="familyDetailReflex"></p></aside>
+    </div>
+    <p class="family-source">Source des parts chiffrées : <a href="https://www.fo-snta.fr/docs/Guide_Handicap.pdf" target="_blank" rel="noopener noreferrer">Guide « Que savez-vous du handicap ? » (2017)</a>, support de sensibilisation français. Ce ne sont pas des statistiques de Nouvelle-Calédonie. Les handicaps sensoriels et cognitifs y sont présentés comme des catégories transversales.</p>
+    <div class="quiz-actions"><button id="familyNext" class="quiz-primary" type="button">Découvrir une autre famille →</button><button id="familyBackToCards" class="quiz-secondary" type="button">Revenir aux cartes</button></div>
+  </section>
+  <section class="family-synthesis" id="familySynthesis" aria-labelledby="familySynthesisTitle" hidden>
+    <p class="discovery-kicker">Question bilan · après la découverte des six familles</p>
+    <h2 id="familySynthesisTitle" tabindex="-1">Peut-on déduire les besoins professionnels d’une personne à partir de sa famille de handicap&nbsp;?</h2>
+    <div id="familyAnswers" class="family-answers" role="group" aria-labelledby="familySynthesisTitle">
+      <button class="family-answer" type="button">Oui, toutes les personnes d’une même famille ont les mêmes besoins.</button>
+      <button class="family-answer" type="button">Non, il faut considérer la personne, son activité et son environnement.</button>
+      <button class="family-answer" type="button">Oui, si l’on connaît son diagnostic médical.</button>
+    </div>
+    <div id="familyFeedback" class="family-feedback" role="status" tabindex="-1" hidden></div>
+    <div class="quiz-actions"><button type="button" id="familyContinue" class="quiz-primary" hidden>Explorer les trois simulations →</button><button type="button" id="familyReview" class="quiz-secondary">Revoir les cartes</button></div>
+  </section>
+  <div class="family-footer"><p><strong>À retenir :</strong> une famille de handicap ne décrit ni une personne entière ni ses capacités. Le dialogue sur les situations réelles permet de trouver des réponses adaptées.</p><button id="familySkip" class="quiz-secondary" type="button">Passer aux mises en situation</button></div>
+  <details class="family-text" id="familyText"><summary>Lire les six familles en version texte intégrale</summary><div id="familyTextBody"></div></details>
+</section>
+
 <div id="experience" hidden aria-label="Parcours interactif de sensibilisation">
-<div class="experience-back"><button type="button" id="returnIntroduction">← Revoir l’introduction</button> <button type="button" id="returnDiscovery">Revoir les idées reçues →</button></div>
+<div class="experience-back"><button type="button" id="returnIntroduction">← Revoir l’introduction</button> <button type="button" id="returnDiscovery">Revoir le quiz</button> <button type="button" id="returnFamilies">Revoir les six familles →</button></div>
 
 <div class="introhead">
   <div class="introcopy">
@@ -558,7 +625,7 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
   </details>
 </div>
 <div class="progress" aria-label="Progression du parcours">
-  <div class="progress-left"><strong id="progressText">Découverte du parcours</strong><span id="progressSub">Environ 20 à 24 minutes</span></div>
+  <div class="progress-left"><strong id="progressText">Découverte du parcours</strong><span id="progressSub">Environ 24 à 30 minutes</span></div>
   <div class="track" id="progressTrack" role="progressbar" aria-label="Situations achevées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="progressFill"></div></div>
 </div>
 <nav class="chapters" aria-label="Choisir une situation">
@@ -618,7 +685,7 @@ function display(shouldFocus=true){$('choices').hidden=true;$('result').hidden=t
 function navigate(i){state.scene=i;state.phase=i===3?'finish':'welcome';state.line=0;state.step=0;state.choice=null;if(i<3)sceneArt(i);display()}
 function renderFinish(){$('contextTitle').textContent='Bilan du parcours · ce qui compte';$('sceneKicker').textContent='Vos repères de terrain';$('stepCount').textContent='Fin de l’expérience';$('roleText').textContent='Votre rôle : transférer ces réflexes dans votre quotidien professionnel.';$('countText').textContent='Bilan personnel, sans enregistrement nominatif';setText('Six réflexes à garder en tête','Une formation inclusive doit être accessible elle aussi. Vous pouvez télécharger ce mémo ou le lire directement ci-dessous.','Votre message clé','Demander, respecter, adapter : l’environnement de travail peut évoluer sans que la personne ait à se justifier.');$('finish').hidden=false;$('visual').dataset.effect='adapt';$('statsLine').textContent=state.completed.filter(Boolean).length+' des 3 situations explorées jusqu’à leur synthèse. Vous pouvez revoir les situations à volonté.';actions('Télécharger le mémo texte',downloadMemo,'Revenir à la situation 1',()=>navigate(0),'Imprimer ou enregistrer cette page',()=>{window.print()});}
 function downloadMemo(){const content=['IFAP — Six réflexes pour un environnement de travail inclusif','', '1. Demander ce qui convient, sans présumer.', '2. Respecter l’autonomie et les choix.', '3. Ne pas rechercher un diagnostic.', '4. Préserver la confidentialité.', '5. Anticiper les documents et l’organisation accessibles.', '6. Orienter sans garantir de droits ni décider à la place.', '', 'Document de sensibilisation général. Cas et personnages fictifs.'];const blob=new Blob([content.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='IFAP_memo_six_reflexes_accessibilite.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
-function initTranscript(){const root=$('transcriptBody');const pre=document.createElement('section');const preTitle=document.createElement('h2');preTitle.textContent='Diagnostic de découverte — sept questions';pre.append(preTitle);const preText=document.createElement('p');preText.textContent='Accessible sans chronomètre : questions, réponses et explications.';pre.append(preText);const preList=document.createElement('ol');quizData.forEach(q=>{const li=document.createElement('li');const st=document.createElement('strong');st.textContent=q.question;li.append(st);const p=document.createElement('p');p.textContent='Réponse : '+q.options[q.correct]+'. '+q.explanation;li.append(p);if(q.source){const sourceP=document.createElement('p');const a=document.createElement('a');a.href=q.source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Source : '+q.source.name;sourceP.append(a);li.append(sourceP)};preList.append(li)});pre.append(preList);root.append(pre);for(let s=0;s<data.length;s++){const sc=data[s];const section=document.createElement('section');const h2=document.createElement('h2');h2.textContent='Situation '+(s+1)+' — '+sc.title;section.append(h2);const p=document.createElement('p');p.textContent=sc.role;section.append(p);for(const [speaker,text] of sc.intro){const item=document.createElement('p');const strong=document.createElement('strong');strong.textContent=speaker+' : ';item.append(strong,document.createTextNode(text));section.append(item)}sc.steps.forEach((step,k)=>{const h3=document.createElement('h3');h3.textContent='Décision '+(k+1)+' — '+step.question;section.append(h3);const list=document.createElement('ol');for(const opt of step.options){const li=document.createElement('li');const st=document.createElement('strong');st.textContent=opt.label+' ';li.append(st);const resp=document.createElement('p');resp.textContent='Réaction : « '+opt.reaction+' »';const feed=document.createElement('p');feed.textContent='Retour : '+opt.title+'. '+opt.feedback;li.append(resp,feed);list.append(li)}section.append(list)});const end=document.createElement('p');const strong=document.createElement('strong');strong.textContent='À retenir : ';end.append(strong,document.createTextNode(sc.take));section.append(end);root.append(section)}}
+function initTranscript(){const root=$('transcriptBody');const pre=document.createElement('section');const preTitle=document.createElement('h2');preTitle.textContent='Diagnostic de découverte — sept questions';pre.append(preTitle);const preText=document.createElement('p');preText.textContent='Accessible sans chronomètre : questions, réponses et explications.';pre.append(preText);const preList=document.createElement('ol');quizData.forEach(q=>{const li=document.createElement('li');const st=document.createElement('strong');st.textContent=q.question;li.append(st);const p=document.createElement('p');p.textContent='Réponse : '+q.options[q.correct]+'. '+q.explanation;li.append(p);if(q.source){const sourceP=document.createElement('p');const a=document.createElement('a');a.href=q.source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Source : '+q.source.name;sourceP.append(a);li.append(sourceP)};preList.append(li)});pre.append(preList);root.append(pre);familyTranscript(root);for(let s=0;s<data.length;s++){const sc=data[s];const section=document.createElement('section');const h2=document.createElement('h2');h2.textContent='Situation '+(s+1)+' — '+sc.title;section.append(h2);const p=document.createElement('p');p.textContent=sc.role;section.append(p);for(const [speaker,text] of sc.intro){const item=document.createElement('p');const strong=document.createElement('strong');strong.textContent=speaker+' : ';item.append(strong,document.createTextNode(text));section.append(item)}sc.steps.forEach((step,k)=>{const h3=document.createElement('h3');h3.textContent='Décision '+(k+1)+' — '+step.question;section.append(h3);const list=document.createElement('ol');for(const opt of step.options){const li=document.createElement('li');const st=document.createElement('strong');st.textContent=opt.label+' ';li.append(st);const resp=document.createElement('p');resp.textContent='Réaction : « '+opt.reaction+' »';const feed=document.createElement('p');feed.textContent='Retour : '+opt.title+'. '+opt.feedback;li.append(resp,feed);list.append(li)}section.append(list)});const end=document.createElement('p');const strong=document.createElement('strong');strong.textContent='À retenir : ';end.append(strong,document.createTextNode(sc.take));section.append(end);root.append(section)}}
 for(let i=0;i<4;i++)$('nav'+i).addEventListener('click',()=>navigate(i));
 for(const [btn,klass] of [['textMode','text-mode'],['contrastMode','hc'],['motionMode','no-motion']])$(btn).addEventListener('click',()=>{const active=!document.body.classList.contains(klass);document.body.classList.toggle(klass,active);$(btn).setAttribute('aria-pressed',String(active));if(btn==='textMode'&&active){$('fullTranscript').open=true;}});
 
@@ -798,6 +865,7 @@ function showQuizSummary(){
 }
 function nextQuiz(){if(!quizAnswered)return;quizIndex++;if(quizIndex>=quizData.length)showQuizSummary();else {renderQuizQuestion();focusQuiz('quizQuestion');}}
 function showDiscovery(){
+  $('familyPage').hidden=true;
   $('welcomePage').hidden=true;
   $('experience').hidden=true;
   $('discoveryPage').hidden=false;
@@ -818,13 +886,106 @@ function quizTranscript(){
 }
 $('discoveryBack').addEventListener('click',showIntroduction);
 $('quizNext').addEventListener('click',nextQuiz);
-$('quizSkip').addEventListener('click',()=>showExperience(false));
-$('quizStartScenes').addEventListener('click',()=>showExperience(false));
+$('quizSkip').addEventListener('click',showFamilies);
+$('quizStartScenes').addEventListener('click',showFamilies);
 $('quizRestart').addEventListener('click',()=>{quizIndex=0;quizCompleted=false;renderQuizQuestion();focusQuiz('quizQuestion');});
 quizTranscript();
 
+
+/* Six familles : exemples professionnels non diagnostiques et réflexes utiles. */
+const familyData=[{"name":"Maladies invalidantes","share":"45 %","subtitle":"Fatigue et contraintes de soins","description":"Certaines maladies invalidantes peuvent entraîner une fatigue variable, des symptômes évolutifs ou des contraintes de soins. Elles ne se ressemblent pas toutes.","examples":["Une réunion longue peut être plus fatigante certains jours.","Des rendez-vous de soins peuvent nécessiter davantage de souplesse dans l’organisation."],"reflex":"Discuter des horaires ou de l’organisation envisageables, sans demander de précisions médicales."},{"name":"Handicap psychique","share":"20 %","subtitle":"Gestion du stress et organisation","description":"Certains troubles psychiques peuvent avoir des effets sur la gestion du stress, les échanges et certaines situations de travail. Les conséquences varient selon les personnes.","examples":["Des changements d’urgence répétés peuvent compliquer l’organisation du travail.","Une accumulation de consignes uniquement orales peut être plus difficile à traiter."],"reflex":"Clarifier les priorités et anticiper les changements lorsque cela est possible, sans jugement."},{"name":"Handicap moteur","share":"16 %","subtitle":"Mouvements, posture et préhension","description":"Le handicap moteur peut concerner les déplacements, la posture, la préhension et certains mouvements. Il ne se réduit pas à l’usage d’un fauteuil roulant.","examples":["Rester debout longtemps à l’accueil peut devenir pénible.","Transporter des dossiers ou accéder à une salle peut demander des adaptations."],"reflex":"Proposer plusieurs modalités et demander ce qui convient, sans faire à la place de la personne."},{"name":"Handicap mental ou intellectuel","share":"15 %","subtitle":"Compréhension et repérage","description":"Certaines situations peuvent rendre plus difficiles la compréhension d’instructions complexes ou le repérage dans le temps et l’espace. Adapter sa communication ne signifie pas infantiliser.","examples":["Une longue procédure sans étapes peut être difficile à suivre.","Des consignes abstraites sans exemple rendent parfois une tâche moins claire."],"reflex":"Présenter les étapes et les exemples clairement, puis vérifier la compréhension avec respect."},{"name":"Handicap sensoriel","share":null,"subtitle":"Vision et audition","description":"Une difficulté visuelle ou auditive peut rendre certains documents et échanges moins accessibles, même si elle n’est pas immédiatement apparente.","examples":["Un tableau projeté en petits caractères rend une réunion difficile à suivre.","Une réunion bruyante ou une vidéo sans sous-titres limite l’accès aux échanges."],"reflex":"Anticiper les documents lisibles, les sous-titres et les alternatives écrites ; demander la préférence de la personne."},{"name":"Handicap cognitif","share":null,"subtitle":"Attention, lecture et organisation","description":"Certains troubles cognitifs peuvent concerner l’attention, la lecture, la mémoire ou l’organisation, sans définir l’ensemble des capacités de la personne.","examples":["Des interruptions répétées peuvent compliquer la concentration.","Plusieurs consignes simultanées sans support écrit peuvent compliquer l’organisation."],"reflex":"Structurer les consignes, préparer des supports clairs et réduire les interruptions selon les besoins."}];
+const familySeen=new Set();let familyCurrent=-1,familyAnswered=false;
+function put(tag,content,root,klass){
+  const e=document.createElement(tag);e.textContent=content;
+  if(klass)e.className=klass;if(root)root.append(e);return e;
+}
+function updateFamilyCards(){
+  const root=$('familyCards');root.replaceChildren();
+  familyData.forEach((d,i)=>{
+    const btn=put('button','',root,'family-card');btn.type='button';
+    btn.dataset.active=String(i===familyCurrent);
+    btn.setAttribute('aria-expanded',String(i===familyCurrent));
+    btn.setAttribute('aria-controls','familyDetail');
+    btn.setAttribute('aria-label',d.name+', '+(d.share||'catégorie transversale')+(familySeen.has(i)?', déjà explorée':'')+' ; ouvrir');
+    const top=put('span','',btn,'family-card-top');
+    put('span',String(i+1).padStart(2,'0'),top);
+    put('span',d.share||'Transversal',top);
+    put('strong',d.name,btn,'family-card-title');
+    put('span',d.subtitle,btn,'family-card-sub');
+    put('span',familySeen.has(i)?'✓ Déjà explorée':'Découvrir →',btn,'family-card-state');
+    btn.addEventListener('click',()=>selectFamily(i));
+  });
+  const n=familySeen.size;$('familyProgress').value=n;
+  $('familyProgressLabel').textContent=n+' famille'+(n>1?'s':'')+' explorée'+(n>1?'s':'')+' sur 6';
+}
+function selectFamily(i){
+  familyCurrent=i;familySeen.add(i);
+  updateFamilyCards();
+  const d=familyData[i];
+  $('familyDetail').hidden=false;
+  $('familyDetailIndex').textContent='Famille '+(i+1)+' sur 6';
+  $('familyDetailShare').textContent=d.share?d.share+' dans le document de référence':'Catégorie transversale';
+  $('familyDetailTitle').textContent=d.name;
+  $('familyDetailDescription').textContent=d.description;
+  $('familyDetailExamples').replaceChildren();
+  d.examples.forEach(e=>put('li',e,$('familyDetailExamples')));
+  $('familyDetailReflex').textContent=d.reflex;
+  $('familyNext').textContent=familySeen.size===6?'Répondre à la question bilan →':'Découvrir une autre famille →';
+  $('familyDetailTitle').focus();
+}
+function familyNext(){
+  if(familySeen.size===6){
+    $('familySynthesis').hidden=false;
+    $('familySynthesisTitle').focus();
+    return;
+  }
+  for(let n=1;n<=6;n++){
+    const i=(Math.max(familyCurrent,0)+n)%6;
+    if(!familySeen.has(i)){selectFamily(i);return;}
+  }
+}
+function answerFamily(i){
+  if(familyAnswered)return;
+  familyAnswered=true;
+  [...$('familyAnswers').children].forEach((b,k)=>{b.disabled=true;if(i===k)b.dataset.chosen='true';});
+  $('familyFeedback').textContent=(i===1?'Exactement. ':'La réponse adaptée est « Non ». ')+
+    'Deux personnes relevant d’une même famille peuvent avoir des besoins très différents. Il faut écouter la personne, considérer son travail réel et éviter les suppositions.';
+  $('familyFeedback').hidden=false;
+  $('familyContinue').hidden=false;
+  $('familyFeedback').focus();
+}
+function showFamilies(){
+  $('welcomePage').hidden=true;$('discoveryPage').hidden=true;$('experience').hidden=true;
+  $('familyPage').hidden=false;
+  $('skipMain').href='#familyTitle';$('skipMain').textContent='Aller à la découverte des six familles';
+  $('skipTranscript').hidden=true;updateFamilyCards();focusQuiz('familyTitle');
+}
+function familyTranscript(root){
+  const sec=document.createElement('section');
+  put('h2','Les six familles de handicap — explications, conséquences et réflexes',sec);
+  familyData.forEach((d,i)=>{
+    put('h3',(i+1)+'. '+d.name+(d.share?' — '+d.share:' — transversal'),sec);
+    put('p',d.description,sec);
+    const ul=document.createElement('ul');d.examples.forEach(e=>put('li',e,ul));sec.append(ul);
+    put('p','Réflexe utile : '+d.reflex,sec);
+  });
+  const p=put('p','Source des parts en entreprise : ',sec);
+  const a=put('a','Guide « Que savez-vous du handicap ? » (2017)',p);
+  a.href='https://www.fo-snta.fr/docs/Guide_Handicap.pdf';a.target='_blank';a.rel='noopener noreferrer';
+  root.append(sec);
+}
+$('familyBack').addEventListener('click',showDiscovery);
+$('familyBackToCards').addEventListener('click',()=>focusQuiz('familyTitle'));
+$('familyNext').addEventListener('click',familyNext);
+[...$('familyAnswers').children].forEach((b,i)=>b.addEventListener('click',()=>answerFamily(i)));
+$('familyContinue').addEventListener('click',()=>showExperience(false));
+$('familySkip').addEventListener('click',()=>showExperience(false));
+$('familyReview').addEventListener('click',()=>{familyAnswered=false;$('familySynthesis').hidden=true;$('familyFeedback').hidden=true;$('familyContinue').hidden=true;[...$('familyAnswers').children].forEach(b=>{b.disabled=false;delete b.dataset.chosen;});focusQuiz('familyTitle');});
+familyTranscript($('familyTextBody'));
+
 let introductionSeen = false;
 function showExperience(textOnly=false) {
+  $('familyPage').hidden=true;
   $('discoveryPage').hidden=true;
   $('welcomePage').hidden=true;
   $('experience').hidden=false;
@@ -847,6 +1008,7 @@ function showExperience(textOnly=false) {
   }
 }
 function showIntroduction() {
+  $('familyPage').hidden=true;
   $('discoveryPage').hidden=true;
   $('experience').hidden=true;
   $('welcomePage').hidden=false;
@@ -861,6 +1023,7 @@ $('beginExperience').addEventListener('click',showDiscovery);
 $('readExperience').addEventListener('click',()=>showExperience(true));
 $('returnIntroduction').addEventListener('click',showIntroduction);
 $('returnDiscovery').addEventListener('click',showDiscovery);
+$('returnFamilies').addEventListener('click',showFamilies);
 
 initTranscript();sceneArt(0);display(false);
 })();
