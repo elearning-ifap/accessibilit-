@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="description" content="Prototype IFAP : trois simulations inclusives sur les réflexes professionnels face au handicap, avec alternative textuelle accessible.">
-<title>Les gestes qui incluent · laboratoire IFAP v0.4</title>
+<title>Les gestes qui incluent · laboratoire IFAP v0.5</title>
 <style>
 /* ======================================================================
    IFAP • v0.4 — système visuel éditorial et accessible
@@ -275,17 +275,133 @@ h1 em { color: var(--brand); font-weight: 400; }
   .transcript > div { display: block !important; }
   .line { position: static !important; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
 }
+
+/* ------------------------------------------------------------
+   Écran d'accueil pédagogique — affiché avant les simulations.
+   Lisibilité, posture inclusive et information concrète.
+   ------------------------------------------------------------ */
+.welcome-page { padding: 9px 0 0; }
+.welcome-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 11px; font-size: .77rem; font-weight: 720; color: var(--brand); letter-spacing: .035em; }
+.welcome-meta::before { content: ''; width: 24px; height: 2px; flex: 0 0 24px; background: currentColor; }
+.welcome-hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(245px,330px); gap: clamp(35px,6vw,94px); align-items: end; padding: 38px 0 48px; border-bottom: 1px solid var(--border); }
+.welcome-copy h1 { max-width: 750px; margin: 0 0 27px; font: 400 clamp(3.2rem,5.5vw,5.85rem)/1.07 var(--font-display); letter-spacing: -.048em; }
+.welcome-copy h1 em { font-weight: 400; font-style: italic; color: var(--brand); }
+.welcome-lead { font-size: clamp(1.14rem,1.62vw,1.39rem); line-height: 1.57; font-weight: 490; color: var(--ink); max-width: 58ch; margin-bottom: 20px; }
+.welcome-explain { font-size: 1rem; line-height: 1.78; color: var(--ink-soft); max-width: 67ch; margin-bottom: 0; }
+.welcome-metric { border-top: 3px solid var(--brand); background: var(--brand-wash); padding: 25px 28px 29px; align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+.welcome-metric-label { margin: 0; color: var(--brand); font-size: .8rem; font-weight: 760; }
+.welcome-duration { display: block; font: 400 clamp(2.8rem,4.1vw,4.3rem)/1.13 var(--font-display); letter-spacing: -.042em; margin: 6px 0 12px; color: var(--ink); white-space: nowrap; }
+.welcome-metric p { font-size: .91rem; line-height: 1.67; color: var(--ink-soft); margin-bottom: 0; }
+.welcome-metric-rule { border-top: 1px solid #bfd3ca; margin: 22px 0 16px; }
+.welcome-metric strong:not(.welcome-duration) { color: var(--brand); font-size: .82rem; }
+.welcome-metric .welcome-duration { color: var(--ink); font-size: clamp(2.8rem,4.1vw,4.3rem); }
+.welcome-purpose { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: 45px; padding: 38px 0 41px; border-bottom: 1px solid var(--border); }
+.welcome-purpose h2, .welcome-objectives h2 { font: 400 clamp(1.7rem,2.4vw,2.3rem)/1.22 var(--font-display); letter-spacing: -.018em; margin-bottom: 16px; }
+.welcome-purpose p { color: var(--ink-soft); font-size: 1rem; line-height: 1.73; margin-bottom: 0; }
+.welcome-objectives { padding: 40px 0 0; }
+.welcome-objectives h2 { margin-bottom: 24px; }
+.welcome-goals { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 0; list-style: none; margin: 0; padding: 0; }
+.welcome-goals li { border-top: 2px solid var(--border); padding: 18px 23px 15px 0; min-width: 0; }
+.welcome-goals li+li { padding-left: 20px; }
+.welcome-goals li span { display: inline-block; font-size: .72rem; font-weight: 760; color: var(--brand); letter-spacing: .06em; margin-bottom: 11px; }
+.welcome-goals li strong { font-size: 1.03rem; line-height: 1.4; font-weight: 770; display: block; color: var(--ink); }
+.welcome-goals li p { margin: 10px 0 0; color: var(--ink-soft); font-size: .88rem; line-height: 1.67; }
+.welcome-action { display: flex; flex-wrap: wrap; gap: 18px 29px; align-items: center; justify-content: space-between; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--brand); margin: 35px 0 0; padding: 24px 29px; }
+.welcome-action-copy { flex: 1 1 320px; }
+.welcome-action-copy strong { display: block; font-size: .98rem; font-weight: 760; }
+.welcome-action-copy p { margin: 6px 0 0; color: var(--ink-soft); font-size: .84rem; line-height: 1.6; }
+.welcome-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: flex-end; }
+.welcome-start { background: var(--brand); color: #fff; border: 1px solid var(--brand); border-radius: 5px; min-height: 50px; padding: 12px 21px; font-weight: 740; }
+.welcome-start:hover { background: var(--brand-hover); }
+.welcome-text { background: transparent; color: var(--brand); border: 1px solid var(--border); border-radius: 5px; min-height: 50px; padding: 12px 17px; font-weight: 700; }
+.welcome-text:hover { background: var(--brand-wash); }
+.welcome-disclaimer { margin: 17px 0 0; font-size: .76rem; color: var(--ink-soft); line-height: 1.55; }
+.experience-back { margin: -12px 0 20px; }
+.experience-back button { color: var(--brand); background: transparent; border: 0; border-bottom: 1px solid transparent; border-radius: 0; padding: 7px 0; min-height: 44px; font-size: .85rem; font-weight: 730; }
+.experience-back button:hover { border-bottom-color: currentColor; }
+@media (max-width: 1000px) {
+  .welcome-hero { grid-template-columns: minmax(0,1fr) 265px; gap: 30px; }
+  .welcome-purpose { grid-template-columns: 190px minmax(0,1fr); gap: 25px; }
+  .welcome-goals { grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 20px; row-gap: 12px; }
+  .welcome-goals li+li { padding-left: 0; }
+}
+@media (max-width: 720px) {
+  .welcome-hero { grid-template-columns: 1fr; padding: 29px 0 33px; gap: 29px; }
+  .welcome-copy h1 { font-size: clamp(2.8rem,9.6vw,4.5rem); margin-bottom: 20px; }
+  .welcome-lead { font-size: 1.13rem; }
+  .welcome-metric { padding: 21px 24px; }
+  .welcome-metric .welcome-duration { font-size: 3.35rem; }
+  .welcome-purpose { grid-template-columns: 1fr; gap: 0; padding: 28px 0; }
+  .welcome-purpose h2 { margin-bottom: 11px; }
+  .welcome-objectives { padding-top: 31px; }
+  .welcome-goals { grid-template-columns: 1fr; row-gap: 0; }
+  .welcome-goals li { padding: 17px 0 21px; }
+  .welcome-goals li p { margin-top: 5px; }
+  .welcome-action { padding: 19px 17px; margin-top: 21px; }
+  .welcome-controls { justify-content: stretch; width: 100%; }
+  .welcome-controls button { width: 100%; }
+}
+@media (max-width: 360px) {
+  .welcome-copy h1 { font-size: 2.65rem; }
+  .welcome-metric .welcome-duration { font-size: 3.1rem; }
+  .welcome-meta { font-size: .67rem; }
+}
+@media (forced-colors: active) {
+  .welcome-metric, .welcome-action { border: 1px solid CanvasText; }
+  .welcome-start, .welcome-text { border: 1px solid ButtonText; }
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#activeStep">Aller à l’étape en cours</a>
-<a class="skip" href="#fullTranscript">Consulter l’intégralité des situations en texte</a>
-<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype de conception · v0.4</span></div></header>
+<a class="skip" id="skipMain" href="#welcomeTitle">Aller à la présentation du parcours</a>
+<a class="skip" id="skipTranscript" href="#fullTranscript" hidden>Consulter l’intégralité des situations en texte</a>
+<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype de conception · v0.5</span></div></header>
 <main>
+<section class="welcome-page" id="welcomePage" aria-labelledby="welcomeTitle">
+  <div class="welcome-meta">Sensibilisation au handicap en emploi · Parcours de découverte</div>
+  <div class="welcome-hero">
+    <div class="welcome-copy">
+      <h1 id="welcomeTitle" tabindex="-1">L’inclusion commence <em>dans nos gestes quotidiens.</em></h1>
+      <p class="welcome-lead">Au travail, une réunion difficile à suivre, une confidence mal accueillie ou une mission décidée à la place d’un collègue peuvent, sans mauvaise intention, créer de l’exclusion.</p>
+      <p class="welcome-explain">Nous n’avons pas besoin de connaître la situation médicale d’une personne pour faciliter sa participation. Notre manière d’écouter, de proposer de l’aide et d’organiser le travail peut faire la différence.</p>
+    </div>
+    <aside class="welcome-metric" aria-label="Durée et format du parcours">
+      <p class="welcome-metric-label">Votre temps de découverte</p>
+      <strong class="welcome-duration">12 à 15 min</strong>
+      <p>Une estimation pour ce <strong>prototype interactif</strong>, à parcourir librement, sans chronomètre.</p>
+      <div class="welcome-metric-rule" aria-hidden="true"></div>
+      <p><strong>3 situations concrètes</strong><br>6 décisions à explorer<br>1 mémo final à conserver</p>
+    </aside>
+  </div>
+  <section class="welcome-purpose" aria-labelledby="welcomeWhy">
+    <h2 id="welcomeWhy">Pourquoi ce parcours&nbsp;?</h2>
+    <p>Parce qu’une intention bienveillante ne suffit pas toujours. Pour contribuer à un environnement de travail inclusif, il faut savoir reconnaître les obstacles, respecter le choix des personnes et agir sur les conditions de participation. Ce parcours vous invite à <strong>expérimenter des réactions professionnelles</strong> plutôt qu’à mémoriser des catégories de handicap.</p>
+  </section>
+  <section class="welcome-objectives" aria-labelledby="welcomeObjectives">
+    <h2 id="welcomeObjectives">À l’issue de cette découverte, vous pourrez…</h2>
+    <ol class="welcome-goals">
+      <li><span>01</span><strong>Repérer un obstacle</strong><p>Identifier ce qui, dans une réunion ou une organisation, peut empêcher un collègue de participer pleinement.</p></li>
+      <li><span>02</span><strong>Proposer sans imposer</strong><p>Choisir une réponse qui laisse à la personne la possibilité d’exprimer ses préférences.</p></li>
+      <li><span>03</span><strong>Respecter la confidentialité</strong><p>Accueillir une confidence sans rechercher de diagnostic ni diffuser une information personnelle.</p></li>
+      <li><span>04</span><strong>Faire évoluer les pratiques</strong><p>Envisager des ajustements simples des supports, des échanges et des décisions collectives.</p></li>
+    </ol>
+  </section>
+  <div class="welcome-action">
+    <div class="welcome-action-copy"><strong>Prêt à faire vos propres choix&nbsp;?</strong><p>Aucun prérequis. Vous avancez à votre rythme, pouvez recommencer les scènes et consulter une version intégralement textuelle.</p></div>
+    <div class="welcome-controls">
+      <button type="button" class="welcome-start" id="beginExperience">Commencer les situations <span aria-hidden="true">→</span></button>
+      <button type="button" class="welcome-text" id="readExperience">Consulter en version texte</button>
+    </div>
+  </div>
+  <p class="welcome-disclaimer">Version de validation IFAP. Ce démonstrateur couvre environ 12 à 15 minutes&nbsp;; il ne remplace pas le futur module complet envisagé pour 35 à 45 minutes. Les situations et personnages sont fictifs.</p>
+</section>
+<div id="experience" hidden aria-label="Parcours interactif de sensibilisation">
+<div class="experience-back"><button type="button" id="returnIntroduction">← Revoir l’introduction</button></div>
+
 <div class="introhead">
   <div class="introcopy">
     <div class="kicker">Trois situations, six décisions</div>
-    <h1>L’inclusion se joue <em>dans nos choix.</em></h1>
+    <h1 id="experienceTitle" tabindex="-1">L’inclusion se joue <em>dans nos choix.</em></h1>
     <p class="sub">Une réunion, une confidence, une mission : trois moments ordinaires du travail. À chaque étape, choisissez une réaction et découvrez ce qu’elle change pour les autres.</p>
   </div>
   <details class="access-settings" id="displaySettings">
@@ -324,7 +440,8 @@ h1 em { color: var(--brand); font-weight: 400; }
 </aside>
 </div>
 <details id="fullTranscript" class="transcript"><summary>Consulter l’intégralité du parcours, les réponses et leurs conséquences, sans animation</summary><p>Vous pouvez lire toutes les situations sans passer par les interactions. Le scénario, les trois réponses, les réactions et les explications sont intégralement présentés.</p><div id="transcriptBody"></div></details>
-<footer class="below">IFAP · prototype éditorial v0.4 · consultation hors ligne, sans collecte nominative · sensibilisation, non conseil juridique ou médical · <a href="https://openclassrooms.com/fr/courses/4537876-developpez-une-entreprise-plus-inclusive-envers-le-handicap" target="_blank" rel="noopener noreferrer">Ressource OpenClassrooms pour approfondir (contexte juridique métropolitain)</a>.</footer>
+<footer class="below">IFAP · prototype éditorial v0.5 · consultation hors ligne, sans collecte nominative · sensibilisation, non conseil juridique ou médical · <a href="https://openclassrooms.com/fr/courses/4537876-developpez-une-entreprise-plus-inclusive-envers-le-handicap" target="_blank" rel="noopener noreferrer">Ressource OpenClassrooms pour approfondir (contexte juridique métropolitain)</a>.</footer>
+</div>
 </main>
 <script>
 (()=>{'use strict';
@@ -360,6 +477,45 @@ function downloadMemo(){const content=['IFAP — Six réflexes pour un environne
 function initTranscript(){const root=$('transcriptBody');for(let s=0;s<data.length;s++){const sc=data[s];const section=document.createElement('section');const h2=document.createElement('h2');h2.textContent='Situation '+(s+1)+' — '+sc.title;section.append(h2);const p=document.createElement('p');p.textContent=sc.role;section.append(p);for(const [speaker,text] of sc.intro){const item=document.createElement('p');const strong=document.createElement('strong');strong.textContent=speaker+' : ';item.append(strong,document.createTextNode(text));section.append(item)}sc.steps.forEach((step,k)=>{const h3=document.createElement('h3');h3.textContent='Décision '+(k+1)+' — '+step.question;section.append(h3);const list=document.createElement('ol');for(const opt of step.options){const li=document.createElement('li');const st=document.createElement('strong');st.textContent=opt.label+' ';li.append(st);const resp=document.createElement('p');resp.textContent='Réaction : « '+opt.reaction+' »';const feed=document.createElement('p');feed.textContent='Retour : '+opt.title+'. '+opt.feedback;li.append(resp,feed);list.append(li)}section.append(list)});const end=document.createElement('p');const strong=document.createElement('strong');strong.textContent='À retenir : ';end.append(strong,document.createTextNode(sc.take));section.append(end);root.append(section)}}
 for(let i=0;i<4;i++)$('nav'+i).addEventListener('click',()=>navigate(i));
 for(const [btn,klass] of [['textMode','text-mode'],['contrastMode','hc'],['motionMode','no-motion']])$(btn).addEventListener('click',()=>{const active=!document.body.classList.contains(klass);document.body.classList.toggle(klass,active);$(btn).setAttribute('aria-pressed',String(active));if(btn==='textMode'&&active){$('fullTranscript').open=true;}});
+
+/* L'introduction constitue un écran distinct avant les simulations.
+   Les scènes et leurs décisions restent inchangées. */
+let introductionSeen = false;
+function showExperience(textOnly=false) {
+  $('welcomePage').hidden=true;
+  $('experience').hidden=false;
+  $('skipMain').href='#activeStep';
+  $('skipMain').textContent='Aller à l’étape en cours';
+  $('skipTranscript').hidden=false;
+  introductionSeen=true;
+  if(textOnly) {
+    $('fullTranscript').open=true;
+    if(!document.body.classList.contains('text-mode')) {
+      document.body.classList.add('text-mode');
+      $('textMode').setAttribute('aria-pressed','true');
+    }
+    const summary=$('fullTranscript').querySelector('summary');
+    summary.focus();
+    summary.scrollIntoView({block:'start'});
+  } else {
+    $('experienceTitle').focus();
+    $('experienceTitle').scrollIntoView({block:'start'});
+  }
+}
+function showIntroduction() {
+  $('experience').hidden=true;
+  $('welcomePage').hidden=false;
+  $('skipMain').href='#welcomeTitle';
+  $('skipMain').textContent='Aller à la présentation du parcours';
+  $('skipTranscript').hidden=true;
+  if(introductionSeen) $('beginExperience').firstChild.textContent='Reprendre les situations ';
+  $('welcomeTitle').focus();
+  $('welcomeTitle').scrollIntoView({block:'start'});
+}
+$('beginExperience').addEventListener('click',()=>showExperience(false));
+$('readExperience').addEventListener('click',()=>showExperience(true));
+$('returnIntroduction').addEventListener('click',showIntroduction);
+
 initTranscript();sceneArt(0);display(false);
 })();
 </script>
