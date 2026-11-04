@@ -1,36 +1,45 @@
-# Prototype IFAP — sensibilisation au handicap en emploi
+# Tableau de bord — sensibilisation au handicap en emploi
 
-Démonstrateur interactif de validation pédagogique, **version 0.7**.
+Version du portail : 0.1 · Mise à jour : 4 novembre 2026. Le portail regroupe le prototype HTML v0.7, le cahier des charges v0.2, le storyboard v0.3 et la grille de relecture v0.1.
 
-## Page d’introduction
+## Important — confidentialité
 
-Avant les simulations, l’apprenant découvre les enjeux de l’inclusion dans le travail quotidien, quatre objectifs d’apprentissage et la durée prévue pour **ce prototype : 12 à 15 minutes**.
+**GitHub Pages n'est pas un extranet privé.** Sur les configurations courantes, un site Pages est public, même si le dépôt est privé. Les fichiers placés dans ce dossier (documents, prototype et ressources) deviendront accessibles depuis le site publié. Avant toute mise en ligne, faites valider la diffusion de ces documents de travail par les responsables du projet. Ne publiez aucune donnée personnelle ou sensible. Si l'accès doit être limité à Aurore et Jérôme, choisissez un hébergement avec authentification (SharePoint/Teams, par exemple), ou un dispositif GitHub Enterprise configuré pour des Pages privés si disponible.
 
-Le futur module complet reste envisagé sur **35 à 45 minutes** ; il n’est pas encore réalisé.
+## Prévisualisation en local
 
-## Quiz de découverte et repères chiffrés
+1. Décompresser l'archive ZIP sur votre ordinateur.
+2. Ouvrir `index.html` dans un navigateur récent.
+3. Les liens vers le prototype et les documents sont relatifs et fonctionnent depuis le dossier décompressé. Le bouton de copie de lien sera surtout utile une fois le site hébergé.
 
-Le diagnostic initial comporte **sept questions**, dont plusieurs exploitent les pourcentages transmis et validés par Jérôme Caneva : 80 % de situations invisibles, 85 % de handicaps acquis, 80 % sans aménagement spécifique de poste, moins de 5 % d'utilisateurs de fauteuil parmi les personnes concernées par un handicap moteur, et une personne sur deux concernée au cours de sa vie.
+## Publication sur GitHub Pages (après accord de diffusion)
 
-La synthèse présente également la répartition indiquée dans le dossier pour quatre familles (45 %, 20 %, 16 %, 15 %) ; les familles sensorielles et cognitives y sont présentées comme transversales. Ne pas additionner ces catégories comme s'il s'agissait d'un graphique exhaustif.
+1. Sur GitHub, créer un nouveau dépôt, par exemple `pilotage-handicap-ifap`.
+2. Extraire le ZIP et ajouter **tout son contenu** à la racine du dépôt (pas le dossier conteneur). Conserver `index.html`, `.nojekyll`, `prototype/`, `documents/` et `assets/`.
+3. Dans le dépôt, ouvrir **Settings → Pages**.
+4. Sous **Build and deployment**, choisir **Deploy from a branch** ; sélectionner `main` et `/(root)`, puis enregistrer.
+5. Une fois le déploiement effectué, utiliser l'adresse affichée dans **Pages → Visit site** et la partager avec les personnes autorisées selon la décision de diffusion.
+6. Pour actualiser le projet, remplacer les fichiers et modifier la chronologie et les ressources dans `index.html`, puis pousser une nouvelle révision.
 
-Les chiffres sont attribués au dossier de Jérôme, sans prétendre à une vérification externe supplémentaire. Le quiz ne porte pas sur les conditions juridiques de reconnaissance.
+Si le dépôt est public, les documents peuvent être indexés ou partagés sans contrôle, malgré la balise `noindex` : celle-ci n'est **pas** un mécanisme de confidentialité.
 
-## Expérience
+## Arborescence
 
-- Trois situations professionnelles : réunion, confidence, mission.
-- Six décisions interactives avec conséquences et feedbacks.
-- Accès à une transcription intégrale, sans animation.
-- Navigation libre et possibilité de revoir la présentation.
-- Aucun chronomètre et aucune donnée de santé collectée.
+- `index.html` — tableau de bord, avec graphiques d'avancement, séquences, profils et accès aux livrables.
+- `cahier-des-charges.html` — lecture confortable du CDC original v0.2, avec avertissement sur les arbitrages ultérieurs.
+- `prototype/index.html` — **copie exacte** du démonstrateur HTML v0.7, non modifiée.
+- `documents/` — storyboard et grille PDF + Word, CDC Markdown.
+- `assets/` — petites prévisualisations et favicon.
+- `.nojekyll` — publication des fichiers statiques sans traitement Jekyll.
 
-**Statut : prototype pédagogique de validation**, non assimilable à une formation finalisée. Vérifications éditoriales, juridiques, tests humains d’accessibilité et recette Moodle restent nécessaires.
+## Mise à jour des statuts et des rôles
 
-## GitHub Pages
+Le portail est **statique**, sans serveur ni base de données : les indicateurs correspondent aux jalons connus au 4 novembre 2026, ils ne se mettent pas à jour automatiquement. Les choix de rôle servent à afficher les attentes, **pas** à collecter les avis. Utilisez la grille Word pour adresser les observations à Marc par vos canaux habituels. Aucun questionnaire n'est envoyé par ce site.
 
-Depuis **Settings → Pages**, choisir **Deploy from a branch**, branche **main**, dossier **/(root)**.
+## Validation
 
-Une fois Pages activé, la page se trouve à l’adresse :
-https://elearning-ifap.github.io/accessibilit-/
-
-**Ce dépôt est public.** L’instruction `noindex` n’est pas un contrôle d’accès.
+- Tableau de bord conçu pour une réunion de travail, pas pour des apprenants.
+- Storyboard : proposition v0.3, relecture collective le 18 novembre 2026.
+- Prototype : démonstrateur v0.7, non SCORM.
+- CDC : version 0.2 antérieure aux arbitrages du 4 novembre 2026.
+- Points nécessitant vérification avant la diffusion du module : textes juridiques locaux, statistiques, accès aux aides, ressources externes, droits médias, accessibilité et intégration Moodle.
