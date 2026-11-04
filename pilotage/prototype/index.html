@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="description" content="Prototype IFAP : parcours autonome de sensibilisation : définition du handicap, idées reçues, simulations, adaptations, orientation et évaluation.">
-<title>Les gestes qui incluent · IFAP · prototype v0.7</title>
+<title>Les gestes qui incluent · IFAP · prototype v0.8</title>
 <style>
 /* ======================================================================
    IFAP • v0.4 — système visuel éditorial et accessible
@@ -413,7 +413,7 @@ body.hc .quiz-option, body.hc .quiz-summary { border-color:var(--ink); }
 @media print { .quiz-options,.quiz-actions,.quiz-progress,.discovery-back { display:none; } .quiz-text-version { display:block; } }
 
 
-/* v0.7 — extensions du parcours, appliquées après la feuille de style v0.6. */
+/* v0.8 — extensions du parcours, appliquées après la feuille de style v0.6. */
 :root{--v7-teal:#176f71;--v7-navy:#173a41;--v7-ice:#e8f4f1;--v7-amber:#a66320;--v7-rose:#fce9e3}
 .v7-coursebar{position:sticky;top:0;z-index:45;background:#fdfefa;border-bottom:1px solid var(--border);box-shadow:0 6px 20px #183b3810}
 .v7-course-inner{max-width:1240px;margin:auto;padding:11px 28px 8px}
@@ -516,34 +516,50 @@ button.v7-tile{cursor:pointer}.v7-tile strong{display:block;font-size:.98rem;col
 @media(prefers-reduced-motion:reduce){.v7-overall>span,.v7-comparison .v7-case,.v7-progress-small span{transition:none}}
 @media print{.v7-coursebar,.v7-footer,.v7-course-tools,.topbar,.v7-button{display:none!important}.v7-page,.v7-panel{box-shadow:none!important;border:none!important}.v7-panel-content{padding:0}}
 
+
+.scene-role{margin:0;padding:12px 24px;background:var(--surface-muted)}
+.welcome-copy .welcome-actions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}
+.v7-course-tools{flex-wrap:wrap;align-items:flex-start}
+.v7-coursebar summary{cursor:pointer;padding:5px}
+.hc .v7-coursebar,.hc .v7-subhead,.hc .v7-panel,.hc .v7-feedback,.hc .v7-memo,.hc .v7-choice,.hc .v7-callout,.hc .quiz-feedback{background:#fff;color:#111;border-color:#111}
+.hc .v7-coursebar button,.hc .v7-panel :is(p,small,strong,h2,h3){color:#111}
+body.no-motion *,body.no-motion *::before,body.no-motion *::after{animation:none!important;transition:none!important}
+html:has(body.no-motion){scroll-behavior:auto}
 </style>
 </head>
 <body>
 <a class="skip" id="skipMain" href="#welcomeTitle">Aller à la présentation du parcours</a>
 <a class="skip" id="skipTranscript" href="#fullTranscript" hidden>Consulter l’intégralité des situations en texte</a>
-<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype complet de validation · v0.7</span></div></header>
-<!-- Navigation générale du parcours v0.7, indépendante du suivi interne des six décisions v0.6. -->
+<header class="topbar"><div class="bar-inner"><div class="brand"><strong>IFAP / laboratoire pédagogique</strong><small>Sensibilisation au handicap en emploi</small></div><span class="version">Prototype complet de validation · v0.8</span></div></header>
+<!-- Navigation générale du parcours v0.8, indépendante du suivi interne des six décisions v0.6. -->
 <nav class="v7-coursebar" id="v7CourseBar" aria-label="Parcours complet — six séquences">
  <div class="v7-course-inner">
-  <div class="v7-course-head"><strong>Les gestes qui incluent · parcours complet</strong><span class="course-count" id="v7CourseCount">Séquence 1 sur 6 · 39 min estimées</span><div class="v7-overall" role="progressbar" aria-label="Progression générale de navigation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="v7Overall"><span id="v7OverallFill"></span></div></div>
-  <div class="v7-course-links" id="v7CourseLinks">
+  <div class="v7-course-head"><strong>Les gestes qui incluent · parcours complet</strong><span class="course-count" id="v7CourseCount">Séquence 1 sur 6 · 39 min estimées</span><div hidden class="v7-overall" role="progressbar" aria-label="Progression générale de navigation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="v7Overall"><span id="v7OverallFill"></span></div></div>
+  <details id="courseMenu"><summary>Voir le parcours</summary><div class="v7-course-links" id="v7CourseLinks">
    <button type="button" data-v7chapter="1" aria-current="step">01 · Bienvenue <small>Idées reçues · 5 min</small></button>
    <button type="button" data-v7chapter="2">02 · Comprendre <small>Définition · 7 min</small></button>
    <button type="button" data-v7chapter="3">03 · Décider <small>Trois situations · 12 min</small></button>
    <button type="button" data-v7chapter="4">04 · Agir <small>Adapter · 7 min</small></button>
    <button type="button" data-v7chapter="5">05 · Dialoguer <small>Orienter · 4 min</small></button>
    <button type="button" data-v7chapter="6">06 · Retenir <small>Évaluer · 4 min</small></button>
-  </div>
+  </div></details>
  </div>
- <div class="v7-course-tools"><button type="button" class="v7-tiny" id="v7Fullscreen">⛶ Plein écran</button><button type="button" class="v7-tiny" id="v7Resume" hidden>↺ Reprendre là où j’en étais</button><button type="button" class="v7-tiny" id="v7Reset">Effacer ma progression locale</button></div>
+ <div class="v7-course-tools">  <details class="access-settings" id="displaySettings">
+    <summary>Options d’affichage</summary>
+    <div class="tools" role="group" aria-label="Options de consultation">
+      <button type="button" class="tool" id="textMode" aria-pressed="false">Simulations sans illustrations</button>
+      <button type="button" class="tool" id="contrastMode" aria-pressed="false">Contraste renforcé</button>
+      <button type="button" class="tool" id="motionMode" aria-pressed="false">Limiter les animations</button>
+    </div>
+  </details><button type="button" class="v7-tiny" id="v7Fullscreen">⛶ Plein écran</button><button type="button" class="v7-tiny" id="v7Resume" hidden>↺ Reprendre là où j’en étais</button><button type="button" class="v7-tiny" id="v7Reset">Effacer ma progression locale</button></div>
 </nav>
 <main>
 <section id="extensionPage" class="v7-page" aria-labelledby="v7ScreenTitle" hidden>
   <div class="v7-subhead"><div><p class="v7-eyebrow" id="v7Breadcrumb">Séquence 2 · Comprendre</p><h1 id="v7ScreenTitle" tabindex="-1">Comprendre une situation de handicap</h1><p id="v7ScreenSubtitle">Des repères concrets pour agir au travail.</p></div><div class="v7-duration"><strong id="v7ScreenTime">1 min</strong><small>Durée indicative de cet écran</small></div></div>
   <article class="v7-panel" id="v7ScreenPanel" aria-label="Contenu pédagogique interactif"><div class="v7-panel-content" id="v7ScreenBody"></div></article>
-  <div class="v7-footer"><span class="v7-step-number" id="v7StepNumber">Écran 1 sur 14</span><div class="v7-footer-actions"><button type="button" class="v7-button secondary" id="v7Prev">← Précédent</button><button type="button" class="v7-button" id="v7Next">Continuer →</button></div></div>
+  <div class="v7-footer"><span class="v7-step-number" id="v7StepNumber" hidden>Écran 1 sur 14</span><div class="v7-footer-actions"><button type="button" class="v7-button secondary" id="v7Prev">← Précédent</button><button type="button" class="v7-button" id="v7Next">Continuer →</button></div></div>
   <details class="v7-reader" id="v7TextDetails"><summary>Consulter les contenus de cette séquence en version textuelle</summary><div id="v7ReaderBody"></div></details>
-  <p class="v7-notice">Prototype pédagogique v0.7 · parcours fictif de sensibilisation, pas un avis médical, juridique ou RH. Certaines ressources locales et formulations restent à valider avec Jérôme et Aurore.</p>
+  <p class="v7-notice">Prototype pédagogique v0.8 · parcours fictif de sensibilisation, pas un avis médical, juridique ou RH. Certaines ressources locales et formulations restent à valider avec Jérôme et Aurore.</p>
   <p class="sr-only" role="status" aria-live="polite" id="v7Live"></p>
 </section>
 
@@ -552,7 +568,8 @@ button.v7-tile{cursor:pointer}.v7-tile strong{display:block;font-size:.98rem;col
   <div class="welcome-hero">
     <div class="welcome-copy">
       <h1 id="welcomeTitle" tabindex="-1">L’inclusion commence <em>dans nos gestes quotidiens.</em></h1>
-      <p class="welcome-lead">Au travail, une réunion difficile à suivre, une confidence mal accueillie ou une mission décidée à la place d’un collègue peuvent, sans mauvaise intention, créer de l’exclusion.</p>
+      <p><strong>39 min environ · 6 séquences</strong><br>Reprise possible dans ce navigateur.</p><div class="welcome-actions">      <button type="button" class="welcome-start" id="beginExperience">Commencer le parcours <span aria-hidden="true">→</span></button>
+      <button type="button" class="welcome-text" id="readExperience">Consulter les simulations en version texte</button></div><p class="welcome-lead">Au travail, une réunion difficile à suivre, une confidence mal accueillie ou une mission décidée à la place d’un collègue peuvent, sans mauvaise intention, créer de l’exclusion.</p>
       <p class="welcome-explain">Nous n’avons pas besoin de connaître la situation médicale d’une personne pour faciliter sa participation. Notre manière d’écouter, de proposer de l’aide et d’organiser le travail peut faire la différence.</p>
     </div>
     <aside class="welcome-metric" aria-label="Durée et format du parcours">
@@ -578,10 +595,6 @@ button.v7-tile{cursor:pointer}.v7-tile strong{display:block;font-size:.98rem;col
   </section>
   <div class="welcome-action">
     <div class="welcome-action-copy"><strong>Prêt à faire vos propres choix&nbsp;?</strong><p>Aucun prérequis. Vous avancez à votre rythme, pouvez recommencer les scènes et consulter une version intégralement textuelle.</p></div>
-    <div class="welcome-controls">
-      <button type="button" class="welcome-start" id="beginExperience">Commencer par le quiz <span aria-hidden="true">→</span></button>
-      <button type="button" class="welcome-text" id="readExperience">Consulter les simulations en version texte</button>
-    </div>
   </div>
   <p class="welcome-disclaimer">Version de validation IFAP, avec quiz de découverte. Ce prototype complet est estimé à 39 minutes, à tester et valider avant une éventuelle production SCORM. Les situations et personnages sont fictifs.</p>
 </section>
@@ -641,16 +654,9 @@ button.v7-tile{cursor:pointer}.v7-tile strong{display:block;font-size:.98rem;col
     <h1 id="experienceTitle" tabindex="-1">L’inclusion se joue <em>dans nos choix.</em></h1>
     <p class="sub">Une réunion, une confidence, une mission : trois moments ordinaires du travail. À chaque étape, choisissez une réaction et découvrez ce qu’elle change pour les autres.</p>
   </div>
-  <details class="access-settings" id="displaySettings">
-    <summary>Options d’accessibilité</summary>
-    <div class="tools" role="group" aria-label="Options de consultation">
-      <button type="button" class="tool" id="textMode" aria-pressed="false">Version texte intégrale</button>
-      <button type="button" class="tool" id="contrastMode" aria-pressed="false">Contraste renforcé</button>
-      <button type="button" class="tool" id="motionMode" aria-pressed="false">Limiter les animations</button>
-    </div>
-  </details>
+
 </div>
-<div class="progress" aria-label="Progression du parcours">
+<div class="progress" hidden aria-label="Progression du parcours">
   <div class="progress-left"><strong id="progressText">Découverte du parcours</strong><span id="progressSub">Environ 17 à 20 minutes</span></div>
   <div class="track" id="progressTrack" role="progressbar" aria-label="Situations achevées" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill" id="progressFill"></div></div>
 </div>
@@ -662,22 +668,22 @@ button.v7-tile{cursor:pointer}.v7-tile strong{display:block;font-size:.98rem;col
 </nav>
 <div class="layout">
 <section class="card" aria-label="Simulation en cours"><div class="cardtop"><strong id="contextTitle">Service public · réunion d’équipe</strong><span id="stepCount">Présentation</span></div>
-<div class="visual" id="visual" data-effect="none" aria-hidden="true"><div id="artStage"></div><div id="bubble" class="bubble" data-side="left"><div id="bubbleName" class="bubblelabel">Votre mission</div><p id="bubbleText">Observer une situation et choisir une réaction.</p></div><div class="scene-sign">Scène illustrée · personnages fictifs</div></div>
+<p class="scene-role"><strong>Votre rôle</strong><br><span id="roleText"></span></p><div class="visual" id="visual" data-effect="none" aria-hidden="true"><div id="artStage"></div><div id="bubble" class="bubble" data-side="left"><div id="bubbleName" class="bubblelabel">Votre mission</div><p id="bubbleText">Observer une situation et choisir une réaction.</p></div><div class="scene-sign">Scène illustrée · personnages fictifs</div></div>
 <div class="content" id="activeStep"><div class="scene-kicker" id="sceneKicker">Situation 1</div><h2 id="stepTitle" class="step-title" tabindex="-1">Vous allez participer à une réunion.</h2><div class="line" id="dialogue"><strong id="dialogueName">Votre mission</strong><p id="dialogueText">Observez la situation, puis choisissez comment intervenir.</p></div><p class="help" id="help">Le contenu est aussi disponible en version texte intégrale, sans animation.</p>
 <div class="choices" id="choices" hidden></div>
-<div id="result" hidden><div class="feedback" id="feedback" role="group" aria-label="Retour pédagogique"><strong id="feedbackTitle"></strong><p id="feedbackText"></p></div></div>
+<div id="result" hidden><div class="feedback" id="feedback" tabindex="-1" role="group" aria-label="Retour pédagogique"><strong id="feedbackTitle"></strong><p id="feedbackText"></p><strong>Une phrase à essayer</strong><p id="scenePhrase"></p></div></div>
 <div class="note" id="note" hidden><h3 id="noteTitle">Document de travail</h3><p id="noteDesc"></p><ul id="noteList"></ul></div>
 <div id="debrief" hidden><div class="feedback"><strong>Le réflexe à retenir</strong><p id="debriefText"></p></div><div class="tags" id="debriefTags"></div></div>
 <div id="finish" hidden><div class="memo"><h3>Les six réflexes que vous pouvez réutiliser</h3><ol><li>Demander quels besoins ou modalités conviennent, sans présumer.</li><li>Respecter l’autonomie et les choix des personnes.</li><li>Ne pas exiger de diagnostic ou d’information intime.</li><li>Respecter la confidentialité des échanges.</li><li>Anticiper des supports et organisations accessibles.</li><li>Orienter, si nécessaire, vers les interlocuteurs compétents sans promettre de droits particuliers.</li></ol></div><p id="statsLine"></p><p class="disclaimer">Démonstrateur pédagogique : les personnes, situations et documents sont fictifs. La validation par les acteurs concernés, un audit d’accessibilité humain et la recette Moodle restent indispensables.</p></div>
 <div class="actions" id="actions"><button id="primary" class="button" type="button">Commencer</button><button id="secondary" class="button secondary" type="button" hidden>Revenir</button><button id="tertiary" class="button secondary" type="button" hidden>Autre choix</button></div>
 <p class="sr-only" id="liveStatus" role="status" aria-live="polite" aria-atomic="true"></p></div></section>
 <aside class="aside" aria-label="Repères du parcours">
-  <section class="asidecard mint"><h3>Votre rôle dans la scène</h3><p id="roleText">Vous êtes Alex, membre de l’équipe.</p><p class="count" id="countText">Situation 1 sur 3 · 2 décisions</p></section>
+  <section class="asidecard mint"><h3>Les situations</h3><p class="count" id="countText">Situation 1 sur 3 · 2 décisions</p></section>
   <details class="aside-details"><summary>Comment fonctionne cette expérience ?</summary><div class="aside-details-content"><p>Une intention peut être utile… ou créer un obstacle. Comparez les réponses et leurs conséquences.</p><ul><li>Vous avancez à votre rythme.</li><li>Vous pouvez explorer d’autres choix.</li><li>Aucune information de santé n’est demandée.</li></ul><p class="aside-caveat">Scènes fictives, sans collecte. Dialogues et accessibilité à valider avant diffusion.</p></div></details>
 </aside>
 </div>
 <details id="fullTranscript" class="transcript"><summary>Lire les trois simulations, leurs réponses et leurs conséquences, sans animation</summary><p>Vous pouvez lire toutes les situations sans passer par les interactions. Le scénario, les trois réponses, les réactions et les explications sont intégralement présentés.</p><div id="transcriptBody"></div></details>
-<footer class="below">IFAP · prototype pédagogique v0.7 · séquence des simulations issue de la v0.6 · consultation hors ligne, sans collecte nominative · sensibilisation, non conseil juridique ou médical · <a href="https://openclassrooms.com/fr/courses/4537876-developpez-une-entreprise-plus-inclusive-envers-le-handicap" target="_blank" rel="noopener noreferrer">Ressource OpenClassrooms pour approfondir (contexte juridique métropolitain)</a>.</footer>
+<footer class="below">IFAP · prototype pédagogique v0.8 · séquence des simulations issue de la v0.6 · consultation hors ligne, sans collecte nominative · sensibilisation, non conseil juridique ou médical · <a href="https://openclassrooms.com/fr/courses/4537876-developpez-une-entreprise-plus-inclusive-envers-le-handicap" target="_blank" rel="noopener noreferrer">Ressource OpenClassrooms pour approfondir (contexte juridique métropolitain)</a>.</footer>
 </div>
 </main>
 <script>
@@ -697,18 +703,23 @@ function progress(){const n=state.completed.filter(Boolean).length;const value=M
 function actions(pText,pHandler,sText,sHandler,tText,tHandler){for(const [id,txt,fn] of [['primary',pText,pHandler],['secondary',sText,sHandler],['tertiary',tText,tHandler]]){const btn=$(id);btn.hidden=!txt;if(txt){btn.textContent=txt;btn.onclick=fn}}}
 function noteContent(scene){$('noteTitle').textContent=scene.noteTitle;$('noteDesc').textContent=scene.note;$('noteList').replaceChildren();for(const item of scene.noteItems){const li=document.createElement('li');li.textContent=item;$('noteList').append(li)}}
 function setText(title,help,speaker,speech){$('stepTitle').textContent=title;$('help').textContent=help;setSpeech(speaker,speech)}
+const scenePhrases=[
+ ['Quel format vous permettrait de suivre la réunion ?','Souhaitez-vous que je partage le support à l’avance ?'],
+ ['Merci de m’en parler. Qu’est-ce qui vous aiderait au travail ?','Avec qui souhaitez-vous en parler, et que puis-je transmettre ?'],
+ ['Comment souhaitez-vous participer à cette mission ?','De quoi aurions-nous besoin pour organiser le déplacement ensemble ?']
+];
 function display(shouldFocus=true){$('choices').hidden=true;$('result').hidden=true;$('note').hidden=true;$('debrief').hidden=true;$('finish').hidden=true;$('visual').dataset.effect='none';
  if(state.scene===3){renderFinish();progress();if(shouldFocus)stageFocus();return;}
- const sc=data[state.scene];$('contextTitle').textContent=sc.location;$('sceneKicker').textContent=sc.tag;$('roleText').textContent=sc.role;$('countText').textContent='Situation '+(state.scene+1)+' sur 3 · 2 décisions';
+ const sc=data[state.scene];$('contextTitle').textContent=sc.location;$('sceneKicker').textContent=['La réunion','La confidence','La mission'][state.scene];$('roleText').textContent=sc.role;$('countText').textContent='Situation '+(state.scene+1)+' sur 3 · 2 décisions';
  if(!document.getElementById('person-lea'))sceneArt(state.scene);
  noteContent(sc);
  if(state.phase==='welcome'){ $('stepCount').textContent='Présentation';setText(sc.title,'Deux décisions à prendre dans une situation de travail. Les réactions sont fictives et vous pouvez les explorer librement.','Votre mission',sc.theme+'. Ce qui compte : la participation et le choix des personnes.');personEmotion('','neutral');actions('Découvrir la situation',()=>{state.phase='intro';state.line=0;display()},state.scene>0?'Scène précédente':null,()=>navigate(state.scene-1),null,null);}
  if(state.phase==='intro'){$('stepCount').textContent='Le contexte · '+(state.line+1)+' sur '+sc.intro.length;const [speaker,speech]=sc.intro[state.line];setText('Observez ce qui se passe.','Prenez connaissance des échanges. Vous pouvez avancer à votre rythme.',speaker,speech);personEmotion(speaker, state.line===sc.intro.length-1?'concern':'neutral','gesture');actions(state.line===sc.intro.length-1?'Choisir votre réaction':'Écouter la suite',()=>{if(state.line+1<sc.intro.length){state.line++;display()}else{state.phase='choose';state.step=0;display()}},'Recommencer la scène',()=>{state.phase='welcome';display()},null,null);}
  if(state.phase==='choose'){const item=sc.steps[state.step];$('stepCount').textContent='Décision '+(state.step+1)+' sur 2'; const [speaker,speech]=sc.intro[sc.intro.length-1];setText(item.question,item.help,speaker,speech);personEmotion(speaker,'concern','gesture');const area=$('choices');area.replaceChildren();item.options.forEach((option,index)=>{const button=document.createElement('button');button.type='button';button.className='choice';const l=document.createElement('span');l.className='tag';l.textContent=String.fromCharCode(65+index);button.dataset.explored=String(state.seen[state.scene].has(String(state.step)+':'+index));l.setAttribute('aria-hidden','true');const v=document.createElement('span');v.textContent=option.label;button.append(l,v);button.setAttribute('aria-label','Réponse '+String.fromCharCode(65+index)+' : '+option.label);button.addEventListener('click',()=>{state.choice=index;state.phase='outcome';state.seen[state.scene].add(String(state.step)+':'+index);display()});area.append(button)});area.hidden=false;actions(null,null,'Revoir le contexte',()=>{state.phase='intro';state.line=0;display()},null,null);}
- if(state.phase==='outcome'){const opt=sc.steps[state.step].options[state.choice];$('stepCount').textContent='Conséquence de votre décision';setText('Comment votre choix est-il vécu ?','Voici une conséquence possible dans cette scène fictive. Vous pouvez comparer les autres choix.',state.scene===0?'Léa':state.scene===1?'Camille':'Inès',opt.reaction);personEmotion(state.scene===0?'Léa':state.scene===1?'Camille':'Inès',opt.pose,opt.good?'gesture':'withdraw');$('feedbackTitle').textContent=(opt.good?'À retenir : ':'À ajuster : ')+opt.title;$('feedbackText').textContent=opt.feedback;$('feedback').className='feedback'+(opt.good?'':' warn');$('result').hidden=false;$('visual').dataset.effect=opt.effect;if(opt.effect==='adapt')$('note').hidden=false;actions(state.step===0?'Continuer : une deuxième décision':'Voir la synthèse de la scène',()=>{if(state.step===0){state.step=1;state.phase='choose'}else{state.phase='debrief';state.completed[state.scene]=true}display()},'Explorer une autre réponse',()=>{state.phase='choose';display()},'Revoir le contexte',()=>{state.phase='intro';state.line=0;display()});}
+ if(state.phase==='outcome'){const opt=sc.steps[state.step].options[state.choice];$('stepCount').textContent='Décision '+(state.step+1)+' sur 2 · retour';$('scenePhrase').textContent=scenePhrases[state.scene][state.step];setText('Comment votre choix est-il vécu ?','Voici une conséquence possible dans cette scène fictive. Vous pouvez comparer les autres choix.',state.scene===0?'Léa':state.scene===1?'Camille':'Inès',opt.reaction);personEmotion(state.scene===0?'Léa':state.scene===1?'Camille':'Inès',opt.pose,opt.good?'gesture':'withdraw');$('feedbackTitle').textContent=(opt.good?'À retenir : ':'À ajuster : ')+opt.title;$('feedbackText').textContent=opt.feedback;$('feedback').className='feedback'+(opt.good?'':' warn');$('result').hidden=false;$('visual').dataset.effect=opt.effect;if(opt.effect==='adapt')$('note').hidden=false;actions(state.step===0?'Continuer : une deuxième décision':'Voir la synthèse de la scène',()=>{if(state.step===0){state.step=1;state.phase='choose'}else{state.phase='debrief';state.completed[state.scene]=true}display()},'Essayer une autre réponse',()=>{state.phase='choose';display()},'Revoir le contexte',()=>{state.phase='intro';state.line=0;display()});}
  if(state.phase==='debrief'){$('stepCount').textContent='Synthèse';setText('Ce que vous pouvez appliquer dès demain','Vous pouvez continuer ou explorer une autre situation. Aucun choix n’est sanctionné.','Votre repère',sc.take);$('debriefText').textContent=sc.take;$('debriefTags').replaceChildren();for(const t of sc.takeTags){const span=document.createElement('span');span.textContent=t;$('debriefTags').append(span)}$('debrief').hidden=false;$('note').hidden=false;$('visual').dataset.effect='adapt';personEmotion(state.scene===0?'Léa':state.scene===1?'Camille':'Inès','smile','gesture');actions(state.scene===2?'Consulter les six réflexes':'Situation suivante →',()=>navigate(state.scene+1),'Rejouer cette situation',()=>{state.phase='intro';state.line=0;state.step=0;display()},null,null);}
- progress();$('liveStatus').textContent=$('stepCount').textContent+'. '+$('stepTitle').textContent;if(shouldFocus)stageFocus();}
-function navigate(i){if(i===3 && window.IFAPv07){window.IFAPv07.open("04.1");return;}state.scene=i;state.phase=i===3?'finish':'welcome';state.line=0;state.step=0;state.choice=null;if(i<3)sceneArt(i);display();window.IFAPv07?.sceneActivated(i)}
+ progress();$('liveStatus').textContent=$('stepCount').textContent+'. '+$('stepTitle').textContent;window.IFAPv07?.sceneActivated(state.scene);if(shouldFocus){if(state.phase==='outcome')$('feedback').focus();else stageFocus();}}
+function navigate(i){if(i===3 && window.IFAPv07){window.IFAPv07.open("04.1");return;}state.scene=i;state.phase=i===3?'finish':'welcome';state.line=0;state.step=0;state.choice=null;if(i<3)sceneArt(i);display()}
 function renderFinish(){$('contextTitle').textContent='Bilan du parcours · ce qui compte';$('sceneKicker').textContent='Vos repères de terrain';$('stepCount').textContent='Fin de l’expérience';$('roleText').textContent='Votre rôle : transférer ces réflexes dans votre quotidien professionnel.';$('countText').textContent='Bilan personnel, sans enregistrement nominatif';setText('Six réflexes à garder en tête','Une formation inclusive doit être accessible elle aussi. Vous pouvez télécharger ce mémo ou le lire directement ci-dessous.','Votre message clé','Demander, respecter, adapter : l’environnement de travail peut évoluer sans que la personne ait à se justifier.');$('finish').hidden=false;$('visual').dataset.effect='adapt';$('statsLine').textContent=state.completed.filter(Boolean).length+' des 3 situations explorées jusqu’à leur synthèse. Vous pouvez revoir les situations à volonté.';actions('Télécharger le mémo texte',downloadMemo,'Revenir à la situation 1',()=>navigate(0),'Imprimer ou enregistrer cette page',()=>{window.print()});}
 function downloadMemo(){const content=['IFAP — Six réflexes pour un environnement de travail inclusif','', '1. Demander ce qui convient, sans présumer.', '2. Respecter l’autonomie et les choix.', '3. Ne pas rechercher un diagnostic.', '4. Préserver la confidentialité.', '5. Anticiper les documents et l’organisation accessibles.', '6. Orienter sans garantir de droits ni décider à la place.', '', 'Document de sensibilisation général. Cas et personnages fictifs.'];const blob=new Blob([content.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='IFAP_memo_six_reflexes_accessibilite.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 function initTranscript(){const root=$('transcriptBody');const pre=document.createElement('section');const preTitle=document.createElement('h2');preTitle.textContent='Diagnostic de découverte — les cinq questions';pre.append(preTitle);const preText=document.createElement('p');preText.textContent='Accessible sans chronomètre : questions, réponses et explications.';pre.append(preText);const preList=document.createElement('ol');quizData.forEach(q=>{const li=document.createElement('li');const st=document.createElement('strong');st.textContent=q.question;li.append(st);const p=document.createElement('p');p.textContent='Réponse : '+q.options[q.correct]+'. '+q.explanation;li.append(p);preList.append(li)});pre.append(preList);root.append(pre);for(let s=0;s<data.length;s++){const sc=data[s];const section=document.createElement('section');const h2=document.createElement('h2');h2.textContent='Situation '+(s+1)+' — '+sc.title;section.append(h2);const p=document.createElement('p');p.textContent=sc.role;section.append(p);for(const [speaker,text] of sc.intro){const item=document.createElement('p');const strong=document.createElement('strong');strong.textContent=speaker+' : ';item.append(strong,document.createTextNode(text));section.append(item)}sc.steps.forEach((step,k)=>{const h3=document.createElement('h3');h3.textContent='Décision '+(k+1)+' — '+step.question;section.append(h3);const list=document.createElement('ol');for(const opt of step.options){const li=document.createElement('li');const st=document.createElement('strong');st.textContent=opt.label+' ';li.append(st);const resp=document.createElement('p');resp.textContent='Réaction : « '+opt.reaction+' »';const feed=document.createElement('p');feed.textContent='Retour : '+opt.title+'. '+opt.feedback;li.append(resp,feed);list.append(li)}section.append(list)});const end=document.createElement('p');const strong=document.createElement('strong');strong.textContent='À retenir : ';end.append(strong,document.createTextNode(sc.take));section.append(end);root.append(section)}}
@@ -757,10 +768,11 @@ const quizData = [
     explanation:'La personne est la mieux placée pour exprimer ses besoins. On peut agir sur les supports, le rythme et l’organisation sans rechercher ni partager des informations de santé.'
   }
 ];
-let quizIndex=0, quizAnswered=false, quizCompleted=false;
+let quizIndex=0, quizAnswered=false, quizCompleted=false, quizChoice=null;
 function focusQuiz(id){const el=$(id);try{el.focus({preventScroll:false})}catch(e){el.focus();}}
 function renderQuizQuestion(){
   quizAnswered=false;
+  quizChoice=null;
   $('quizSummary').hidden=true;
   $('quizSection').hidden=false;
   const q=quizData[quizIndex];
@@ -785,6 +797,8 @@ function renderQuizQuestion(){
 function answerQuiz(chosen){
   if(quizAnswered)return;
   quizAnswered=true;
+  quizChoice=chosen;
+  window.IFAPv07?.discoveryActivated();
   const q=quizData[quizIndex];
   [...$('quizOptions').children].forEach((b,i)=>{b.disabled=true;if(i===chosen)b.dataset.answer='chosen';else if(i===q.correct)b.dataset.answer='expected';});
   const good=chosen===q.correct;
@@ -798,20 +812,22 @@ function answerQuiz(chosen){
 }
 function showQuizSummary(){
   quizCompleted=true;
+  window.IFAPv07?.discoveryActivated();
   $('quizSection').hidden=true;
   $('quizSummary').hidden=false;
   focusQuiz('quizSummaryTitle');
 }
-function nextQuiz(){if(!quizAnswered)return;quizIndex++;if(quizIndex>=quizData.length)showQuizSummary();else {renderQuizQuestion();focusQuiz('quizQuestion');}}
+function nextQuiz(){if(!quizAnswered)return;quizIndex++;if(quizIndex>=quizData.length)showQuizSummary();else {renderQuizQuestion();window.IFAPv07?.discoveryActivated();focusQuiz('quizQuestion');}}
 function showDiscovery(){
   $('welcomePage').hidden=true;
   $('experience').hidden=true;
   $('discoveryPage').hidden=false;
-  $('extensionPage').hidden=true;window.IFAPv07?.discoveryActivated();
+  $('extensionPage').hidden=true;
   $('skipMain').href='#discoveryTitle';
   $('skipMain').textContent='Aller au quiz de découverte';
   $('skipTranscript').hidden=true;
-  if(quizCompleted){$('quizSection').hidden=true;$('quizSummary').hidden=false;}else renderQuizQuestion();
+  if(quizCompleted){$('quizSection').hidden=true;$('quizSummary').hidden=false;}else if($('quizSection').hidden||!$('quizOptions').children.length)renderQuizQuestion();
+  window.IFAPv07?.discoveryActivated();
   focusQuiz('discoveryTitle');
 }
 function quizTranscript(){
@@ -835,7 +851,7 @@ function showExperience(textOnly=false) {
   $('discoveryPage').hidden=true;
   $('welcomePage').hidden=true;
   $('experience').hidden=false;
-  $('extensionPage').hidden=true;window.IFAPv07?.sceneActivated(state.scene);
+  $('extensionPage').hidden=true;
   $('skipMain').href='#activeStep';
   $('skipMain').textContent='Aller à l’étape en cours';
   $('skipTranscript').hidden=false;
@@ -862,7 +878,7 @@ function showIntroduction() {
   $('skipMain').href='#welcomeTitle';
   $('skipMain').textContent='Aller à la présentation du parcours';
   $('skipTranscript').hidden=true;
-  if(introductionSeen) $('beginExperience').firstChild.textContent='Reprendre la découverte ';
+
   $('welcomeTitle').focus();
   $('welcomeTitle').scrollIntoView({block:'start'});
 }
@@ -871,12 +887,26 @@ $('readExperience').addEventListener('click',()=>showExperience(true));
 $('returnIntroduction').addEventListener('click',showIntroduction);
 $('returnDiscovery').addEventListener('click',showDiscovery);
 
-window.IFAPv06={showIntroduction,showDiscovery,showExperience,navigate,state,quizData,data};
+window.IFAPv06={
+ snapshotQuiz:()=>({index:quizIndex,choice:quizChoice,completed:quizCompleted}),
+ restoreQuiz(q){
+   quizIndex=Math.min(q.index,quizData.length-1);
+   quizCompleted=q.completed;
+   showDiscovery();
+   if(!quizCompleted){renderQuizQuestion();if(q.choice!==null)answerQuiz(q.choice);else{window.IFAPv07?.discoveryActivated();focusQuiz('quizQuestion');}}
+ },
+ snapshotScene:()=>({scene:state.scene,phase:state.phase,line:state.line,step:state.step,choice:state.choice,completed:state.completed,seen:state.seen.map(x=>[...x])}),
+ restoreScene(q){
+   Object.assign(state,q,{seen:q.seen.map(x=>new Set(x))});
+   showExperience();sceneArt(state.scene);display();
+ },
+ reset(){quizIndex=0;quizCompleted=false;renderQuizQuestion();state.completed=[false,false,false];state.seen=state.completed.map(()=>new Set());},
+ showIntroduction,showDiscovery,showExperience,navigate,state,quizData,data};
 initTranscript();sceneArt(0);display(false);
 })();
 </script>
 <script>
-/* IFAP — Extension v0.7. Les six décisions et les cinq questions v0.6 sont conservées. */
+/* IFAP — Extension v0.8. Les six décisions et les cinq questions v0.6 sont conservées. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -919,21 +949,34 @@ const finalQ=[
 {q:'Une consigne orale n’a pas été comprise par plusieurs collègues. Quelle pratique ?',opts:['Répéter plus vite pour ne pas perdre de temps.','Rendre les étapes explicites, proposer un support écrit et demander si cela convient.','Chercher à identifier les troubles éventuels des personnes.'],ok:1,feedback:'Améliorer la transmission des consignes bénéficie souvent à toute l’équipe.'},
 {q:'Un collègue demande si une aide financière FIPH lui est automatiquement acquise. Que répondre ?',opts:['Oui, tous les salariés et agents y ont droit sans condition.','Non, aucune aide n’existe pour ces situations.','Orienter vers une source locale compétente, sans promettre d’éligibilité.'],ok:2,feedback:'Les dispositifs et conditions sont à confirmer auprès des organismes compétents. Un collègue ne détermine pas l’éligibilité.'}
 ];
-const safeGet=()=>{try{return JSON.parse(localStorage.getItem('ifap-handicap-v07')||'{}')}catch(_){return {}}};
+const safeGet=()=>{try{return JSON.parse(localStorage.getItem('ifap-handicap-v08')||'{}')}catch(_){return {}}};
 let stored=safeGet(),current=keys.includes(stored.current)?stored.current:'02.1',activeChapter=1,resumeVisible=!!stored.current;
 let state={visited:stored.visited||['01.1'],answers:stored.answers||{},selectedSupports:stored.selectedSupports||[],finalAnswers:stored.finalAnswers||[],examIndex:stored.examIndex||0,prevViewed:stored.prevViewed||'avant'};
-function remember(){try{localStorage.setItem('ifap-handicap-v07',JSON.stringify({...state,current}))}catch(_){}}
-function mark(id){if(!state.visited.includes(id))state.visited.push(id);remember();updateNav(activeChapter);}
+function remember(){
+ if(current==='01.1')return;
+ stored={...state,current,quiz:window.IFAPv06.snapshotQuiz(),scene:window.IFAPv06.snapshotScene()};
+ try{localStorage.setItem('ifap-handicap-v08',JSON.stringify(stored))}catch(_){}
+}
+function mark(id){current=id;if(!state.visited.includes(id))state.visited.push(id);remember();updateNav(activeChapter);}
 function updateNav(chapter=activeChapter){
  activeChapter=chapter;
- const labels={1:'Bienvenue et idées reçues',2:'Comprendre le handicap',3:'Faire des choix',4:'Agir sur les obstacles',5:'Dialoguer et orienter',6:'Retenir et transférer'};
- $('v7CourseCount').textContent='Séquence '+chapter+' sur 6 · '+labels[chapter]+' · 39 min estimées';
+ const labels={1:'Bienvenue',2:'Comprendre',3:'Décider',4:'Agir',5:'Dialoguer',6:'Retenir'};
+ $('v7CourseCount').textContent=chapter+' sur 6 · '+labels[chapter];
  const total=19,visited=state.visited.length;const pct=Math.min(100,Math.round(100*visited/total));
  $('v7Overall').setAttribute('aria-valuenow',String(pct));$('v7OverallFill').style.width=pct+'%';
  document.querySelectorAll('[data-v7chapter]').forEach(b=>{let n=Number(b.dataset.v7chapter);b.setAttribute('aria-current',n===chapter?'step':'false');b.dataset.visited=String(state.visited.some(x=>Number(x.slice(0,2))===n));});
  $('v7Resume').hidden=!resumeVisible;
+ $('beginExperience').classList.toggle('welcome-start',!resumeVisible);
+ $('beginExperience').classList.toggle('welcome-text',resumeVisible);
+ if(resumeVisible){
+   const scene=stored.scene;
+   const sceneLabel=scene && ['La réunion','La confidence','La mission'][scene.scene];
+   const decision=scene && ['choose','outcome'].includes(scene.phase)?' · décision '+(scene.step+1)+' sur 2':'';
+   const label=stored.current.startsWith('03.')?sceneLabel+decision:stored.current==='01.2'?(stored.quiz.completed?'Bilan du quiz':'Quiz · question '+(stored.quiz.index+1)):pages[stored.current]?.title;
+   $('v7Resume').textContent='Reprendre · '+label;
+ }
 }
-function internalGo(chapter){resumeVisible=false;if(chapter===1){window.IFAPv06.showIntroduction();updateNav(1);mark('01.1')}else if(chapter===3){window.IFAPv06.showExperience(false);window.IFAPv06.navigate(0);mark('03.1')}else open(chapter===2?'02.1':chapter===4?'04.1':chapter===5?'05.1':'06.1');}
+function internalGo(chapter){$('courseMenu').open=false;resumeVisible=chapter===1&&!!stored.current;if(chapter===1){window.IFAPv06.showIntroduction();updateNav(1);mark('01.1')}else if(chapter===3){window.IFAPv06.showExperience(false);window.IFAPv06.navigate(0);mark('03.1')}else open(chapter===2?'02.1':chapter===4?'04.1':chapter===5?'05.1':'06.1');}
 function focusScreen(){try{$('v7ScreenTitle').focus({preventScroll:false})}catch(_){$('v7ScreenTitle').focus()}}
 function open(id){if(!pages[id])return;resumeVisible=false;current=id;['welcomePage','discoveryPage','experience'].forEach(el=>$(el).hidden=true);$('extensionPage').hidden=false;
  $('skipMain').href='#v7ScreenTitle';$('skipMain').textContent='Aller au contenu de la séquence';$('skipTranscript').hidden=true;
@@ -963,11 +1006,11 @@ function mobility(){template(`<span class="v7-lessonlabel">04.4 · Deux situatio
  document.querySelectorAll('[data-mobility]').forEach(b=>b.onclick=()=>{const [k,i]=b.dataset.mobility.split('-').map(Number);state.answers[mobilityQ[k].key]=i;remember();mobility()});}
 function relay(){let cards=[['Un obstacle dans le travail quotidien','Discuter d’abord avec la personne des modalités qu’elle souhaite tester avec l’équipe.'],['Un aménagement durable à organiser','Avec son accord, se rapprocher des interlocuteurs compétents de l’employeur (organisation, ressources humaines ou santé au travail selon le cas).'],['Une question sur les aides et démarches','Consulter des informations officielles actualisées et, si besoin, solliciter un organisme ou un service spécialisé, sans garantir d’éligibilité.']];template(`<span class="v7-lessonlabel">05.2 · À qui s’adresser ?</span><h2>Vous n’avez pas à tout résoudre seul.</h2><p>Choisissez une situation pour découvrir une piste de dialogue. L’orientation se construit avec la personne, et non à sa place.</p><div class="v7-stacked">${cards.map((c,i)=>`<details class="v7-tile"><summary><strong>${i+1}. ${esc(c[0])}</strong><span class="v7-micro">Ouvrir la piste</span></summary><p>${esc(c[1])}</p></details>`).join('')}</div><div class="v7-callout"><strong>À retenir</strong><p>Demander l’accord de la personne avant de l’accompagner vers un interlocuteur. Les circuits exacts dépendent de l’employeur et doivent être confirmés.</p></div>`)}
 function resources(){template(`<span class="v7-lessonlabel">05.3 · Ressources complémentaires</span><h2>Des informations utiles pour aller plus loin</h2><p>Les ressources ci-dessous sont des portes d’entrée pour approfondir le sujet. Les règles et les aides peuvent dépendre de la situation et du cadre applicable.</p><div class="v7-resource"><strong>Portail handicap.nc et FIPH</strong><p>Informations sur l’inclusion professionnelle, les ressources et les dispositifs d’accompagnement en Nouvelle-Calédonie.</p><p><a href="https://handicap.nc/" target="_blank" rel="noopener noreferrer">Consulter le portail handicap.nc (nouvel onglet) ↗</a></p></div><div class="v7-resource"><strong>Relais de votre employeur</strong><p>Selon la situation : hiérarchie, ressources humaines, santé au travail ou autres interlocuteurs compétents. Leur circuit précis reste à confirmer.</p></div><div class="v7-resource"><strong>Pour approfondir : OpenClassrooms</strong><p>Une ressource de sensibilisation complémentaire ; les éléments de droit métropolitain ne doivent pas être assimilés au droit calédonien.</p><p><a href="https://openclassrooms.com/fr/courses/4537876-developpez-une-entreprise-plus-inclusive-envers-le-handicap" target="_blank" rel="noopener noreferrer">Consulter le cours (nouvel onglet) ↗</a></p></div><div class="v7-callout"><strong>Point de vigilance avant diffusion publique</strong><p>Jérôme, Aurore et les autorités compétentes devront valider la pertinence, l’actualité et les périmètres des ressources locales. Aucune aide particulière n’est garantie par ce prototype.</p></div>`)}
-function exam(){let i=Math.min(state.examIndex,finalQ.length); if(i>=finalQ.length){let n=state.finalAnswers.reduce((s,a,j)=>s+(a===finalQ[j].ok?1:0),0);template(`<span class="v7-lessonlabel">06.1 · Bilan de transfert</span><h2>Vous avez terminé les cinq décisions.</h2><p class="v7-score" aria-label="${n} réponses adaptées sur 5">${n} <small style="font:400 1.4rem var(--font-ui)">/ 5</small></p><p>Ce résultat est un repère pour réfléchir à vos pratiques. Il ne constitue ni une certification ni une attestation de compétence.</p><div class="v7-callout"><strong>Ce que vous pouvez faire</strong><p>Relisez les retours pédagogiques ou recommencez librement. Aucun seuil de réussite n’est fixé à ce stade.</p></div><div class="v7-toggle"><button type="button" id="v7RestartExam">Recommencer les cinq décisions</button></div><details class="v7-reader"><summary>Relire mes réponses et les explications</summary><ol>${finalQ.map((q,j)=>`<li><strong>${esc(q.q)}</strong><p>Votre réponse : ${esc(q.opts[state.finalAnswers[j]])}</p><p>Repère : ${esc(q.feedback)}</p></li>`).join('')}</ol></details>`);$('v7RestartExam').onclick=()=>{state.examIndex=0;state.finalAnswers=[];remember();exam();};return;}
+function exam(){let i=Math.min(state.examIndex,finalQ.length); if(i>=finalQ.length){let n=state.finalAnswers.reduce((s,a,j)=>s+(a===finalQ[j].ok?1:0),0);template(`<span class="v7-lessonlabel">06.1 · Bilan de transfert</span><h2>Vous avez terminé les cinq décisions.</h2><div class="v7-memo"><h3>Six réflexes à réutiliser</h3><ol>${reflexes.map(x=>`<li>${esc(x)}</li>`).join('')}</ol><button type="button" class="v7-button secondary" id="v8Memo">Ouvrir le mémo à télécharger</button></div><p>Ce résultat est un repère pour réfléchir à vos pratiques. Il ne constitue ni une certification ni une attestation de compétence.</p><div class="v7-callout"><strong>Ce que vous pouvez faire</strong><p>Relisez les retours pédagogiques ou recommencez librement. Aucun seuil de réussite n’est fixé à ce stade.</p></div><div class="v7-toggle"><button type="button" id="v7RestartExam">Recommencer les cinq décisions</button></div><details class="v7-reader"><summary>Revoir mes réponses et les gestes à retenir</summary><ol>${finalQ.map((q,j)=>`<li><strong>${esc(q.q)}</strong><p>Votre réponse : ${esc(q.opts[state.finalAnswers[j]])}</p><p>Repère : ${esc(q.feedback)}</p></li>`).join('')}</ol></details><p class="v7-micro">Résultat indicatif · ${n} réponses adaptées sur 5</p>`);$('v8Memo').onclick=()=>open('06.2');$('v7RestartExam').onclick=()=>{state.examIndex=0;state.finalAnswers=[];remember();exam();};return;}
  let q=finalQ[i],a=state.finalAnswers[i];template(`<span class="v7-lessonlabel">06.1 · Évaluation de transfert</span><div class="v7-quizmeta">Décision ${i+1} sur 5 · entraînement libre</div><div class="v7-progress-small" role="progressbar" aria-label="Évaluation finale" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${i}"><span style="width:${100*i/5}%"></span></div><h2>${esc(q.q)}</h2><div class="v7-choice-list" role="group" aria-label="Réponses possibles">${q.opts.map((s,j)=>`<button type="button" class="v7-choice" data-final="${j}" aria-pressed="${a===j}" ${a!==undefined?`data-correct="${a===j?(a===q.ok):''}"`:''}>${String.fromCharCode(65+j)}. ${esc(s)}</button>`).join('')}</div>${a!==undefined?feedback(q.feedback,a===q.ok):''}<div class="v7-toggle">${a!==undefined?'<button type="button" id="v7NextFinal">'+(i===4?'Afficher mon bilan':'Question suivante')+' →</button>':''}${i>0?'<button type="button" id="v7PrevFinal">← Question précédente</button>':''}</div>`);
  document.querySelectorAll('[data-final]').forEach(b=>b.onclick=()=>{state.finalAnswers[i]=Number(b.dataset.final);state.finalAnswers=state.finalAnswers.slice(0,i+1);remember();exam()});if($('v7NextFinal'))$('v7NextFinal').onclick=()=>{state.examIndex++;remember();exam()};if($('v7PrevFinal'))$('v7PrevFinal').onclick=()=>{state.examIndex--;remember();exam()};}
 const reflexes=['Demander ce qui convient, sans présumer.','Respecter l’autonomie et les choix des personnes.','Ne pas exiger de diagnostic ou d’information intime.','Préserver la confidentialité des échanges.','Anticiper des supports et des organisations accessibles.','Orienter, si nécessaire, vers les interlocuteurs compétents sans promettre un droit individuel.'];
-function downloadMemo(){const promise=$('v7Promise')?.value||'';const data=['IFAP — Les six réflexes qui incluent','',...reflexes.map((x,i)=>`${i+1}. ${x}`),'','Un premier geste que je peux essayer demain :',promise||'À définir','', 'Sensibilisation générale, non un conseil médical ou juridique.'];const blob=new Blob([data.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='IFAP_memo_handicap_v0.7.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+function downloadMemo(){const promise=$('v7Promise')?.value||'';const data=['IFAP — Les six réflexes qui incluent','',...reflexes.map((x,i)=>`${i+1}. ${x}`),'','Un premier geste que je peux essayer demain :',promise||'À définir','', 'Sensibilisation générale, non un conseil médical ou juridique.'];const blob=new Blob([data.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='IFAP_memo_handicap_v0.8.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 function memo(){template(`<span class="v7-lessonlabel">06.2 · Vos repères de terrain</span><h2>Les six réflexes qui incluent</h2><p>Un geste simple peut rendre un support, une réunion ou une mission plus accessible. Voici ce que vous pouvez réutiliser au quotidien.</p><div class="v7-memo"><ol>${reflexes.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div><div class="v7-callout"><strong>Votre premier engagement</strong><p>Quelle action pourriez-vous mettre en œuvre à votre prochaine réunion ou dans un échange avec vos collègues ?</p><label for="v7Promise" style="display:block;margin:12px 0 5px;font-weight:680">Mon premier geste concret (facultatif)</label><textarea id="v7Promise" rows="3" style="font:inherit;max-width:650px;width:100%;border:1px solid #99bdb4;border-radius:8px;padding:12px" placeholder="Par exemple : envoyer un ordre du jour et un support lisible avant la réunion."></textarea><p class="v7-micro">Cette zone n’est pas envoyée à l’IFAP et n’est pas enregistrée automatiquement.</p></div><div class="v7-toggle"><button type="button" id="v7DownloadMemo">Télécharger le mémo (.txt)</button><button type="button" id="v7PrintMemo">Imprimer cette page</button></div><p class="v7-notice">Les formulations, les exemples et le dispositif restent soumis à validation. Le prototype n’a pas encore été conditionné en SCORM ni testé en recette Moodle.</p>`);$('v7DownloadMemo').onclick=downloadMemo;$('v7PrintMemo').onclick=()=>window.print();}
 function buildTextVersion(p){let text=`<p><strong>${esc(p.title)}</strong> — ${esc(p.sub)}</p>`;
  if(current==='02.4')text+='<ul>'+families.map(f=>`<li><strong>${esc(f[0])}</strong> : ${esc(f[1])} Exemple : ${esc(f[2])}</li>`).join('')+'</ul>';
@@ -982,14 +1025,21 @@ function buildTextVersion(p){let text=`<p><strong>${esc(p.title)}</strong> — $
  else if(current==='05.2')text+='<p>Selon le besoin : dialogue d’équipe, interlocuteur de l’employeur ou service spécialisé compétent, avec l’accord de la personne.</p>';
  else if(current==='05.3')text+='<p>Sources : handicap.nc / FIPH ; interlocuteurs compétents de votre employeur ; OpenClassrooms comme approfondissement non transposable juridiquement.</p>';
  $('v7ReaderBody').innerHTML=text;}
-window.IFAPv07={open,updateNav,sceneActivated:(i)=>{if(i<3){updateNav(3);mark('03.'+(i+1))}},discoveryActivated:()=>{mark('01.2');updateNav(1)},introActivated:()=>{mark('01.1');updateNav(1)}};
+window.IFAPv07={open,updateNav,sceneActivated:(i)=>{if(i<3){resumeVisible=false;updateNav(3);mark('03.'+(i+1))}},discoveryActivated:()=>{resumeVisible=false;mark('01.2');updateNav(1)},introActivated:()=>{resumeVisible=!!stored.current;mark('01.1');updateNav(1)}};
 $('v7Next').addEventListener('click',goNext);$('v7Prev').addEventListener('click',goPrev);
 document.querySelectorAll('[data-v7chapter]').forEach(b=>b.addEventListener('click',()=>internalGo(Number(b.dataset.v7chapter))));
 // Intercepter les deux chemins qui, en v0.6, passaient immédiatement du quiz aux scènes.
 for(const id of ['quizStartScenes','quizSkip'])$(id).addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();open('02.1')},true);
 $('v7Fullscreen').addEventListener('click',()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen?.().catch(()=>{})}else document.exitFullscreen?.()});
-$('v7Reset').addEventListener('click',()=>{if(window.confirm('Effacer la progression enregistrée dans ce navigateur ? Le parcours restera accessible.')){try{localStorage.removeItem('ifap-handicap-v07')}catch(_){}state={visited:['01.1'],answers:{},selectedSupports:[],finalAnswers:[],examIndex:0,prevViewed:'avant'};current='02.1';internalGo(1);updateNav(1)}});
-$('v7Resume').addEventListener('click',()=>{if(stored.current)open(stored.current)});
+$('v7Reset').addEventListener('click',()=>{if(window.confirm('Effacer la progression enregistrée dans ce navigateur ? Le parcours restera accessible.')){try{localStorage.removeItem('ifap-handicap-v08')}catch(_){}state={visited:['01.1'],answers:{},selectedSupports:[],finalAnswers:[],examIndex:0,prevViewed:'avant'};stored={};window.IFAPv06.reset();current='01.1';internalGo(1);updateNav(1)}});
+$('beginExperience').before($('v7Resume'));
+$('v7Resume').className='welcome-start';
+$('v7Resume').addEventListener('click',()=>{
+ const saved=stored;
+ if(saved.current==='01.2')window.IFAPv06.restoreQuiz(saved.quiz);
+ else if(saved.current?.startsWith('03.'))window.IFAPv06.restoreScene(saved.scene);
+ else if(saved.current)open(saved.current);
+});
 if(stored.current) $('v7Resume').hidden=false;
 updateNav(1);
 })();
