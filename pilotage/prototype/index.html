@@ -539,6 +539,32 @@ html:has(body.no-motion){scroll-behavior:auto}
 .v7-tile p,.v7-case-row p,.v7-comparison li{font-size:1rem}
 @media(min-width:1150px){body{padding-left:245px}.v7-coursebar{position:fixed;left:0;top:0;bottom:0;width:245px;overflow:auto}.v7-course-inner{display:block;padding:20px}.v7-course-head{display:block}.v7-course-links{grid-template-columns:1fr}.v7-course-tools{padding:16px}.v7-course-links button{text-align:left}}
 
+
+.family-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:26px 0}
+.family-card{border:1px solid var(--accent);border-radius:20px;overflow:hidden;background:#fff;color:var(--ink)}
+.family-card summary{display:block;cursor:pointer;list-style:none}
+.family-card summary::-webkit-details-marker{display:none}
+.family-art{background:var(--wash);padding:8px 15px;color:var(--accent)}
+.family-art svg{display:block;width:100%;height:140px}
+.family-caption{padding:18px}
+.family-caption>strong{display:block;font-size:1.2rem;color:var(--accent)}
+.family-caption p{font-size:1rem;margin:6px 0 16px;line-height:1.4}
+.family-action{display:flex;align-items:center;justify-content:space-between;color:var(--accent);font-size:.9rem;font-weight:700;gap:8px}
+.family-action b{font-size:1.6rem;line-height:1}
+.family-open{display:none}
+.family-card[open] .family-open{display:inline}
+.family-card[open] .family-closed{display:none}
+.family-card[open] .family-action b{transform:rotate(45deg)}
+.family-detail{padding:0 18px 18px;border-top:1px solid var(--accent)}
+.family-detail p{font-size:1rem;margin:14px 0}
+.family-detail>strong{font-size:.9rem;color:var(--accent)}
+.family-card summary:hover .family-action{text-decoration:underline}
+.hc .family-art{background:white;color:black}
+.hc .family-card{border-color:black}
+.hc .family-caption strong,.hc .family-action,.hc .family-detail strong{color:black}
+@media(max-width:850px){.family-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.family-gallery{grid-template-columns:1fr}.family-art svg{height:125px}}
+
 </style>
 </head>
 <body>
@@ -976,7 +1002,24 @@ function comparison(){let mode=state.prevViewed||'avant';template(`<span class="
  $('v7Before').onclick=()=>{state.prevViewed='avant';remember();comparison()};$('v7After').onclick=()=>{state.prevViewed='apres';remember();comparison()};}
 function single(){const q=items.find(x=>x.id===current);const a=state.answers[current];let options=q.answers.map((o,i)=>`<button type="button" class="v7-choice" data-answer="${i}" ${a!==undefined?`aria-pressed="${a===i}" data-correct="${a===i?(a===q.correct):''}"`:''}>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('');template(`<span class="v7-lessonlabel">${esc(pages[current].label)}</span><h2>${esc(q.question)}</h2><p class="v7-micro">Choisissez une réponse pour lire l’explication.</p><div class="v7-choice-list" role="group" aria-label="Réponses possibles">${options}</div>${a!==undefined?feedback(q.why,a===q.correct):''}`);
  document.querySelectorAll('#v7ScreenBody [data-answer]').forEach(b=>b.onclick=()=>{state.answers[current]=Number(b.dataset.answer);remember();single();$('v7Live').textContent=q.why;});}
-function familiesPage(){template(`<span class="v7-lessonlabel">02.4 · Explorer les repères</span><h2>Six familles pour comprendre la diversité des situations</h2><p>Ces familles aident à découvrir des situations différentes. Une personne peut être concernée par plusieurs familles. Demandez-lui ce qui lui serait utile.</p><div class="v7-grid" id="v7FamilyGrid">${families.map((f,i)=>`<details class="v7-tile"><summary><span aria-hidden="true">${f[3]}</span><strong>${esc(f[0])}</strong></summary><p>${esc(f[1])}</p><p><strong>Exemple d’adaptation à discuter :</strong> ${esc(f[2])}</p></details>`).join('')}</div><div class="v7-callout"><strong>Un même principe pour toutes les familles</strong><p>Deux personnes peuvent avoir le même handicap et des besoins différents. Écoutez chacune et cherchez avec elle ce qui peut faciliter son travail.</p></div>`)}
+function familyArt(i){
+ const scenes=[
+ '<path d="M30 104h180M46 102V68h30v34M90 102V50h30v52M134 102V32h30v70"/><path d="M38 117 191 48" stroke-width="8"/><circle cx="180" cy="30" r="12"/><path d="m178 46-17 24 25 14 10 29M162 70h-24"/>',
+ '<rect x="24" y="24" width="112" height="75" rx="9"/><path d="M42 45h76M42 59h53M42 77h32M56 115h49M80 100v15"/><path d="M171 43q28-15 31 10 1 15-16 23v12M169 57q15-10 19 1"/><path d="M156 45q-12 19 0 35"/>',
+ '<rect x="37" y="23" width="165" height="96" rx="12"/><path d="m51 46 5 5 10-11M80 46h100m-129 24 5 5 10-11M80 70h75m-104 24 5 5 10-11M80 94h58"/>',
+ '<circle cx="62" cy="54" r="16"/><path d="M31 114V96q0-24 31-24t31 24v18"/><rect x="110" y="26" width="95" height="61" rx="13"/><path d="m124 87-9 15 31-15M130 47h55M130 64h35"/><path d="M182 107h28m-14-14v28"/>',
+ '<rect x="30" y="31" width="60" height="70" rx="10"/><rect x="145" y="31" width="60" height="70" rx="10"/><path d="M46 51h28M46 66h20M46 81h28m26-15h34m-10-10 10 10-10 10M162 52h25M162 67h25"/><circle cx="174" cy="85" r="4"/>',
+ '<circle cx="72" cy="69" r="41"/><path d="M72 42v28l18 12"/><rect x="136" y="44" width="47" height="51" rx="6"/><path d="M183 53h10v24q0 14-10 14M129 105h64M148 34V22m15 12V17"/>'
+ ];
+ return '<svg viewBox="0 0 240 140" aria-hidden="true" focusable="false"><circle cx="172" cy="70" r="59" fill="var(--wash)"/><g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'+scenes[i]+'</g></svg>';
+}
+function familiesPage(){
+ const cues=['Se déplacer, bouger','Voir, entendre','Se concentrer, mémoriser','Vivre les échanges et le rythme','Comprendre une information','Composer avec la fatigue ou la douleur'];
+ const colors=['#175b67','#684789','#235b83','#87465a','#7b551e','#35623e'];
+ const washes=['#d7efef','#eee3fa','#deedf9','#f9e1e8','#f9ebce','#e3efda'];
+ template(`<span class="v7-lessonlabel">02.4 · Découvrir les situations</span><h2>Des situations différentes. Des besoins à écouter.</h2><p>Explorez les six familles. Une personne peut être concernée par plusieurs familles.</p><div id="v7FamilyGrid" class="family-gallery">${families.map((f,i)=>`<details class="family-card" style="--accent:${colors[i]};--wash:${washes[i]}"><summary><div class="family-art">${familyArt(i)}</div><div class="family-caption"><strong>${esc(f[0])}</strong><p>${esc(cues[i])}</p><span class="family-action"><span class="family-closed">Découvrir une aide</span><span class="family-open">Refermer</span><b aria-hidden="true">+</b></span></div></summary><div class="family-detail"><p>${esc(f[1])}</p><strong>Une aide à essayer ensemble</strong><p>${esc(f[2])}</p></div></details>`).join('')}</div><div class="v7-callout"><strong>Le bon réflexe pour chaque situation</strong><p>Demandez à la personne ce qui l’aiderait. Deux personnes qui ont le même handicap peuvent avoir des besoins différents.</p></div>`);
+}
+
 function levers(){let cards=[['Matériel et outils','Supports lisibles, équipement ou environnement adapté.','▣'],['Organisation','Horaires, consignes, pauses, répartition des tâches.','◷'],['Aide humaine','Appui à la communication, formation, accompagnement.','◉'],['Mobilité','Trajet, véhicule ou conditions de déplacement.','↗']];template(`<span class="v7-lessonlabel">04.1 · Quatre façons de faciliter le travail</span><h2>Adapter, ce n’est pas forcément acheter un équipement.</h2><p>Selon les situations, une modification du support, de l’organisation ou de l’accompagnement peut rendre l’activité plus accessible. La mobilité fait aussi partie des sujets à examiner.</p><div class="v7-grid four">${cards.map(c=>`<article class="v7-tile"><span aria-hidden="true">${c[2]}</span><strong>${c[0]}</strong><p>${c[1]}</p></article>`).join('')}</div><div class="v7-callout"><strong>Le point de départ</strong><p>Partir de l’obstacle concret et du besoin exprimé, puis examiner les solutions possibles avec la personne et les interlocuteurs compétents.</p></div><p class="v7-notice">Les fiches de financement FIPH et leurs conditions éventuelles ne sont pas reproduites ici ; elles doivent être vérifiées séparément.</p>`)}
 function supports(){const opts=['Partager un tableau structuré, lisible et consultable dans un format accessible.','Exprimer en texte les informations importantes et transmettre le support à l’avance.','Remplacer toute documentation par une lecture orale très rapide.'];let selected=state.selectedSupports;template(`<span class="v7-lessonlabel">04.2 · Défi des supports</span><h2>Quels changements proposer à votre équipe ?</h2><div class="v7-context"><strong>Situation</strong><p>Une convocation contient un tableau sous forme d’image, des informations indiquées uniquement par couleur et aucun support textuel modifiable.</p></div><p>Choisissez deux améliorations qui permettraient de consulter et de comprendre les informations plus facilement.</p><div class="v7-choice-list" role="group" aria-label="Sélectionner deux améliorations">${opts.map((s,i)=>`<button type="button" class="v7-choice" data-support="${i}" aria-pressed="${selected.includes(i)}">${selected.includes(i)?'☑':'☐'} ${esc(s)}</button>`).join('')}</div><button type="button" class="v7-button secondary" id="v7CheckSupports">Vérifier mes choix</button>${state.answers.supportsDone?feedback('Un tableau structuré et des informations exprimées en texte donnent davantage d’autonomie. Une lecture orale peut être un complément mais ne remplace pas un support accessible.',selected.length===2&&selected.includes(0)&&selected.includes(1)):''}`);
  document.querySelectorAll('[data-support]').forEach(b=>b.onclick=()=>{let i=Number(b.dataset.support);let arr=state.selectedSupports;state.selectedSupports=arr.includes(i)?arr.filter(x=>x!==i):[...arr,i];state.answers.supportsDone=false;remember();supports()});$('v7CheckSupports').onclick=()=>{state.answers.supportsDone=true;remember();supports()};}
