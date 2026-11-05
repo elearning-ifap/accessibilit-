@@ -820,6 +820,7 @@ function showQuizSummary(){
   window.IFAPv07?.discoveryActivated();
   $('quizSection').hidden=true;
   $('quizSummary').hidden=false;
+  window.IFAPv07?.discoveryActivated();
   focusQuiz('quizSummaryTitle');
 }
 function nextQuiz(){if(!quizAnswered)return;quizIndex++;if(quizIndex>=quizData.length)showQuizSummary();else {renderQuizQuestion();window.IFAPv07?.discoveryActivated();focusQuiz('quizQuestion');}}
@@ -1056,15 +1057,26 @@ $('v7Fullscreen').addEventListener('click',()=>{if(!document.fullscreenElement){
 $('v7Reset').addEventListener('click',()=>{if(window.confirm('Effacer la progression enregistrée dans ce navigateur ? Le parcours restera accessible.')){try{localStorage.removeItem('ifap-handicap-v08')}catch(_){}state={visited:['01.1'],answers:{},selectedSupports:[],finalAnswers:[],examIndex:0,prevViewed:'avant'};stored={};window.IFAPv06.reset();current='01.1';internalGo(1);updateNav(1)}});
 $('beginExperience').before($('v7Resume'));
 $('v7Resume').className='welcome-start';
-$('v7Resume').addEventListener('click',()=>{
- const saved=stored;
- if(saved.current==='01.2')window.IFAPv06.restoreQuiz(saved.quiz);
- else if(saved.current?.startsWith('03.'))window.IFAPv06.restoreScene(saved.scene);
- else if(saved.current)open(saved.current);
+function resumeProgress(){
+ const saved=JSON.parse(JSON.stringify(stored));
+ if(saved.current==='01.2' && saved.quiz){
+   window.IFAPv06.restoreQuiz(saved.quiz);
+ }else if(saved.current?.startsWith('03.') && saved.scene){
+   window.IFAPv06.restoreScene(saved.scene);
+ }else if(pages[saved.current]){
+   open(saved.current);
+ }else{
+   window.IFAPv06.showDiscovery();
+ }
+}
+$('v7Resume').addEventListener('click',resumeProgress);
+window.addEventListener('pagehide',remember);
+document.addEventListener('visibilitychange',()=>{
+ if(document.visibilityState==='hidden')remember();
 });
 if(stored.current) $('v7Resume').hidden=false;
 updateNav(1);
-window.IFAPv06.showDiscovery();
+resumeProgress();
 })();
 
 </script>
