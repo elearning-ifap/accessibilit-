@@ -616,6 +616,30 @@ body main{padding:32px 24px 64px}
 body.no-motion .story-scene svg{transition:none;transform:none}
 @media print{.story-scene{display:none}}
 
+
+/* Charte B — ensemble du parcours */
+:root{--canvas:#fffdf8;--surface:#fffdf8;--surface-muted:#edf3f5;--ink:#172c42;--ink-soft:#3c5267;--brand:#166b77;--brand-hover:#10505a;--brand-wash:#e3f1f2;--border:#b5c7cf;--v7-teal:#166b77;--v7-navy:#172c42;--v7-ice:#e3f1f2;--font-display:'Segoe UI',system-ui,sans-serif}
+.topbar,.v7-coursebar{background:#172c42;color:#fff}
+.topbar .brand strong,.topbar .brand small,.topbar .version,.v7-coursebar .v7-course-head strong,.v7-coursebar .course-count,.v7-coursebar summary{color:#fff}
+.v7-coursebar .v7-course-links button{background:#253e56;color:#fff;border:1px solid #7993a5;font-size:1rem}
+.v7-coursebar .v7-course-links button small{color:#e2edf1;font-size:.9rem}
+.v7-coursebar .v7-course-links button[aria-current='step']{background:#ffc48c;color:#172c42;border-color:#ffc48c}
+.v7-coursebar .v7-course-links button[aria-current='step'] small{color:#172c42}
+.v7-coursebar button:disabled{opacity:1;background:#253e56;color:#bfcdd6;border-style:dashed;cursor:not-allowed}
+.v7-coursebar .tools button,.v7-coursebar .v7-tiny{background:#fffdf8;color:#172c42}
+.v7-panel,.card,.quiz-section,.quiz-summary{background:#fffdf8;border-radius:20px;border-color:#b5c7cf}
+.v7-panel-content{padding:clamp(22px,4vw,42px)}
+.v7-screen-title,h1,h2,h3{font-family:var(--font-ui)}
+.v7-tile,.v7-context{background:#edf3f5}
+.v7-callout{background:#fff0df;border-left:5px solid #a44a16;color:#172c42}
+.v7-button,.quiz-primary{background:#166b77;color:#fff;border-color:#166b77;min-height:48px;font-size:1rem}
+.v7-button.secondary,.quiz-secondary{background:#fffdf8;color:#172c42;border:1px solid #6c8294}
+.v7-choice,.choice,.quiz-option{font-size:1rem;line-height:1.6;min-height:52px}
+.v7-subhead{background:#edf3f5;border-radius:20px;padding:24px}
+.v7-tile p,.v7-notice,.v7-micro,.v7-resource p{font-size:1rem!important}
+.story-scene{background:#172c42}
+.hc .v7-coursebar,.hc .topbar{background:#111;color:#fff}
+
 </style>
 </head>
 <body>
@@ -627,7 +651,7 @@ body.no-motion .story-scene svg{transition:none;transform:none}
  <div class="v7-course-inner">
   <div class="v7-course-head"><strong>Les gestes qui incluent · parcours complet</strong><span class="course-count" id="v7CourseCount">Séquence 1 sur 6 · 39 min estimées</span><div hidden class="v7-overall" role="progressbar" aria-label="Progression générale de navigation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="v7Overall"><span id="v7OverallFill"></span></div></div>
   <details id="courseMenu"><summary>Voir le parcours</summary><div class="v7-course-links" id="v7CourseLinks">
-   <button type="button" data-v7chapter="1" aria-current="step">01 · Bienvenue <small>Idées reçues · 5 min</small></button>
+   <button type="button" data-v7chapter="1" aria-current="step">01 · Découvrir <small>5 questions pour commencer</small></button>
    <button type="button" data-v7chapter="2">02 · Comprendre <small>Définition · 7 min</small></button>
    <button type="button" data-v7chapter="3">03 · Décider <small>Trois situations · 12 min</small></button>
    <button type="button" data-v7chapter="4">04 · Agir <small>Adapter · 7 min</small></button>
@@ -723,7 +747,7 @@ body.no-motion .story-scene svg{transition:none;transform:none}
     <div class="quiz-feedback" id="quizFeedback" role="region" aria-labelledby="quizFeedbackTitle" tabindex="-1" hidden>
       <p id="quizFeedbackTitle"></p><h3 id="quizAnswer"></h3><p id="quizFeedbackText"></p>
     </div>
-    <div class="quiz-actions"><button type="button" id="quizNext" class="quiz-primary" hidden>Question suivante →</button><button type="button" id="quizSkip" class="quiz-secondary">Passer à la définition du handicap</button></div>
+    <div class="quiz-actions"><button type="button" id="quizNext" class="quiz-primary" hidden>Question suivante →</button></div>
     
   </section>
   </div>
@@ -919,7 +943,7 @@ function quizTranscript(){
 }
 $('discoveryBack').addEventListener('click',showIntroduction);
 $('quizNext').addEventListener('click',nextQuiz);
-$('quizSkip').addEventListener('click',()=>showExperience(false));
+
 $('quizStartScenes').addEventListener('click',()=>showExperience(false));
 $('quizRestart').addEventListener('click',()=>{quizIndex=0;quizCompleted=false;renderQuizQuestion();focusQuiz('quizQuestion');});
 quizTranscript();
@@ -961,7 +985,7 @@ function showIntroduction() {
   $('welcomeTitle').scrollIntoView({block:'start'});
 }
 $('beginExperience').addEventListener('click',showDiscovery);
-$('readExperience').addEventListener('click',()=>showExperience(true));
+$('readExperience').addEventListener('click',()=>{if(window.IFAPv06.snapshotQuiz().completed)showExperience(true);else showDiscovery();});
 $('returnIntroduction').addEventListener('click',showIntroduction);
 $('returnDiscovery').addEventListener('click',showDiscovery);
 
@@ -1042,7 +1066,7 @@ function updateNav(chapter=activeChapter){
  $('v7CourseCount').textContent=chapter+' sur 6 · '+labels[chapter];
  const total=19,visited=state.visited.length;const pct=Math.min(100,Math.round(100*visited/total));
  $('v7Overall').setAttribute('aria-valuenow',String(pct));$('v7OverallFill').style.width=pct+'%';
- document.querySelectorAll('[data-v7chapter]').forEach(b=>{let n=Number(b.dataset.v7chapter);b.setAttribute('aria-current',n===chapter?'step':'false');b.dataset.visited=String(state.visited.some(x=>Number(x.slice(0,2))===n));});
+ document.querySelectorAll('[data-v7chapter]').forEach(b=>{let n=Number(b.dataset.v7chapter);b.disabled=n>1&&!window.IFAPv06.snapshotQuiz().completed;b.title=b.disabled?'Terminez les cinq questions du quiz pour ouvrir la suite':'';b.setAttribute('aria-current',n===chapter?'step':'false');b.dataset.visited=String(state.visited.some(x=>Number(x.slice(0,2))===n));});
  $('v7Resume').hidden=!resumeVisible;
  $('beginExperience').classList.toggle('welcome-start',!resumeVisible);
  $('beginExperience').classList.toggle('welcome-text',resumeVisible);
@@ -1054,9 +1078,9 @@ function updateNav(chapter=activeChapter){
    $('v7Resume').textContent='Reprendre · '+label;
  }
 }
-function internalGo(chapter){$('courseMenu').open=false;resumeVisible=chapter===1&&!!stored.current;if(chapter===1){window.IFAPv06.showIntroduction();updateNav(1);mark('01.1')}else if(chapter===3){window.IFAPv06.showExperience(false);window.IFAPv06.navigate(0);mark('03.1')}else open(chapter===2?'02.1':chapter===4?'04.1':chapter===5?'05.1':'06.1');}
+function internalGo(chapter){if(chapter>1&&!quizIsComplete()){showRequiredQuiz();return;}$('courseMenu').open=false;resumeVisible=chapter===1&&!!stored.current;if(chapter===1){window.IFAPv06.showIntroduction();updateNav(1);mark('01.1')}else if(chapter===3){window.IFAPv06.showExperience(false);window.IFAPv06.navigate(0);mark('03.1')}else open(chapter===2?'02.1':chapter===4?'04.1':chapter===5?'05.1':'06.1');}
 function focusScreen(){try{$('v7ScreenTitle').focus({preventScroll:false})}catch(_){$('v7ScreenTitle').focus()}}
-function open(id){if(!pages[id])return;resumeVisible=false;current=id;['welcomePage','discoveryPage','experience'].forEach(el=>$(el).hidden=true);$('extensionPage').hidden=false;
+function open(id){if(!pages[id])return;if(!quizIsComplete()){showRequiredQuiz();return;}resumeVisible=false;current=id;['welcomePage','discoveryPage','experience'].forEach(el=>$(el).hidden=true);$('extensionPage').hidden=false;
  $('skipMain').href='#v7ScreenTitle';$('skipMain').textContent='Aller au contenu de la séquence';$('skipTranscript').hidden=true;
  const p=pages[id];activeChapter=Number(id.slice(0,2));$('v7Breadcrumb').textContent='Séquence '+Number(id.slice(0,2))+' · '+chapters[Number(id.slice(0,2))]+' · Écran '+id;
  $('v7ScreenTitle').textContent=p.title;$('v7ScreenSubtitle').textContent=p.sub;$('v7ScreenTime').textContent=p.mins;
@@ -1129,16 +1153,22 @@ window.IFAPv07={open,updateNav,sceneActivated:(i)=>{if(i<3){resumeVisible=false;
 $('v7Next').addEventListener('click',goNext);$('v7Prev').addEventListener('click',goPrev);
 document.querySelectorAll('[data-v7chapter]').forEach(b=>b.addEventListener('click',()=>internalGo(Number(b.dataset.v7chapter))));
 // Intercepter les deux chemins qui, en v0.6, passaient immédiatement du quiz aux scènes.
-for(const id of ['quizStartScenes','quizSkip'])$(id).addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();open('02.1')},true);
+for(const id of ['quizStartScenes'])$(id).addEventListener('click',e=>{e.stopImmediatePropagation();e.preventDefault();open('02.1')},true);
 $('v7Fullscreen').addEventListener('click',()=>{if(!document.fullscreenElement){document.documentElement.requestFullscreen?.().catch(()=>{})}else document.exitFullscreen?.()});
 $('v7Reset').addEventListener('click',()=>{if(window.confirm('Effacer la progression enregistrée dans ce navigateur ? Le parcours restera accessible.')){try{localStorage.removeItem('ifap-handicap-v08')}catch(_){}state={visited:['01.1'],answers:{},selectedSupports:[],finalAnswers:[],examIndex:0,prevViewed:'avant'};stored={};window.IFAPv06.reset();current='01.1';internalGo(1);updateNav(1)}});
 $('beginExperience').before($('v7Resume'));
 $('v7Resume').className='welcome-start';
+function quizIsComplete(){return window.IFAPv06.snapshotQuiz().completed;}
+function showRequiredQuiz(){
+ window.IFAPv06.showDiscovery();
+ $('quizProgressText').textContent='Question '+(window.IFAPv06.snapshotQuiz().index+1)+' sur 5 · Terminez les cinq questions pour continuer';
+}
 function resumeProgress(){
  const saved=JSON.parse(JSON.stringify(stored));
+ if(saved.quiz?.completed && saved.current!=='01.2')window.IFAPv06.restoreQuiz(saved.quiz);
  if(saved.current==='01.2' && saved.quiz){
    window.IFAPv06.restoreQuiz(saved.quiz);
- }else if(saved.current?.startsWith('03.') && saved.scene){
+ }else if(saved.current?.startsWith('03.') && saved.scene && quizIsComplete()){
    window.IFAPv06.restoreScene(saved.scene);
  }else if(pages[saved.current]){
    open(saved.current);
