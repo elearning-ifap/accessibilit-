@@ -1,0 +1,45 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Donner mon avis · Les gestes qui incluent</title><style>
+*{box-sizing:border-box}body{margin:0;background:#fffdf8;color:#172c42;font:18px/1.6 system-ui}main{max-width:1000px;margin:auto;padding:24px}header{background:#172c42;color:white;padding:30px;border-radius:20px}h1{line-height:1.2}fieldset{border:1px solid #a6b5c2;border-radius:16px;margin:26px 0;padding:22px}legend{font-size:1.25rem;font-weight:750;padding:0 8px}label.option{display:block;padding:14px;margin:10px 0;background:#eef3f5;border:1px solid #b6c8d0;border-radius:10px;cursor:pointer}input[type=radio]{width:22px;height:22px;vertical-align:middle;margin-right:12px;accent-color:#167d89}textarea,input[type=text]{font:inherit;width:100%;padding:12px;border:1px solid #73899c;border-radius:8px}textarea{min-height:100px}button{font:inherit;background:#172c42;color:#fff;border:0;border-radius:10px;padding:14px;cursor:pointer}a{color:#175b70}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #a24405;outline-offset:4px}.palette{display:flex;height:28px;margin:8px 0}.palette i{flex:1}.note{background:#fff0d9;padding:18px;border-radius:12px}.tools{display:flex;gap:12px;flex-wrap:wrap}#status{font-weight:650}small{font-size:1rem}summary{cursor:pointer}
+</style><main><a href="../">← Tableau de bord</a><header><p>Consultation de l’équipe · prototype v0.9</p><h1>Quelle expérience voulons-nous proposer ?</h1><p>Testez le prototype, puis indiquez vos préférences et ce que vous ressentez. Vos avis aideront à décider ensemble.</p></header><p><a href="../prototype/" target="_blank" rel="noopener">Tester le prototype dans un nouvel onglet ↗</a></p><p class="note"><strong>Collecte automatique à connecter.</strong> Pour l’instant, vos réponses restent dans ce navigateur. Téléchargez votre avis à la fin et transmettez le fichier à Marc par votre canal habituel.</p><form id="review"><label for="name">Votre prénom ou votre nom (facultatif)</label><input id="name" name="identite" type="text" autocomplete="name"><div id="questions"></div><label for="overall"><strong>Votre ressenti sur le prototype</strong></label><p>Qu’est-ce qui vous donne envie de continuer ? Qu’est-ce qui vous gêne ou vous manque ?</p><textarea id="overall" name="ressenti_global"></textarea><label for="priority">La première chose à améliorer, selon vous</label><textarea id="priority" name="priorite"></textarea><p>Toutes les questions sont facultatives. Les choix présentés servent de base à la discussion.</p><div class="tools"><button type="submit">Télécharger mon avis</button><button type="button" id="clear">Effacer mes réponses</button></div><p id="status" role="status"></p></form><script>
+const questions=[
+{id:'charte',title:'1 · La charte graphique',intro:'Les trois directions sont présentées ici. Marc a retenu B comme point de départ, et votre préférence reste ouverte.',options:[
+['A · Chaleureuse et humaine','Crème, pétrole, terre cuite et sauge. Illustrations souples et scènes lumineuses.',['#fff8ef','#164b50','#b85c43','#ddeae1']],
+['B · Immersive et contemporaine','Bleu nuit, blanc chaud, turquoise et abricot. Scènes de travail et personnages récurrents.',['#172c42','#fffdf8','#167d89','#ffc48c']],
+['C · Lumineuse et dynamique','Blanc, indigo, jaune doux et menthe. Grands repères graphiques et cartes épurées.',['#ffffff','#303b78','#ffe39a','#ddf3eb']]]},
+{id:'illustrations',title:'2 · Le style des illustrations',options:['Dessin épuré','Roman graphique contemporain','Rendu semi-réaliste']},
+{id:'personnages',title:'3 · Les personnages',options:['Un personnage guide','Une équipe de quatre à six collègues récurrents','Des personnages différents selon les situations']},
+{id:'image',title:'4 · La place de l’image',options:['Une grande scène centrale','Une image à côté des questions et des textes','Une grande scène dans les simulations, une image à côté du quiz']},
+{id:'navigation',title:'5 · La navigation',options:['Un menu à gauche toujours visible','Un menu à ouvrir, avec l’étape en cours toujours visible']},
+{id:'validation',title:'6 · Le choix des réponses',options:['Afficher le retour dès le clic sur une réponse','Choisir une réponse, puis cliquer sur « Valider »']},
+{id:'son',title:'7 · Le son',options:['Tout lire à l’écran, sans voix','Écouter une voix à la demande','Écouter une voix au début de chaque scène, avec un bouton d’arrêt']}
+];
+const form=document.querySelector('form'),root=document.querySelector('#questions'),status=document.querySelector('#status'),key='ifap-consultation-design-v1';
+for(const q of questions){
+ const field=document.createElement('fieldset'),legend=document.createElement('legend');legend.textContent=q.title;field.append(legend);
+ if(q.intro){const p=document.createElement('p');p.textContent=q.intro;field.append(p)}
+ const opts=[...q.options,'Je n’ai pas encore de préférence'];
+ opts.forEach((o,i)=>{
+ const label=document.createElement('label');label.className='option';
+ const input=document.createElement('input');input.type='radio';input.name=q.id;input.value=Array.isArray(o)?o[0]:o;
+ label.append(input,document.createTextNode(input.value));
+ if(Array.isArray(o)){const desc=document.createElement('p');desc.textContent=o[1];label.append(desc);const palette=document.createElement('div');palette.className='palette';palette.setAttribute('aria-hidden','true');o[2].forEach(color=>{const swatch=document.createElement('i');swatch.style.background=color;palette.append(swatch)});label.append(palette)}
+ field.append(label);
+ });
+ const label=document.createElement('label');label.htmlFor=q.id+'_avis';label.textContent='Votre ressenti ou une autre proposition';
+ const area=document.createElement('textarea');area.id=q.id+'_avis';area.name=q.id+'_avis';field.append(label,area);root.append(field);
+}
+function snapshot(){return Object.fromEntries(new FormData(form))}
+try{const saved=JSON.parse(localStorage.getItem(key)||'{}');for(const el of form.elements){if(el.name&&saved[el.name]!==undefined){if(el.type==='radio')el.checked=el.value===saved[el.name];else el.value=saved[el.name]}}}catch{}
+form.addEventListener('input',()=>{try{localStorage.setItem(key,JSON.stringify(snapshot()));status.textContent='Brouillon enregistré dans ce navigateur.'}catch{status.textContent='Le navigateur ne permet pas de garder le brouillon. Vous pouvez télécharger votre avis.'}});
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ const data=snapshot();
+ const lines=['Consultation · Les gestes qui incluent','Date · '+new Date().toLocaleDateString('fr-FR'),'Identité · '+(data.identite||'Non renseignée'),''];
+ for(const q of questions)lines.push(q.title,'Préférence · '+(data[q.id]||'Sans réponse'),'Ressenti · '+(data[q.id+'_avis']||'Sans commentaire'),'');
+ lines.push('Ressenti global',data.ressenti_global||'Sans commentaire','','Priorité',data.priorite||'Sans réponse');
+ const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}));
+ const a=document.createElement('a');a.href=url;a.download='avis_prototype_handicap.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ status.textContent='Votre fichier est prêt. Transmettez-le à Marc pour partager votre avis.';
+});
+document.querySelector('#clear').onclick=()=>{if(confirm('Effacer vos réponses enregistrées dans ce navigateur ?')){form.reset();try{localStorage.removeItem(key)}catch{}status.textContent='Réponses effacées.'}};
+</script></main></html>
