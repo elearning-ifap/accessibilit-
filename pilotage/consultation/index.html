@@ -1,6 +1,25 @@
 <!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Donner mon avis · Les gestes qui incluent</title><style>
 *{box-sizing:border-box}body{margin:0;background:#fffdf8;color:#172c42;font:18px/1.6 system-ui}main{max-width:1000px;margin:auto;padding:24px}header{background:#172c42;color:white;padding:30px;border-radius:20px}h1{line-height:1.2}fieldset{border:1px solid #a6b5c2;border-radius:16px;margin:26px 0;padding:22px}legend{font-size:1.25rem;font-weight:750;padding:0 8px}label.option{display:block;padding:14px;margin:10px 0;background:#eef3f5;border:1px solid #b6c8d0;border-radius:10px;cursor:pointer}input[type=radio]{width:22px;height:22px;vertical-align:middle;margin-right:12px;accent-color:#167d89}textarea,input[type=text]{font:inherit;width:100%;padding:12px;border:1px solid #73899c;border-radius:8px}textarea{min-height:100px}button{font:inherit;background:#172c42;color:#fff;border:0;border-radius:10px;padding:14px;cursor:pointer}a{color:#175b70}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #a24405;outline-offset:4px}.palette{display:flex;height:28px;margin:8px 0}.palette i{flex:1}.note{background:#fff0d9;padding:18px;border-radius:12px}.tools{display:flex;gap:12px;flex-wrap:wrap}#status{font-weight:650}small{font-size:1rem}summary{cursor:pointer}
-</style><main><a href="../">← Tableau de bord</a><header><p>Consultation de l’équipe · prototype v0.9</p><h1>Quelle expérience voulons-nous proposer ?</h1><p>Testez le prototype, puis indiquez vos préférences et ce que vous ressentez. Vos avis aideront à décider ensemble.</p></header><p><a href="../prototype/" target="_blank" rel="noopener">Tester le prototype dans un nouvel onglet ↗</a></p><p class="note"><strong>Collecte automatique à connecter.</strong> Pour l’instant, vos réponses restent dans ce navigateur. Téléchargez votre avis à la fin et transmettez le fichier à Marc par votre canal habituel.</p><form id="review"><label for="name">Votre prénom ou votre nom (facultatif)</label><input id="name" name="identite" type="text" autocomplete="name"><div id="questions"></div><label for="overall"><strong>Votre ressenti sur le prototype</strong></label><p>Qu’est-ce qui vous donne envie de continuer ? Qu’est-ce qui vous gêne ou vous manque ?</p><textarea id="overall" name="ressenti_global"></textarea><label for="priority">La première chose à améliorer, selon vous</label><textarea id="priority" name="priorite"></textarea><p>Toutes les questions sont facultatives. Les choix présentés servent de base à la discussion.</p><div class="tools"><button type="submit">Télécharger mon avis</button><button type="button" id="clear">Effacer mes réponses</button></div><p id="status" role="status"></p></form><script>
+
+main{max-width:1800px;width:100%;padding:clamp(18px,3vw,52px)}
+header{padding:clamp(24px,3vw,44px)}
+header p{max-width:80ch}
+.test-button{display:inline-flex;align-items:center;min-height:52px;padding:14px 24px;background:#16717d;color:#fff;border-radius:10px;text-decoration:none;font-weight:750}
+.test-button:hover{background:#10535d}
+.option-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+label.option{margin:0;padding:22px;background:#fff;border:2px solid #b6c8d0}
+label.option:has(input:checked){border-color:#166a76;background:#e8f4f2;box-shadow:inset 0 0 0 1px #166a76}
+.option p{font-size:1rem;line-height:1.65;margin:12px 0}
+.option-title{display:block;margin-top:16px;color:#172c42}
+.style-preview{margin:-8px -8px 20px}
+.style-preview svg{display:block;width:100%;height:auto}
+fieldset{background:#f7f9fa;padding:26px;border-radius:20px;margin:32px 0}
+fieldset>label{display:block;font-weight:700;margin-top:22px}
+fieldset textarea{min-height:85px;background:#fff}
+.preview-note{font-size:1rem;color:#344e63}
+@media(max-width:1050px){.option-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.option-grid{grid-template-columns:1fr}fieldset{padding:18px}label.option{padding:18px}}
+</style><main><a href="../">← Tableau de bord</a><header><p>Consultation de l’équipe · prototype v0.9</p><h1>Quelle expérience voulons-nous proposer ?</h1><p>Testez le prototype, puis indiquez vos préférences et ce que vous ressentez. Vos avis aideront à décider ensemble.</p></header><p><a class="test-button" href="../prototype/" target="_blank" rel="noopener">Tester le prototype ↗</a></p><p class="note"><strong>Collecte automatique à connecter.</strong> Pour l’instant, vos réponses restent dans ce navigateur. Téléchargez votre avis à la fin et transmettez le fichier à Marc par votre canal habituel.</p><form id="review"><label for="name">Votre prénom ou votre nom (facultatif)</label><input id="name" name="identite" type="text" autocomplete="name"><div id="questions"></div><label for="overall"><strong>Votre ressenti sur le prototype</strong></label><p>Qu’est-ce qui vous donne envie de continuer ? Qu’est-ce qui vous gêne ou vous manque ?</p><textarea id="overall" name="ressenti_global"></textarea><label for="priority">La première chose à améliorer, selon vous</label><textarea id="priority" name="priorite"></textarea><p>Toutes les questions sont facultatives. Les choix présentés servent de base à la discussion.</p><div class="tools"><button type="submit">Télécharger mon avis</button><button type="button" id="clear">Effacer mes réponses</button></div><p id="status" role="status"></p></form><script>
 const questions=[
 {id:'charte',title:'1 · La charte graphique',intro:'Les trois directions sont présentées ici. Marc a retenu B comme point de départ, et votre préférence reste ouverte.',options:[
 ['A · Chaleureuse et humaine','Crème, pétrole, terre cuite et sauge. Illustrations souples et scènes lumineuses.',['#fff8ef','#164b50','#b85c43','#ddeae1']],
@@ -13,18 +32,51 @@ const questions=[
 {id:'validation',title:'6 · Le choix des réponses',options:['Afficher le retour dès le clic sur une réponse','Choisir une réponse, puis cliquer sur « Valider »']},
 {id:'son',title:'7 · Le son',options:['Tout lire à l’écran, sans voix','Écouter une voix à la demande','Écouter une voix au début de chaque scène, avec un bouton d’arrêt']}
 ];
+const guidance={
+illustrations:[
+['Des formes simples, peu de détails','Les gestes et les objets importants ressortent vite. Le décor reste discret. Ce style facilite la lecture, mais montre moins de nuances dans les expressions.'],
+['Une scène comme dans une bande dessinée adulte','Les expressions, les gestes et le décor racontent la situation. Ce style aide à suivre les personnages. Les détails doivent laisser assez de place à la question.'],
+['Des personnages proches de la photographie','Les visages, la lumière et les matières donnent une impression réaliste. Ce style demande davantage de soin pour garder les mêmes personnages et éviter les images artificielles.']],
+personnages:[
+['Un repère qui accompagne tout le parcours','Une personne présente les consignes et fait les liens entre les situations. Les autres personnages apparaissent selon les scènes.'],
+['Une équipe que l’on apprend à connaître','On retrouve les mêmes collègues dans plusieurs scènes. Leurs rôles changent pour éviter d’associer une apparence à une difficulté ou à une attitude.'],
+['De nouveaux collègues à chaque scène','Chaque situation présente une autre équipe. Cela montre davantage de profils, mais crée moins de continuité dans l’histoire.']],
+image:[
+['La situation occupe le centre de l’écran','La scène attire le regard. La question et les réponses se trouvent en dessous. Il peut être nécessaire de faire défiler la page.'],
+['Lire et observer côte à côte','Sur ordinateur, la scène et les réponses restent visibles ensemble. Sur téléphone, elles se placent l’une sous l’autre.'],
+['Une présentation selon l’activité','Une grande scène pour prendre une décision dans une simulation. Une illustration à côté des réponses dans le quiz.']],
+navigation:[
+['Tout le parcours reste sous les yeux','Une colonne présente les séquences. On sait où aller, mais la scène dispose de moins de largeur.'],
+['Plus de place pour la situation','Un bouton ouvre le parcours. Le nom de la séquence et l’avancement restent affichés. Il faut ouvrir le menu pour changer de séquence.']],
+validation:[
+['Une réponse en un clic','Le clic sur une option affiche immédiatement son explication. C’est rapide, mais un clic accidentel peut révéler la réponse.'],
+['Un temps pour réfléchir avant de confirmer','On sélectionne une option, on peut changer d’avis, puis on clique sur « Valider ». Cela ajoute une action.']],
+son:[
+['Un parcours à lire','Les dialogues et les explications sont écrits. On suit le parcours en silence, à son rythme.'],
+['Un bouton pour écouter quand on le souhaite','Le texte reste affiché. Une commande permet de lancer ou d’arrêter la voix. Cette option demande de produire les enregistrements.'],
+['Une voix qui démarre avec la scène','Un bouton permet d’arrêter la lecture et le texte reste disponible. Le démarrage du son dépend aussi des autorisations du navigateur. Cette option demande de produire les enregistrements.']]
+};
+function sampleArt(style){
+ const person=style===2?'#b87d5d':'#d29a72';
+ return '<svg viewBox="0 0 360 180" aria-hidden="true"><rect width="360" height="180" rx="12" fill="'+(style===1?'#e4edf5':'#f0f4f3')+'"/><rect x="205" y="25" width="120" height="75" rx="6" fill="white" stroke="#35576a" stroke-width="'+(style===0?2:4)+'"/><path d="M220 45h80m-80 18h55m-55 18h67" stroke="#167d89" stroke-width="5"/><path d="M55 150V99q0-30 32-30t32 30v51" fill="#167d89"/><ellipse cx="87" cy="49" rx="20" ry="24" fill="'+person+'"/><path d="M67 43q0-33 22-26t20 27l-13-15-25 8" fill="#343446"/><path d="m106 108 65-19" stroke="'+person+'" stroke-width="13" stroke-linecap="round"/><path d="M35 150h290" stroke="#172c42" stroke-width="9"/>'+(style===1?'<path d="M130 20h63v32h-43l-14 11V52h-6Z" fill="white" stroke="#172c42" stroke-width="2"/>':'')+(style===2?'<path d="M72 50h10m11 0h10M78 63q10 6 18 0" fill="none" stroke="#513c35" stroke-width="2"/><path d="M60 112v30m48-20v20" stroke="#145965" stroke-width="4"/>':'')+'</svg>';
+}
 const form=document.querySelector('form'),root=document.querySelector('#questions'),status=document.querySelector('#status'),key='ifap-consultation-design-v1';
 for(const q of questions){
  const field=document.createElement('fieldset'),legend=document.createElement('legend');legend.textContent=q.title;field.append(legend);
  if(q.intro){const p=document.createElement('p');p.textContent=q.intro;field.append(p)}
  const opts=[...q.options,'Je n’ai pas encore de préférence'];
+ const group=document.createElement('div');group.className='option-grid';
  opts.forEach((o,i)=>{
  const label=document.createElement('label');label.className='option';
  const input=document.createElement('input');input.type='radio';input.name=q.id;input.value=Array.isArray(o)?o[0]:o;
  label.append(input,document.createTextNode(input.value));
  if(Array.isArray(o)){const desc=document.createElement('p');desc.textContent=o[1];label.append(desc);const palette=document.createElement('div');palette.className='palette';palette.setAttribute('aria-hidden','true');o[2].forEach(color=>{const swatch=document.createElement('i');swatch.style.background=color;palette.append(swatch)});label.append(palette)}
- field.append(label);
+ if(q.id==='illustrations'&&i<3){const art=document.createElement('div');art.className='style-preview';art.innerHTML=sampleArt(i);label.prepend(art)}
+ if(guidance[q.id]&&i<guidance[q.id].length){const title=document.createElement('strong');title.className='option-title';title.textContent=guidance[q.id][i][0];const desc=document.createElement('p');desc.textContent=guidance[q.id][i][1];label.append(title,desc)}
+ group.append(label);
  });
+ field.append(group);
+ if(q.id==='illustrations'){const note=document.createElement('p');note.className='preview-note';note.textContent='Ces schémas indiquent une intention de présentation. Le rendu semi-réaliste devra être montré dans une véritable image avant un choix définitif.';field.append(note)}
  const label=document.createElement('label');label.htmlFor=q.id+'_avis';label.textContent='Votre ressenti ou une autre proposition';
  const area=document.createElement('textarea');area.id=q.id+'_avis';area.name=q.id+'_avis';field.append(label,area);root.append(field);
 }
