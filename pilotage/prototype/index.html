@@ -640,6 +640,14 @@ body.no-motion .story-scene svg{transition:none;transform:none}
 .story-scene{background:#172c42}
 .hc .v7-coursebar,.hc .topbar{background:#111;color:#fff}
 
+
+.stat-number{display:block;font-size:clamp(2.5rem,5vw,4rem);color:#ffc48c;margin:12px 0}
+.stat-dots{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;max-width:500px;margin:14px 0}
+.stat-dots i{display:block;aspect-ratio:1;border-radius:50%;background:#577184}
+.stat-dots i.filled{background:#ffc48c}
+.stat-source{font-size:.9rem;line-height:1.5;margin-top:16px}
+.stat-source a{color:#fff;text-decoration:underline}
+.hc .stat-source a{color:#111}
 </style>
 </head>
 <body>
@@ -745,31 +753,18 @@ body.no-motion .story-scene svg{transition:none;transform:none}
     <h2 class="quiz-question" id="quizQuestion" tabindex="-1">Question de découverte</h2>
     <div class="quiz-options" id="quizOptions" role="group" aria-labelledby="quizQuestion"></div>
     <div class="quiz-feedback" id="quizFeedback" role="region" aria-labelledby="quizFeedbackTitle" tabindex="-1" hidden>
-      <p id="quizFeedbackTitle"></p><h3 id="quizAnswer"></h3><p id="quizFeedbackText"></p>
+      <p id="quizFeedbackTitle"></p><h3 id="quizAnswer"></h3><div id="quizGraphic" aria-hidden="true"></div><p id="quizFeedbackText"></p>
     </div>
     <div class="quiz-actions"><button type="button" id="quizNext" class="quiz-primary" hidden>Question suivante →</button></div>
     
   </section>
   </div>
   <section class="quiz-summary" id="quizSummary" aria-labelledby="quizSummaryTitle" hidden>
-    <p class="discovery-kicker">Cinq repères essentiels</p>
-    <h2 id="quizSummaryTitle" tabindex="-1">Ce que l’on retient avant d’agir</h2>
-    <p>Le handicap ne se résume ni à une apparence ni à un diagnostic. Les conditions de travail peuvent créer des obstacles ou, au contraire, rendre la participation possible. L’objectif n’est pas d’étiqueter les personnes&nbsp;: c’est d’adapter les pratiques.</p>
-    <ol class="quiz-takeaways">
-      <li><strong>Ne pas présumer</strong><span>Une situation de handicap peut ne pas être apparente.</span></li>
-      <li><strong>Observer le contexte</strong><span>Les tâches et l’environnement influencent les obstacles.</span></li>
-      <li><strong>Respecter la diversité</strong><span>Les situations et les besoins varient selon les personnes.</span></li>
-      <li><strong>Demander, sans diagnostiquer</strong><span>La personne est la mieux placée pour exprimer ses besoins.</span></li>
-    </ol>
-    <details class="quiz-families"><summary>Pour aller plus loin : six grandes familles de situations</summary><ul>
-      <li><strong>Motrices&nbsp;:</strong> déplacements, mouvements, préhension ou posture.</li>
-      <li><strong>Sensorielles&nbsp;:</strong> vision, audition et accès à l’information.</li>
-      <li><strong>Cognitives&nbsp;:</strong> attention, lecture, mémoire ou organisation.</li>
-      <li><strong>Psychiques&nbsp;:</strong> fonctionnement et vécu pouvant varier selon les contextes.</li>
-      <li><strong>Intellectuelles ou mentales&nbsp;:</strong> compréhension et adaptation à certaines tâches.</li>
-      <li><strong>Maladies invalidantes&nbsp;:</strong> fatigue, symptômes fluctuants ou contraintes de soins.</li>
-    </ul><p>Ces familles sont des repères pédagogiques, pas des étiquettes à attribuer à des collègues. Les besoins ne se déduisent pas d’une catégorie.</p></details>
-    <div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Comprendre une situation de handicap →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les cinq questions</button></div>
+<p class="discovery-kicker">Les cinq questions sont terminées</p>
+<h2 id="quizSummaryTitle" tabindex="-1">Des chiffres pour élargir notre regard</h2>
+<p>Le handicap est fréquent, souvent invisible et peut apparaître au cours de la vie. Les situations sont variées. Demandez à la personne ce qui l’aiderait.</p>
+<p>Ces repères concernent le monde ou des publications françaises. Ils ne décrivent pas la population calédonienne. Les sources et leurs limites figurent sous chaque réponse.</p>
+<div class="quiz-actions"><button type="button" id="quizStartScenes" class="quiz-primary">Comprendre une situation de handicap →</button><button type="button" id="quizRestart" class="quiz-secondary">Recommencer les cinq questions</button></div>
   </section>
   <details class="quiz-text-version" id="quizTextVersion"><summary>Lire les cinq questions et leurs explications en version texte</summary><div id="quizTextBody"></div></details>
 </section>
@@ -860,7 +855,7 @@ for(const [btn,klass] of [['textMode','text-mode'],['contrastMode','hc'],['motio
 
 /* Découverte inspirée du diagnostic Quiz / Kahoot de le dossier pédagogique :
    pas de données chiffrées douteuses, ni de quiz juridique local non validé. */
-const quizData = [{"topic":"Ce qui se voit… et ce qui ne se voit pas","question":"Une situation de handicap est-elle toujours visible au premier regard ?","options":["Oui, car elle modifie forcément la façon de se déplacer.","Non, certaines situations ne sont pas apparentes.","Oui, si l’on connaît bien ses collègues.","Non, mais il faut demander un diagnostic pour en être sûr."],"correct":1,"explanation":"Une personne peut avoir du mal à entendre, à se concentrer ou vivre avec une maladie sans que cela se voie. Pour connaître ses besoins au travail, demandez-lui ce qui l’aiderait."},{"topic":"Le rôle de l’environnement","question":"Une même difficulté de santé entraîne-t-elle forcément les mêmes obstacles dans deux métiers ?","options":["Oui : le diagnostic suffit à déterminer l’impact.","Oui : toutes les tâches posent les mêmes problèmes.","Non : cela dépend notamment des tâches et des conditions de travail.","Non : seul l’âge de la personne change les difficultés."],"correct":2,"explanation":"Une personne allergique à la farine peut rencontrer des difficultés dans une boulangerie. Dans un bureau, elle peut être moins gênée. Les difficultés dépendent donc aussi du travail à réaliser et des conditions de travail."},{"topic":"La diversité des situations","question":"Parmi ces exemples, lesquels peuvent parfois être non apparents ?","options":["Un trouble auditif.","Une maladie chronique.","Certaines difficultés cognitives.","Tous ces exemples."],"correct":3,"explanation":"Ces difficultés peuvent passer inaperçues. Elles varient selon les personnes et les situations. Demandez à la personne ce qui lui serait utile."},{"topic":"Des repères, pas des étiquettes","question":"À quoi servent les grandes familles de handicap dans une sensibilisation ?","options":["À deviner le diagnostic de ses collègues.","À décider de leur capacité à réaliser une mission.","À comprendre la diversité des situations sans enfermer les personnes dans une catégorie.","À imposer un aménagement identique à tout le monde."],"correct":2,"explanation":"Ces familles montrent que les situations sont variées. Au travail, demandez à chaque personne ce qui la gêne et ce qui pourrait l’aider."},{"topic":"La bonne posture","question":"Un collègue évoque une fatigue qui complique certaines réunions. Que pouvez-vous utilement faire ?","options":["Lui demander quelle maladie il a pour comprendre.","Lui proposer de ne plus assister aux réunions.","En informer immédiatement toute l’équipe.","Lui demander quelles modalités de réunion lui conviendraient, sans exiger de détails personnels."],"correct":3,"explanation":"Demandez à la personne ce qui l’aiderait. Vous pouvez adapter les documents, prévoir des pauses ou modifier les horaires. Elle choisit les informations personnelles qu’elle souhaite partager."}];
+const quizData = [{"topic": "Le handicap dans le monde", "question": "Selon l’OMS, quelle part de la population mondiale vit avec un handicap important ?", "options": ["3 %", "16 %", "1 %", "10 %"], "correct": 1, "percent": 16, "display": "16 %", "explanation": "Cela représente environ une personne sur six. Le handicap concerne donc beaucoup de personnes, dans des situations très différentes.", "source": "OMS · Fiche Handicap · 7 mars 2023 · Monde", "url": "https://www.who.int/fr/news-room/fact-sheets/detail/disability-and-health"}, {"topic": "Ce qui ne se voit pas", "question": "En France, quelle part des handicaps déclarés est dite « invisible », selon l’Agefiph ?", "options": ["80 %", "50 %", "60 %", "40 %"], "correct": 0, "percent": 80, "display": "80 %", "explanation": "Une difficulté auditive, une maladie ou une fatigue importante peuvent passer inaperçues. Pour connaître les besoins d’une personne, demandez-lui ce qui l’aiderait.", "source": "Agefiph · Baromètre Agefiph–Ifop · France · publication 2022", "url": "https://www.agefiph.fr/actualites-handicap/barometre-agefiph-ifop-la-perception-de-lemploi-des-personnes-en-situation-de"}, {"topic": "Les parcours de vie", "question": "Selon les repères publiés en France par le ministère de l’Agriculture, quelle part des handicaps survient au cours de la vie ?", "options": ["45 %", "35 %", "65 %", "85 %"], "correct": 3, "percent": 85, "display": "85 %", "explanation": "Un handicap peut apparaître après une maladie, un accident ou avec l’âge. Ce repère porte sur le cours de la vie. Il ne désigne pas uniquement la période de 18 à 64 ans.", "source": "Ministère de l’Agriculture · Chiffres clés sur le handicap · France · consulté en novembre 2026", "url": "https://handicap.agriculture.gouv.fr/chiffres-cles-r89.html"}, {"topic": "Les maladies invalidantes", "question": "Dans les repères de sensibilisation publiés par l’université de Lille, quelle part des handicaps est liée à des maladies invalidantes ?", "options": ["10 %", "5 %", "45 %", "30 %"], "correct": 2, "percent": 45, "display": "45 %", "explanation": "Une maladie peut provoquer de la fatigue, des douleurs ou des difficultés dans certaines activités. Ce chiffre est un repère de sensibilisation publié en France. Il ne mesure pas les reconnaissances de travailleur handicapé en Nouvelle-Calédonie. La page ne précise pas l’année de la donnée.", "source": "Université de Lille · Handithèque · Maladies invalidantes · donnée non datée", "url": "https://handitheque.univ-lille.fr/maladies-invalidantes/"}, {"topic": "Au-delà du fauteuil roulant", "question": "Selon les repères du ministère de l’Agriculture en France, quelle part des personnes ayant un handicap moteur utilise un fauteuil roulant ?", "options": ["Environ 60 %", "Environ 25 %", "Environ 10 %", "Moins de 5 %"], "correct": 3, "percent": 5, "display": "Moins de 5 %", "explanation": "Un handicap moteur peut aussi gêner les gestes, la posture ou la manipulation d’objets. Il ne se limite pas aux déplacements en fauteuil roulant.", "source": "Ministère de l’Agriculture · Chiffres clés sur le handicap · France · consulté en novembre 2026", "url": "https://handicap.agriculture.gouv.fr/chiffres-cles-r89.html"}];
 let quizIndex=0, quizAnswered=false, quizCompleted=false, quizChoice=null;
 function focusQuiz(id){const el=$(id);try{el.focus({preventScroll:false})}catch(e){el.focus();}}
 function renderQuizQuestion(){
@@ -904,6 +899,14 @@ function answerQuiz(chosen){
   $('quizFeedbackTitle').textContent=good?'Bonne intuition !':'Voici la réponse';
   $('quizAnswer').textContent=q.options[q.correct];
   $('quizFeedbackText').textContent=q.explanation;
+  $('quizGraphic').replaceChildren();
+  const value=document.createElement('strong');value.className='stat-number';value.textContent=q.display;
+  const dots=document.createElement('div');dots.className='stat-dots';
+  for(let i=0;i<100;i++){const dot=document.createElement('i');dot.className=i<q.percent?'filled':'';dots.append(dot);}
+  $('quizGraphic').append(value,dots);
+  const source=document.createElement('p');source.className='stat-source';
+  const link=document.createElement('a');link.href=q.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=q.source+' · Consulter la source (nouvel onglet)';
+  source.append(link);$('quizFeedbackText').append(source);
   $('quizFeedback').hidden=false;
   $('quizNext').hidden=false;
   $('quizProgress').value=quizIndex+1;
@@ -1051,12 +1054,12 @@ const finalQ=[
 {q:'Une consigne orale n’a pas été comprise par plusieurs collègues. Quelle pratique ?',opts:['Répéter plus vite pour ne pas perdre de temps.','Rendre les étapes explicites, proposer un support écrit et demander si cela convient.','Chercher à identifier les troubles éventuels des personnes.'],ok:1,feedback:'Améliorer la transmission des consignes bénéficie souvent à toute l’équipe.'},
 {q:'Un collègue demande si une aide financière FIPH lui est automatiquement acquise. Que répondre ?',opts:['Oui, tous les salariés et agents y ont droit sans condition.','Non, aucune aide n’existe pour ces situations.','L’aider à contacter le service qui pourra vérifier sa situation.'],ok:2,feedback:'Le service qui gère l’aide vérifiera si la personne peut en bénéficier.'}
 ];
-const safeGet=()=>{try{return JSON.parse(localStorage.getItem('ifap-handicap-v08')||'{}')}catch(_){return {}}};
+const safeGet=()=>{try{const saved=JSON.parse(localStorage.getItem('ifap-handicap-v08')||'{}');if(saved.quizVersion!=='chiffres-2026-11'){saved.quiz={index:0,choice:null,completed:false};saved.current='01.2';}return saved;}catch(_){return {}}};
 let stored=safeGet(),current=keys.includes(stored.current)?stored.current:'02.1',activeChapter=1,resumeVisible=!!stored.current;
 let state={visited:stored.visited||['01.1'],answers:stored.answers||{},selectedSupports:stored.selectedSupports||[],finalAnswers:stored.finalAnswers||[],examIndex:stored.examIndex||0,prevViewed:stored.prevViewed||'avant'};
 function remember(){
  if(current==='01.1')return;
- stored={...state,current,quiz:window.IFAPv06.snapshotQuiz(),scene:window.IFAPv06.snapshotScene()};
+ stored={...state,current,quizVersion:'chiffres-2026-11',quiz:window.IFAPv06.snapshotQuiz(),scene:window.IFAPv06.snapshotScene()};
  try{localStorage.setItem('ifap-handicap-v08',JSON.stringify(stored))}catch(_){}
 }
 function mark(id){current=id;if(!state.visited.includes(id))state.visited.push(id);remember();updateNav(activeChapter);}
@@ -1189,3 +1192,4 @@ resumeProgress();
 
 </script>
 </body></html>
+
