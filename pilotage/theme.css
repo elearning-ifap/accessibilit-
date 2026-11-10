@@ -1,0 +1,38 @@
+/* Charte commune du projet — bleu nuit, blanc chaud, turquoise, abricot. */
+:root{--project-navy:#172c42;--project-paper:#fffdf8;--project-teal:#166b77;--project-apricot:#ffc48c;--project-ink:#172c42;--project-muted:#40566a;--project-line:#b5c7cf;--canvas:#fffdf8;--surface:#fffdf8;--ink:#172c42;--brand:#166b77}
+html{scroll-behavior:smooth}
+body{background:var(--project-paper);color:var(--project-ink);font-family:'Segoe UI',system-ui,sans-serif;font-size:18px;line-height:1.6}
+body>main{width:100%;max-width:1500px;margin:auto;padding:clamp(20px,3.5vw,52px)}
+h1,h2,h3{font-family:inherit;line-height:1.2}h1{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.025em}h2{font-size:clamp(1.35rem,2.4vw,1.9rem)}
+a{color:var(--project-teal)}button,input,textarea{font:inherit}
+:where(a,button,input,textarea,summary):focus-visible{outline:3px solid #9b3d00;outline-offset:4px}
+.project-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 24px}
+.project-nav>a{font-weight:750;text-decoration:none;color:var(--project-navy)}
+.project-nav div{display:flex;gap:10px;flex-wrap:wrap}
+.project-nav div a{display:inline-block;padding:9px 16px;border:1px solid var(--project-teal);border-radius:10px;text-decoration:none;font-size:1rem;font-weight:650}
+.project-nav div a[aria-current=page]{background:var(--project-teal);color:#fff}
+header#accueil,body.project-consult header{background:var(--project-navy);color:#fff;border-radius:22px;padding:clamp(24px,4vw,44px)}
+header#accueil .label{color:#ffc48c}
+.steps{gap:10px;margin-top:24px}.steps li{padding:5px 12px;font-size:1rem;border-color:#9bb5c5}.steps [aria-current]{background:#ffc48c;color:#172c42}
+body.project-dash .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body.project-dash section{margin-top:32px}
+body.project-dash .card{padding:24px;border:1px solid var(--project-line);border-radius:16px;background:#fff;text-decoration:none;min-height:135px}
+body.project-dash .card strong{font-size:1.15rem;text-decoration:none}
+body.project-dash .card span{margin-top:10px;font-size:1rem;color:var(--project-muted)}
+body.project-dash .card:hover{background:#e8f3f3;border-color:var(--project-teal)}
+body.project-dash .card.primary{background:var(--project-teal);color:#fff;border-color:var(--project-teal)}
+body.project-dash .card.primary span{color:#fff}
+body.project-dash .review{border:1px solid var(--project-line);border-left:5px solid var(--project-teal);border-radius:16px;padding:24px;background:#edf3f5}
+body.project-dash .review dl{margin-top:18px;gap:10px 20px}
+footer{border-top:1px solid var(--project-line);padding-top:20px;margin-top:32px;font-size:1rem;color:var(--project-muted)}
+body.project-consult fieldset{background:#edf3f5;border-color:var(--project-line);border-radius:18px}
+body.project-consult .option{border-radius:14px}
+body.project-consult .test-button,body.project-consult button[type=submit]{background:var(--project-teal);color:white}
+body.project-consult .note{background:#fff0df;border-left:4px solid #a44a16}
+body.project-consult main{max-width:1500px}
+body.project-proto .project-nav{background:#fffdf8;padding:16px 24px;margin:0}
+body.project-proto .project-nav>a{font-size:1rem}
+body.project-proto .project-nav div a{font-size:.9rem}
+@media(max-width:850px){body.project-dash .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){body.project-dash .grid{grid-template-columns:1fr}.project-nav{align-items:flex-start;flex-direction:column}.project-nav div{width:100%}.project-nav div a{flex:1;text-align:center}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
