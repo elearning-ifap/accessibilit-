@@ -19,7 +19,7 @@ W3C WAI — instructions et libellés https://www.w3.org/WAI/tutorials/forms/ins
 Revue de recherche sur la pratique de récupération https://doi.org/10.1007/s10648-021-09595-9 : justifie la conservation des occasions de répondre et des retours. Ne prouve pas l’effet de ce prototype.
 
 ## Tests
-Syntaxe JavaScript contrôlée. En navigateur avant correction : réponse révélée immédiatement, suite du cours verrouillée, réponse restaurée après actualisation. Contrôles après publication en cours.
+Syntaxe JavaScript contrôlée. En navigateur avant correction : réponse révélée immédiatement, suite du cours verrouillée, réponse restaurée après actualisation. Après publication, tests réels dans Chrome : changement de choix avant validation, sélection provisoire conservée après actualisation, validation et retour pédagogique, parcours des cinq questions, ouverture de la définition après complétion, absence du bouton général Continuer au premier cas de l’évaluation, relance du quiz puis actualisation ramenant à la question 1 non répondue. Lien d’évitement pointe vers la question visible. Non exécutés : audit WCAG exhaustif, lecteurs d’écran, tests mobiles, fin complète de l’évaluation et mesures apprenants.
 
 ## Points signalés
 Tests apprenants absents. Audit WCAG complet non réalisé. Vidéo EDF, fiche PDF et vérification exacte de la matrice source restent à traiter. La sélection définitive de maquette appartient aux collègues. Aucun résultat de rétention ou engagement inventé.
